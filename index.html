@@ -14,33 +14,34 @@
 			stockId = 'qqq';
 			const data = await d3.csv('Data/QQQ3.csv');//3
 			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
-			dateString = data.map(function(d) {return d.Date; });
+			//dateString = data.map(function(d) {return d.Date; });
 			dates = data.map(function(d) {return new Date(d.Date); });
-			console.log(dateString);
-
-			prices = data.map(function(d) {return d.Close; });
-			prices2 = data.map(function(d) {return Number.parseFloat(d.Close); });
-			console.log(prices);
-			console.log(prices2);
-			xMin = Math.min.apply(null, dates);
-			xMax = Math.max.apply(null, dates);
-			yMin = Math.min.apply(null, prices);
-			yMax = Math.max.apply(null, prices);
-			yMin2 = Math.min.apply(null, prices2);
-			yMax2 = Math.max.apply(null, prices2);
-			console.log(xMin);
-			console.log(xMax);
-			console.log(yMin);
-			console.log(yMax);
-			console.log(yMin2);
-			console.log(yMax2);
-
-			volume = data.map(function(d) {return d.Volume;});
+			console.log(dates);
+			closes = data.map(function(d) {return Number.parseFloat(d.Close); });
 			volume2 = data.map(function(d) {return parseInt(d.Volume);});
-			volume3 = data.map(function(d) {return Number.parseInt(d.Volume);});
+			open = data.map(function(d) {return parseFloat(d.Open);});
+			High = data.map(function(d) {return parseFloat(d.High);});
+			Low = data.map(function(d) {return parseFloat(d.Low);});			
+			console.log(closes);
 			console.log(volume);
-			console.log(volume2);
-			console.log(volume3);
+			console.log(open);
+			console.log(High);
+			console.log(Low);
+			 xMin = Math.min.apply(null, dates);
+			 xMax = Math.max.apply(null, dates);
+			// yMin = Math.min.apply(null, prices);
+			// yMax = Math.max.apply(null, prices);
+			// yMin2 = Math.min.apply(null, prices2);
+			// yMax2 = Math.max.apply(null, prices2);
+			 console.log(xMin);
+			 console.log(xMax);
+			// console.log(yMin);
+			// console.log(yMax);
+			// console.log(yMin2);
+			// console.log(yMax2);
+			
+			// console.log(volume2);
+			// console.log(volume3);
 
 			w = 600;
 			h = 600;
