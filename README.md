@@ -1,1 +1,1 @@
-# StockAnalysisOfTechInnovators
+# Stock Analysis Of Tech Innovators
