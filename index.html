@@ -12,7 +12,7 @@
 	<script>
 		async function init() {
 			stockId = 'qqq';
-			const data = await d3.csv('https://github.com/jiechen2358/StockAnalysisOfTechInnovators/tree/master/Data/QQQ.csv');
+			const data = await d3.csv('Data/QQQ.csv');
 			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
 			dateString = data.map(function(d,i) {return d.Date; });
 			dates = data.map(function(d,i) {return new Date(d.Date); });
