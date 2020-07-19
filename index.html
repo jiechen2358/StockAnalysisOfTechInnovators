@@ -28,6 +28,11 @@
 			xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
 			yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
 
+
+			line = d3.line()
+					 .x(function(d,i) {return i;})
+					 .y(function(d) {return yScale(d.Close); });
+
 			d3.select('svg')
 			  .append('g')
 			  .attr("transform", "translate(50, 50)")
