@@ -16,6 +16,8 @@
 			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
 			dateString = data.map(function(d,i) {return d.Date; });
 			dates = data.map(function(d,i) {return new Date(d.Date); });
+			console.log(dates);
+			
 			prices = data.map(function(d,i) {return parseFloat(d.Close)});
 			xMin = Math.min.apply(null, dates);
 			xMax = Math.max.apply(null, dates);
