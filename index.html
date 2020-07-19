@@ -18,7 +18,7 @@
 			dates = data.map(function(d,i) {return new Date(d.Date); });
 			console.log(dateString);
 
-			prices = data.map(function(d,i) {return parseFloat(d.Close)});
+			prices = data.map(function(d,i) {return d.Close});
 
 			console.log(prices);
 			xMin = Math.min.apply(null, dates);
