@@ -34,6 +34,14 @@
 			console.log(yMax);
 			console.log(yMin2);
 			console.log(yMax2);
+
+			volume = data.map(function(d) {return d.Volume;});
+			volume2 = data.map(function(d) {return parseInt(d.Volume);});
+			volume3 = data.map(function(d) {return Number.parseInt(d.Volume);});
+			console.log(volume);
+			console.log(volume2);
+			console.log(volume3);
+
 			w = 600;
 			h = 600;
 			color = 'Green';
