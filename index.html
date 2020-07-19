@@ -18,7 +18,7 @@
 			dates = data.map(function(d) {return new Date(d.Date); });
 			console.log(dates);
 			closes = data.map(function(d) {return Number.parseFloat(d.Close); });
-			volume2 = data.map(function(d) {return parseInt(d.Volume);});
+			volume = data.map(function(d) {return parseInt(d.Volume);});
 			open = data.map(function(d) {return parseFloat(d.Open);});
 			High = data.map(function(d) {return parseFloat(d.High);});
 			Low = data.map(function(d) {return parseFloat(d.Low);});			
