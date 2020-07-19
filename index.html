@@ -45,7 +45,7 @@
 			           .append("g")
 			           .attr("transform", "translate(50,50)")
 			           .selectAll("circle")
-			           .date(data)
+			           .data(data)
 			           .enter()
 			           .attr("class", "dot")
 			           .attr("cx", function(d, i) {return i;})
