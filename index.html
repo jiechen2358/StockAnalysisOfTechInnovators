@@ -12,14 +12,14 @@
 	<script>
 		async function init() {
 			stockId = 'qqq';
-			const data = await d3.csv('DateVolume.csv');//2
+			const data = await d3.csv('Data/QQQ3.csv');//3
 			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
 			dateString = data.map(function(d) {return d.Date; });
 			dates = data.map(function(d) {return new Date(d.Date); });
 			console.log(dateString);
 
-			prices = data.map(function(d) {return d.Low; });
-			prices2 = data.map(function(d) {return Number.parseFloat(d.Low); });
+			prices = data.map(function(d) {return d.Close; });
+			prices2 = data.map(function(d) {return Number.parseFloat(d.Close); });
 			console.log(prices);
 			console.log(prices2);
 			xMin = Math.min.apply(null, dates);
