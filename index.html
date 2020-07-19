@@ -1,18 +1,54 @@
-<html><body>
-<h1>Stock Analysis Of Tech Innovators</h1>
-<p>QQQ AAPL MSFT AMZN FB GOOGL GOOG INTC
-<script>
-var values = [4,8,15,16,23,'forty-two'];
-for (i = 0; i < values.length; i++) {
-  document.write(values[i] + ' ');
-}
+<!DOCTYPE html>
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<head>
 
-</script>
-</p>
-<h1>Javascript also supports objects</h1>
-<script>
-var c1 = {name: 'USA', currency: 'dollar'};
-var c2 = {name: 'France', language: 'French'};
-document.write('<p>The currency of ' + c1.name + ' is the ' + c1.currency + '.</p>');
-</script>
-</body></html>
+	<title> Stock Historical Data over Time</title>
+</head>
+<body onload="init()">
+	<h1>Stock Historical Data over Time</h1>
+	<svg width=800 height=700>
+	</svg>
+	<script>
+		async function init() {
+			stockId = 'qqq';
+			const data = await d3.csv('https://github.com/jiechen2358/StockAnalysisOfTechInnovators/tree/master/Data/QQQ.csv');
+			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
+			dateString = data.map(function(d,i) {return d.Date; });
+			dates = data.map(function(d,i) {return new Date(d.Date); });
+			prices = data.map(function(d,i) {return parseFloat(d.Close/Last)});
+			xMin = Math.min.apply(null, dates);
+			xMax = Math.max.apply(null, dates);
+			yMin = Math.min.apply(null, prices);
+			yMax = Math.max.apply(null, prices);
+			w = 600;
+			h = 600;
+			color = 'Green';
+
+			xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
+			yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+
+			d3.select('svg')
+			  .append('g')
+			  .attr("transform", "translate(50, 50)")
+			  .data(data)
+			  .attr("d", line)
+			  .attr("class", "line")
+			  .attr("stroke", color);
+
+			marker = d3.select("svg")
+			           .append("g")
+			           .attr("transform", "translate(50,50)")
+			           .selectAll("circle")
+			           .date(data)
+			           .enter()
+			           .attr("class", "dot")
+			           .attr("cx", function(d, i) {return i;})
+			           .attr("cy", function(d, i) {return yScale(d.Close);})
+			           .attr("r", 4)
+			           .attr("fill", color);
+
+		}
+	</script>
+</body>
+</html>
