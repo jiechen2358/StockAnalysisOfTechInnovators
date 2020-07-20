@@ -20,13 +20,19 @@
 		async function init() {
 			const data_qqq = await d3.csv('Data/QQQ.csv');
 			const data_spy = await d3.csv('Data/SPY.csv');
-
+			const qqq_holdings = await d3.csv('Data/QQQHoldings.csv');
 			//const data_qqq = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
 			//dateString = data_qqq.map(function(d) {return d.Date; });
 			dates_qqq = data_qqq.map(function(d) {return new Date(d.Date); });
 			closes_qqq = data_qqq.map(function(d) {return Number.parseFloat(d.Close); });
 			dates_spy = data_spy.map(function(d) {return new Date(d.Date); });
 			closes_spy = data_spy.map(function(d) {return Number.parseFloat(d.Close); });
+			ticker = qqq_holdings.map(function(d) {return d.Ticker;});
+			company = qqq_holdings.map(function(d) {return d.Company});
+			percent = qqq_holdings.map(function(d){return d.PercentOfFund;});
+			console.log(ticker);
+			console.log(company);
+			console.log(percent);
 			// volume = data_qqq.map(function(d) {return parseInt(d.Volume);});
 			// open = data_qqq.map(function(d) {return parseFloat(d.Open);});
 			// High = data_qqq.map(function(d) {return parseFloat(d.High);});
