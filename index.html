@@ -19,30 +19,30 @@
 	</svg>
 	<script>
 		async function init() {
-			const data_qqq = await d3.csv('data_qqq/QQQ.csv');
+			const data_qqq = await d3.csv('data/QQQ.csv');
+			const data_spy = await d3.csv('data/SPY.csv');
 
 			//const data_qqq = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
 			//dateString = data_qqq.map(function(d) {return d.Date; });
-			dates = data_qqq.map(function(d) {return new Date(d.Date); });
-			console.log(dates);
-			closes = data_qqq.map(function(d) {return Number.parseFloat(d.Close); });
+			dates_qqq = data_qqq.map(function(d) {return new Date(d.Date); });
+			closes_qqq = data_qqq.map(function(d) {return Number.parseFloat(d.Close); });
+			dates_spy = data_spy.map(function(d) {return new Date(d.Date); });
+			closes_spy = data_spy.map(function(d) {return Number.parseFloat(d.Close); });
 			// volume = data_qqq.map(function(d) {return parseInt(d.Volume);});
 			// open = data_qqq.map(function(d) {return parseFloat(d.Open);});
 			// High = data_qqq.map(function(d) {return parseFloat(d.High);});
 			// Low = data_qqq.map(function(d) {return parseFloat(d.Low);});			
-			console.log(closes);
 			// console.log(volume);
 			// console.log(open);
 			// console.log(High);
 			// console.log(Low);
-			 xMin = Math.min.apply(null, dates);
-			 xMax = Math.max.apply(null, dates);
-			 yMin = Math.min.apply(null, closes);
-			 yMax = Math.max.apply(null, closes);
+			 xMin = Math.min(Math.min.apply(null, dates_qqq), Math.min.apply(null, dates_spy));
+			 xMax = Math.max(Math.max.apply(null, dates_qqq), Math.max.apply(null, dates_spy));
+			 yMin = Math.min(Math.min.apply(null, closes_qqq), Math.min.apply(null, closes_spy));
+			 yMax = Math.max(Math.max.apply(null, closes_qqq), Math.max.apply(null, closes_spy));
 			// yMin2 = Math.min.apply(null, prices2);
 			// yMax2 = Math.max.apply(null, prices2);
-			 console.log(xMin);
-			 console.log(xMax);
+
 			// console.log(yMin);
 			// console.log(yMax);
 			// console.log(yMin2);
@@ -51,12 +51,12 @@
 			// console.log(volume2);
 			// console.log(volume3);
 
-			w = 600;
-			h = 600;
+			width = 600;
+			height = 600;
 
 			//var xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
-            var xScale = d3.scaleTime().domain([xMin, xMax]).range([0, w]);
-			var yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+            var xScale = d3.scaleTime().domain([xMin, xMax]).range([0, width]);
+			var yScale = d3.scaleLinear().domain([yMin, yMax]).range([height, 0]);
 
             var xAxis = d3.axisBottom(xScale);
             var yAxis = d3.axisLeft(yScale);
@@ -70,6 +70,14 @@
 			  .attr("transform", "translate(50, 50)")
 			  .append("path")
 			  .data([data_qqq])
+			  .attr("d", line)
+			  .attr("class", "line");
+
+			d3.select('svg')
+			  .append('g')
+			  .attr("transform", "translate(50, 50)")
+			  .append("path")
+			  .data([data_spy])
 			  .attr("d", line)
 			  .attr("class", "line");
 
