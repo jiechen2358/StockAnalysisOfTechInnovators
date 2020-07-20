@@ -23,10 +23,10 @@
 			High = data.map(function(d) {return parseFloat(d.High);});
 			Low = data.map(function(d) {return parseFloat(d.Low);});			
 			console.log(closes);
-			console.log(volume);
-			console.log(open);
-			console.log(High);
-			console.log(Low);
+			// console.log(volume);
+			// console.log(open);
+			// console.log(High);
+			// console.log(Low);
 			 xMin = Math.min.apply(null, dates);
 			 xMax = Math.max.apply(null, dates);
 			 yMin = Math.min.apply(null, closes);
@@ -47,13 +47,15 @@
 			h = 600;
 			color = 'Green';
 
-			xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
-			yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
+			var xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
+			var yScale = d3.scaleLinear().domain([yMin, yMax]).range([h, 0]);
 
+            var xAxis = d3.axisBottom(xScale);
+            var yAxis = d3.axisLeft(yScale);
 
-			line = d3.line()
-					 .x(function(d,i) {return i;})
-					 .y(function(d) {return yScale(d.Close); });
+			var line = d3.line()
+					     .x(function(d,i) {return xScale(i);})
+					     .y(function(d) {return yScale(d.Close); });
 
 			d3.select('svg')
 			  .append('g')
@@ -62,7 +64,16 @@
 			  .attr("d", line)
 			  .attr("class", "line")
 			  .attr("stroke", color);
-
+			d3.select("svg")
+			  .append("g")
+			  .attr("transform", "translate(50, 50)")
+			  .style("font", "14px times")
+			  .call(yAxis);
+			d3.select("svg")
+			  .append("g")
+			  .attr("transform", "translate(50, 50)")
+			  .style("font", "14px times")
+			  .call(xAxis);
 			/*marker = d3.select("svg")
 			           .append("g")
 			           .attr("transform", "translate(50,50)")
