@@ -19,17 +19,17 @@
 	</svg>
 	<script>
 		async function init() {
-			stockId = 'qqq';
-			const data = await d3.csv('Data/QQQ.csv');//3
-			//const data = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
-			//dateString = data.map(function(d) {return d.Date; });
-			dates = data.map(function(d) {return new Date(d.Date); });
+			const data_qqq = await d3.csv('data_qqq/QQQ.csv');
+
+			//const data_qqq = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
+			//dateString = data_qqq.map(function(d) {return d.Date; });
+			dates = data_qqq.map(function(d) {return new Date(d.Date); });
 			console.log(dates);
-			closes = data.map(function(d) {return Number.parseFloat(d.Close); });
-			// volume = data.map(function(d) {return parseInt(d.Volume);});
-			// open = data.map(function(d) {return parseFloat(d.Open);});
-			// High = data.map(function(d) {return parseFloat(d.High);});
-			// Low = data.map(function(d) {return parseFloat(d.Low);});			
+			closes = data_qqq.map(function(d) {return Number.parseFloat(d.Close); });
+			// volume = data_qqq.map(function(d) {return parseInt(d.Volume);});
+			// open = data_qqq.map(function(d) {return parseFloat(d.Open);});
+			// High = data_qqq.map(function(d) {return parseFloat(d.High);});
+			// Low = data_qqq.map(function(d) {return parseFloat(d.Low);});			
 			console.log(closes);
 			// console.log(volume);
 			// console.log(open);
@@ -69,7 +69,7 @@
 			  .append('g')
 			  .attr("transform", "translate(50, 50)")
 			  .append("path")
-			  .data([data])
+			  .data([data_qqq])
 			  .attr("d", line)
 			  .attr("class", "line");
 
@@ -87,7 +87,7 @@
 			           .append("g")
 			           .attr("transform", "translate(50,50)")
 			           .selectAll("circle")
-			           .data(data)
+			           .data(data_qqq)
 			           .enter()
 			           .attr("class", "dot")
 			           .attr("cx", function(d, i) {return i;})
