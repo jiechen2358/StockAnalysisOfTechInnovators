@@ -18,10 +18,10 @@
 			dates = data.map(function(d) {return new Date(d.Date); });
 			console.log(dates);
 			closes = data.map(function(d) {return Number.parseFloat(d.Close); });
-			volume = data.map(function(d) {return parseInt(d.Volume);});
-			open = data.map(function(d) {return parseFloat(d.Open);});
-			High = data.map(function(d) {return parseFloat(d.High);});
-			Low = data.map(function(d) {return parseFloat(d.Low);});			
+			// volume = data.map(function(d) {return parseInt(d.Volume);});
+			// open = data.map(function(d) {return parseFloat(d.Open);});
+			// High = data.map(function(d) {return parseFloat(d.High);});
+			// Low = data.map(function(d) {return parseFloat(d.Low);});			
 			console.log(closes);
 			// console.log(volume);
 			// console.log(open);
@@ -55,16 +55,18 @@
             var yAxis = d3.axisLeft(yScale);
 
 			var line = d3.line()
-					     .x(function(d,i) {return xScale(new Date(d.Date(i)));})
-					     .y(function(d,i) {return yScale(parseFloat(d.Close(i))); });
+					     .x(function(d,i) {return xScale(new Date(d.Date));})
+					     .y(function(d,i) {return yScale(parseFloat(d.Close)); });
 
 			d3.select('svg')
 			  .append('g')
 			  .attr("transform", "translate(50, 50)")
-			  .data(data)
+			  .append("path")
+			  .data([data])
 			  .attr("d", line)
 			  .attr("class", "line")
 			  .attr("stroke", color);
+			  
 			d3.select("svg")
 			  .append("g")
 			  .attr("transform", "translate(50, 50)")
