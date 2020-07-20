@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<style>
+<!-- <style>
 .line {
 	fill: none;
 	stroke: steelblue;
 	stroke-width: 2px;
 }
-</style>
+</style> -->
 <!-- load the d3.js library -->   
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
@@ -65,13 +65,16 @@
 					     .x(function(d) {return xScale(new Date(d.Date));})
 					     .y(function(d) {return yScale(parseFloat(d.Close)); });
 
+			colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen'];
+
 			d3.select('svg')
 			  .append('g')
 			  .attr("transform", "translate(50, 50)")
 			  .append("path")
 			  .data([data_qqq])
 			  .attr("d", line)
-			  .attr("class", "line");
+			  .attr("class", "line")
+			  .attr("stroke", colors[0]);
 
 			d3.select('svg')
 			  .append('g')
@@ -79,7 +82,8 @@
 			  .append("path")
 			  .data([data_spy])
 			  .attr("d", line)
-			  .attr("class", "line");
+			  .attr("class", "line")
+			  .attr("stroke", colors[1]);
 
 			d3.select("svg")
 			  .append("g")
