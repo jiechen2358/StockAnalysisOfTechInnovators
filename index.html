@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+<style>
+.line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 2px;
+}
+</style>
+<!-- load the d3.js library -->   
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
 
@@ -45,7 +53,6 @@
 
 			w = 600;
 			h = 600;
-			color = 'Green';
 
 			//var xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
             var xScale = d3.scaleTime().domain([xMin, xMax]).range([0, w]);
@@ -55,8 +62,8 @@
             var yAxis = d3.axisLeft(yScale);
 
 			var line = d3.line()
-					     .x(function(d,i) {return xScale(new Date(d.Date));})
-					     .y(function(d,i) {return yScale(parseFloat(d.Close)); });
+					     .x(function(d) {return xScale(new Date(d.Date));})
+					     .y(function(d) {return yScale(parseFloat(d.Close)); });
 
 			d3.select('svg')
 			  .append('g')
@@ -64,9 +71,8 @@
 			  .append("path")
 			  .data([data])
 			  .attr("d", line)
-			  .attr("class", "line")
-			  .attr("stroke", color);
-			  
+			  .attr("class", "line");
+
 			d3.select("svg")
 			  .append("g")
 			  .attr("transform", "translate(50, 50)")
