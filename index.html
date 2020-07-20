@@ -55,8 +55,8 @@
             var yAxis = d3.axisLeft(yScale);
 
 			var line = d3.line()
-					     .x(function(d) {return xScale(new Date(d.Date));})
-					     .y(function(d) {return yScale(parseFloat(d.Close)); });
+					     .x(function(d,i) {return xScale(new Date(d.Date(i)));})
+					     .y(function(d,i) {return yScale(parseFloat(d.Close(i))); });
 
 			d3.select('svg')
 			  .append('g')
