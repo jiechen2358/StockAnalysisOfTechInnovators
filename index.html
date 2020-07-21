@@ -61,11 +61,11 @@
 					closes = data.map(function(d) {
 						return Number.parseFloat(d.Close); });
 
-					console.log(dates[0]);
-					console.log(closes[0]);
+					console.log(dates[dates.length - 1]);
+					console.log(closes[closes.length - 1]);
 					var line = d3.line()
 					             .x(function(d) {return xScale(new Date(d.Date));})
-					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[0])*10000); });
+					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
 					d3.select('svg')
 			  		  .append('g')
