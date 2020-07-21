@@ -3,7 +3,6 @@
 <style>
 .line {
 	fill: none;
-	stroke: steelblue;
 	stroke-width: 2px;
 }
 </style>
@@ -24,7 +23,7 @@
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
 			var priceMin = 0;
-			var priceMax = 330000;
+			var priceMax = 80000;
 			var width = 600;
 			var height = 600;
 
@@ -46,7 +45,8 @@
 			  .style("font", "14px times")
 			  .call(xAxis);
 
-			stockList.forEach(function(stockId,i){
+            var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen'];
+			stockList.forEach(function(stockId, index){
 				var ticker = stockId.Ticker;
 				var company = stockId.Company;
 				console.log(stockId);
@@ -69,8 +69,8 @@
 			          .append("path")
 			          .data([data])
 			          .attr("d", line)
-			          .attr("class", "line");
-			         // .attr("stroke", colors);
+			          .attr("class", "line")
+			          .attr("stroke", colors[index]);
 				})
 				.catch(function(){
 					console.log("error loading file");
