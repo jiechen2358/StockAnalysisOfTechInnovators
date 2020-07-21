@@ -16,7 +16,16 @@
 	<h1>Growth of $10,000 as of July 17,2020</h1>
 	<svg width=1200 height=1000>
 	</svg>
+	<input type= 'checkbox' id ='tsla‘ name='tsla' checked>
+	<label for ='tsla'>Tesla</label>
 	<script>
+		d3.select('#tsla').on('change', updateTsla);
+		updateTsla();
+		function updateTsla(){
+			if(d3.select('#tsla').property('checked')){
+
+			}
+		}
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
 			//console.log(stockList);
@@ -51,6 +60,9 @@
 				var company = stockId.Company;
 				console.log(stockId);
 				console.log(index);
+				if (stockId.localCompare('tsla') == 0) {
+
+				}
 
 				const data = d3.csv('Data/' + ticker + '.csv')
 				.then(function(data){
