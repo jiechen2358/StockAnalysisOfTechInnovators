@@ -16,7 +16,19 @@
 	<h1>Growth of $10,000 as of July 17,2020</h1>
 	<svg width=1200 height=1000>
 	</svg>
-	<input type= 'checkbox' id ='tsla‘ name='tsla' checked>
+	<input type= 'checkbox' id ='aapl' name='aapl' checked>
+	<label for ='aapl'>Apple</label>
+	<input type= 'checkbox' id ='amzn' name='amzn' checked>
+	<label for ='amzn'>Amazon</label>
+	<input type= 'checkbox' id ='fb' name='fb' checked>
+	<label for ='fb'>Facebook</label>
+	<input type= 'checkbox' id ='goog' name='goog' checked>
+	<label for ='goog'>Google</label>
+	<input type= 'checkbox' id ='googl' name='googl' checked>
+	<label for ='googl'>Google</label>
+	<input type= 'checkbox' id ='intc' name='intc' checked>
+	<label for ='intc'>Intel</label>
+	<input type= 'checkbox' id ='tsla' name='tsla' checked>
 	<label for ='tsla'>Tesla</label>
 	<script>
 		d3.select('#tsla').on('change', updateTsla);
@@ -55,14 +67,14 @@
 			  .call(xAxis);
 
             var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
-			stockList.forEach(function(stockId, index){
+			stocksList.forEach(function(stockId, index){
 				var ticker = stockId.Ticker;
 				var company = stockId.Company;
 				console.log(stockId);
 				console.log(index);
-				if (stockId.localCompare('tsla') == 0) {
+				// if (stockId.localCompare('tsla') == 0) {
 
-				}
+				// }
 
 				const data = d3.csv('Data/' + ticker + '.csv')
 				.then(function(data){
