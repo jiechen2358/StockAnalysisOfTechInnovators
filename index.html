@@ -57,8 +57,12 @@
 					// console.log(data);
 					dates = data.map(function(d) {
 						return new Date(d.Date); });
+
 					closes = data.map(function(d) {
 						return Number.parseFloat(d.Close); });
+
+					console.log(dates[0]);
+					console.log(closes[0]);
 					var line = d3.line()
 					             .x(function(d) {return xScale(new Date(d.Date));})
 					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[0])*10000); });
