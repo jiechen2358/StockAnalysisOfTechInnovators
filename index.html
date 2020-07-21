@@ -14,7 +14,7 @@
 	<title> Stock Historical Data over Time</title>
 </head>
 <body onload="init()">
-	<h1>Stock Historical Data over Time</h1>
+	<h1>Growth of $10,000 as of July 17,2020</h1>
 	<svg width=800 height=700>
 	</svg>
 	<script>
@@ -46,15 +46,15 @@
 			  .style("font", "14px times")
 			  .call(xAxis);
 
-			stockList.forEach(function(stockId){
+			stockList.forEach(function(stockId,i){
 				var ticker = stockId.Ticker;
 				var company = stockId.Company;
-				console.log(ticker);
-				console.log(company);
+				console.log(stockId);
+				console.log(i);
 
 				const data = d3.csv('Data/' + ticker + '.csv')
 				.then(function(data){
-					console.log(data);
+					// console.log(data);
 					dates = data.map(function(d) {
 						return new Date(d.Date); });
 					closes = data.map(function(d) {
