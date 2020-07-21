@@ -21,8 +21,11 @@
 			const stockList = await d3.csv('Data/StockList.csv');
 			//console.log(stockList);
 			stockList.forEach(function(stockId){
-				console.log(stockId);
+				var ticker = stockId.Ticker;
+				console.log(ticker);
 
+				const data = await d3.csv('Data/' + ticker + '.csv');
+				console.log(data);
 			});
 			const data_qqq = await d3.csv('Data/QQQ.csv');
 			const data_spy = await d3.csv('Data/SPY.csv');
