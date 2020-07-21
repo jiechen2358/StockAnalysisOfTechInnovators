@@ -24,8 +24,18 @@
 				var ticker = stockId.Ticker;
 				console.log(ticker);
 
-				const data = await d3.csv('Data/' + ticker + '.csv');
-				console.log(data);
+				const data = d3.csv('Data/' + ticker + '.csv')
+				.then(function(data){
+					console.log(data);
+					dates = data.map(function(d) {return new Date(d.Date); });
+					closes = data.map(function(d) {return Number.parseFloat(d.Close); });
+				})
+				.catch(function(){
+					console.log("error loading file");
+
+				});
+
+
 			});
 			const data_qqq = await d3.csv('Data/QQQ.csv');
 			const data_spy = await d3.csv('Data/SPY.csv');
