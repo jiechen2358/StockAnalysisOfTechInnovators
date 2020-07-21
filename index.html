@@ -24,7 +24,7 @@
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
 			var priceMin = 0;
-			var priceMax = 3300;
+			var priceMax = 330000;
 			var width = 600;
 			var height = 600;
 
@@ -61,7 +61,7 @@
 						return Number.parseFloat(d.Close); });
 					var line = d3.line()
 					             .x(function(d) {return xScale(new Date(d.Date));})
-					             .y(function(d) {return yScale(parseFloat(d.Close)); });
+					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[0])*10000; });
 
 					d3.select('svg')
 			  		  .append('g')
