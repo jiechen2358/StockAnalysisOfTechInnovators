@@ -18,6 +18,8 @@
 	</svg>
 	<script>
 		async function init() {
+			const stockList = await d3.csv('Data/StockList.csv');
+			console.log(stockList);
 			const data_qqq = await d3.csv('Data/QQQ.csv');
 			const data_spy = await d3.csv('Data/SPY.csv');
 			const qqq_holdings = await d3.csv('Data/QQQHoldings.csv');
