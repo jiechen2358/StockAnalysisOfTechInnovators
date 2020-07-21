@@ -23,7 +23,7 @@
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
 			var priceMin = 0;
-			var priceMax = 80000;
+			var priceMax = 150000;
 			var width = 600;
 			var height = 600;
 
@@ -45,7 +45,7 @@
 			  .style("font", "14px times")
 			  .call(xAxis);
 
-            var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen'];
+            var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen'];
 			stockList.forEach(function(stockId, index){
 				var ticker = stockId.Ticker;
 				var company = stockId.Company;
