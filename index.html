@@ -51,8 +51,8 @@
 			stockShowList = stockList;
 			stockShowList.forEach(function(stockId,index) {
 				var ticker = stockId.Ticker;
-				document.getElementById('QQQ').onclick = function(){
-					console.log('QQQ');
+				document.getElementById(ticker).onclick = function(){
+					console.log(ticker);
 				}
 			});
 
