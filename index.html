@@ -17,20 +17,6 @@
 	<svg width=1200 height=1000>
 	</svg>
 	<div id='checkboxContainer'></div>
-<!-- 	<input type= 'checkbox' id ='aapl' name='showStock' value ='aapl' checked>
-	<label for ='aapl'>Apple</label>
-	<input type= 'checkbox' id ='amzn' name='showStock' value ='amzn' checked>
-	<label for ='amzn'>Amazon</label>
-	<input type= 'checkbox' id ='fb' name='showStock' value ='fb'checked>
-	<label for ='fb'>Facebook</label>
-	<input type= 'checkbox' id ='goog' name='showStock' value='goog' checked>
-	<label for ='goog'>Google</label>
-	<input type= 'checkbox' id ='googl' name='showStock' value='googl' checked>
-	<label for ='googl'>Google</label>
-	<input type= 'checkbox' id ='intc' name='showStock' value='intc'checked>
-	<label for ='intc'>Intel</label>
-	<input type= 'checkbox' id ='tsla' name='showStock' value='tsla'checked>
-	<label for ='tsla'>Tesla</label> -->
 	<script>
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
@@ -45,6 +31,7 @@
 				checkbox.name = 'showStock';
 				checkbox.value = ticker;
 				checkbox.checked = true;
+				checkbox.onclick='updateStockList()';
 				var label = document.createElement('label');
 				label.htmlFor = ticker;
 				label.appendChild(document.createTextNode(company));
@@ -58,7 +45,9 @@
 
 			});
 
+			function updateStockList() {
 
+			}
 			//console.log(stockList);
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
