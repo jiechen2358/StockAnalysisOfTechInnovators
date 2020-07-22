@@ -16,6 +16,7 @@
 	<h1>Growth of $10,000 as of July 17,2020</h1>
 	<svg width=1200 height=1000>
 	</svg>
+	<div id='checkboxContainer'></div>
 <!-- 	<input type= 'checkbox' id ='aapl' name='showStock' value ='aapl' checked>
 	<label for ='aapl'>Apple</label>
 	<input type= 'checkbox' id ='amzn' name='showStock' value ='amzn' checked>
@@ -34,7 +35,29 @@
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
 
-			d3.select()
+
+			stockList.forEach(function(stockId, index){
+				var ticker = stockerId.Ticker;
+				var company = stockeId.Company;
+				var checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+				checkbox.id = ticker;
+				checkbox.name = 'showStock';
+				checkbox.value = ticker;
+				var label = document.createElement('label');
+				label.htmlFor = ticker;
+				label.appendChild(document.createTextNode(company));
+
+				var br = document.createElement('br');
+
+				var container = document.getElementById('checkboxContainer');
+				container.appendChild(checkbox);
+				container.appendChild(label);
+				container.appendChild(br);
+
+			});
+
+
 			//console.log(stockList);
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
