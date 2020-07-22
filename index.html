@@ -31,7 +31,7 @@
 				checkbox.name = 'showStock';
 				checkbox.value = ticker;
 				checkbox.checked = true;
-				checkbox.onclick='updateStockList()';
+				checkbox.onclick="updateStockList()";
 				var label = document.createElement('label');
 				label.htmlFor = ticker;
 				label.appendChild(document.createTextNode(company));
@@ -46,7 +46,7 @@
 			});
 			console.log(document.getElementById('checkboxContainer'));
 			
-			var newStockList2=[];
+			//var newStockList2=[];
 			function updateStockList() {
 				var newStockList=[];
 				stockList.forEach(function(stockId, index){
@@ -59,8 +59,9 @@
 
 				});
 				console.log(newStockList);
+				console.log(1);
 			}
-			console.log(newStockList2);
+			//console.log(newStockList2);
 			//console.log(stockList);
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
