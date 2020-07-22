@@ -16,30 +16,25 @@
 	<h1>Growth of $10,000 as of July 17,2020</h1>
 	<svg width=1200 height=1000>
 	</svg>
-	<input type= 'checkbox' id ='aapl' name='aapl' checked>
+<!-- 	<input type= 'checkbox' id ='aapl' name='showStock' value ='aapl' checked>
 	<label for ='aapl'>Apple</label>
-	<input type= 'checkbox' id ='amzn' name='amzn' checked>
+	<input type= 'checkbox' id ='amzn' name='showStock' value ='amzn' checked>
 	<label for ='amzn'>Amazon</label>
-	<input type= 'checkbox' id ='fb' name='fb' checked>
+	<input type= 'checkbox' id ='fb' name='showStock' value ='fb'checked>
 	<label for ='fb'>Facebook</label>
-	<input type= 'checkbox' id ='goog' name='goog' checked>
+	<input type= 'checkbox' id ='goog' name='showStock' value='goog' checked>
 	<label for ='goog'>Google</label>
-	<input type= 'checkbox' id ='googl' name='googl' checked>
+	<input type= 'checkbox' id ='googl' name='showStock' value='googl' checked>
 	<label for ='googl'>Google</label>
-	<input type= 'checkbox' id ='intc' name='intc' checked>
+	<input type= 'checkbox' id ='intc' name='showStock' value='intc'checked>
 	<label for ='intc'>Intel</label>
-	<input type= 'checkbox' id ='tsla' name='tsla' checked>
-	<label for ='tsla'>Tesla</label>
+	<input type= 'checkbox' id ='tsla' name='showStock' value='tsla'checked>
+	<label for ='tsla'>Tesla</label> -->
 	<script>
-		d3.select('#tsla').on('change', updateTsla);
-		updateTsla();
-		function updateTsla(){
-			if(d3.select('#tsla').property('checked')){
-
-			}
-		}
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
+
+			d3.select()
 			//console.log(stockList);
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
