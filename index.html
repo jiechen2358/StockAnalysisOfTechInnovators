@@ -48,29 +48,26 @@
 			});
 			console.log(document.getElementById('checkboxContainer'));
 
-			stockShowList = stockList;
+			var stockShowList = stockList;
 			stockShowList.forEach(function(stockId,index) {
 				var ticker = stockId.Ticker;
 				document.getElementById(ticker).onclick = function(){
-					console.log(ticker);
+					if (document.getElementById(ticker).checked)
+					{
+						stockShowList.push(stockId);
+						console.log(ticker + "has been added to stock show list.");
+					}
+					else
+					{
+						var pos = stockShowList.indexOf(stockId);
+						stockShowList.splice(pos,1);
+						console.log(ticker + 'has been removed from stock show list');
+					}
+					console.log(stockShowList);
+
 				}
 			});
 
-			//var newStockList2=[];
-			function updateStockList() {
-/*				var newStockList=[];
-				stockList.forEach(function(stockId, index){
-					var ticker = stockId.Ticker;
-					if (document.getElementById(ticker).checked)
-					{
-						newStockList.push(stockId);
-						newStockList2.push(stockId);
-					}
-
-				});
-				console.log(newStockList);*/
-				console.log(0);
-			}
 			//console.log(newStockList2);
 			//console.log(stockList);
 			var timeMin = new Date('07/19/2010');
