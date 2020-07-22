@@ -47,7 +47,7 @@
 
 			});
 			console.log(document.getElementById('checkboxContainer'));
-
+//TODO: now stockShowList is stockList, exactly the same, need to remove duplicated var later.
 			var stockShowList = stockList;
 			stockShowList.forEach(function(stockId,index) {
 				var ticker = stockId.Ticker;
@@ -63,11 +63,12 @@
 						stockShowList.splice(pos,1);
 						console.log(ticker + ' has been removed from stock show list');
 					}
-					console.log(stockShowList);
-					console.log(stockList);
+
+					//console.log(stockList);
 				}
 			});
 
+			console.log(stockShowList);
 
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
@@ -76,7 +77,6 @@
 			var width = 1000;
 			var height = 900;
 
-			//var xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
             var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
 			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 
