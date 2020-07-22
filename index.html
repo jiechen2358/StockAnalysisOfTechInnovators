@@ -21,6 +21,9 @@
 		function updateStockList(){
 			console.log(2);
 		}
+		document.getElementById('SPY').onclick = function(){
+			console.log('SPY');
+		}
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
 
@@ -50,8 +53,8 @@
 
 			});
 			console.log(document.getElementById('checkboxContainer'));
-			function updateStockList1(){
-				console.log(1);
+			document.getElementById('QQQ').onclick = function(){
+				console.log('QQQ');
 			}
 			//var newStockList2=[];
 			function updateStockList() {
