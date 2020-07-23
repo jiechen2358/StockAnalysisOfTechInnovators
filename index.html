@@ -87,6 +87,10 @@
 			 	   			.attr("transform", "translate(100, 950)")
 			  	   			.style("font", "14px times")
 			  	   			.call(xAxis);
+
+			  	   		svg.selectAll("g.x.axis").call(xAxis);
+			  	   		svg.selectAll("g.y.axis").call(yAxis);
+
 					})
 					.catch(function(){
 						console.log("error loading file");
