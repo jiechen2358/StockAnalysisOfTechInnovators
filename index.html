@@ -47,28 +47,7 @@
 
 			});
 	//		console.log(document.getElementById('checkboxContainer'));
-//TODO: now stockShowList is stockList, exactly the same, need to remove duplicated var later.
-			var stockShowList = stockList;
-			stockShowList.forEach(function(stockId,index) {
-				var ticker = stockId.Ticker;
-				document.getElementById(ticker).onclick = function(){
-					if (document.getElementById(ticker).checked)
-					{
-						stockShowList.push(stockId);
-						console.log(ticker + " has been added to stock show list.");
-					}
-					else
-					{
-						var pos = stockShowList.indexOf(stockId);
-						stockShowList.splice(pos,1);
-						console.log(ticker + ' has been removed from stock show list');
-					}
 
-					//console.log(stockList);
-				}
-			});
-
-			console.log(stockShowList);
 			var svg = d3.select("svg");
 			plotStockList(svg, stockList);            	
 
@@ -140,24 +119,22 @@
 				});
 
 			}
-		//	const plot = （stockList, svg）
 
-			var stockShowList = stockList;
-			stockShowList.forEach(function(stockId,index) {
+			stockList.forEach(function(stockId,index) {
 				var ticker = stockId.Ticker;
 				document.getElementById(ticker).onclick = function(){
 					if (document.getElementById(ticker).checked)
 					{
-						stockShowList.push(stockId);
+						stockList.push(stockId);
 						console.log(ticker + " has been added to stock show list.");
 					}
 					else
 					{
-						var pos = stockShowList.indexOf(stockId);
-						stockShowList.splice(pos,1);
+						var pos = stockList.indexOf(stockId);
+						stockList.splice(pos,1);
 						console.log(ticker + ' has been removed from stock show list');
 					}
-
+					plotStockList(svg, stockList);
 /*					priceMax = 800000;
 
 					yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
