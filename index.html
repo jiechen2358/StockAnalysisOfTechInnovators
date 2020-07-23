@@ -131,6 +131,7 @@
 			         	   .append("path")
 			         	   .data([data])
 			         	   .attr("d", line)
+			         	   .attr('id', 'ticker')
 			       		   .attr("class", "line")
 			          	   .attr("stroke", colors[index]);
 					})
@@ -198,8 +199,9 @@
 					{
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
+						d3.select('#'+ticker).remove();
 					}
-					d3.selectAll("path.line").remove();
+					//d3.selectAll("path.line").remove();
 					//var yScale = calculateYScale(stockList);
 					//updateYAxis(svg, yScale);
 					//plotXAxis(svg, xScale);
