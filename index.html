@@ -46,7 +46,6 @@
 				container.appendChild(br);
 
 			});
-	//		console.log(document.getElementById('checkboxContainer'));
 
 			var svg = d3.select("svg");
 			plotStockList(svg, stockList);            	
@@ -55,6 +54,8 @@
 				while (svg.lastChild) {
 					svg.removeChild(svg.lastChild);
 				}
+
+				console.log(stockList);
 				var timeMin = new Date('07/19/2010');
 				var timeMax = new Date('07/17/2020');
 				var priceMin = 0;
@@ -83,28 +84,21 @@
 				stockList.forEach(function(stockId, index){
 					var ticker = stockId.Ticker;
 					var company = stockId.Company;
-					console.log(stockId);
-					console.log(index);
-				// if (stockId.localCompare('tsla') == 0) {
-
-				// }
 
 					const data = d3.csv('Data/' + ticker + '.csv')
 					.then(function(data){
-					// console.log(data);
+
 						dates = data.map(function(d) {
 							return new Date(d.Date); });
 
 						closes = data.map(function(d) {
 							return Number.parseFloat(d.Close); });
 
-						console.log(dates[dates.length - 1]);
-						console.log(closes[closes.length - 1]);
+
 						var line = d3.line()
 					            	 .x(function(d) {return xScale(new Date(d.Date));})
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-				//	d3.select('svg')
 			  			svg.append('g')
 			         	 .attr("transform", "translate(100, 50)")
 			         	 .append("path")
@@ -129,26 +123,16 @@
 					if (document.getElementById(ticker).checked)
 					{
 						stockList.push(stockId);
-						console.log(ticker + " has been added to stock show list.");
 					}
 					else
 					{
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
-						console.log(ticker + ' has been removed from stock show list');
 					}
 					plotStockList(svg, stockList);
-/*					priceMax = 800000;
 
-					yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
-	
-            		yAxis = d3.axisLeft(yScale);*/
-            		//TODO: dynamically remove an svg element: http://www.java2s.com/Code/XML/SVG/DynamicallyRemovinganSVGElement.htm
-					//console.log(stockList);
 				}
 			});
-
-			console.log(stockShowList);
 
 		}
 	</script>
