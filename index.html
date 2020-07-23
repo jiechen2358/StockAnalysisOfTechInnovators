@@ -55,9 +55,9 @@
 
 			var xScale = calculateXScale();
 			var yScale = calculateYScale(stockList);
-			var xAxis = plotXAxis(svg, xScale);
-			var yAxis = plotYAxis(svg, yScale);			
-			plotStockList(svg, xScale, yScale, stockList);            	
+			var xAxis = plotXAxis(xScale);
+			var yAxis = plotYAxis(yScale);			
+			plotStockList(xScale, yScale, stockList);            	
 
 			function calculateXScale(){
 				var timeMin = new Date('07/19/2010');
@@ -74,7 +74,7 @@
 				return yScale;
 			}
 
-			function plotXAxis(svg, xScale){
+			function plotXAxis(xScale){
 				var xAxis = d3.axisBottom(xScale);
 
 				svg.append("g")
@@ -84,7 +84,7 @@
 	  	   			.call(xAxis);
 	  	   		return xAxis;
 			}
-			function plotYAxis(svg, yScale){
+			function plotYAxis(yScale){
            		var yAxis = d3.axisLeft(yScale);
 
 				svg.append("g")
@@ -95,7 +95,7 @@
 		   		return yAxis;
 			}
 
-			function updateYAxis(svg, yScale){
+			function updateYAxis(yScale){
 
 				yScale.domain([0, 1600000]);
 				svg.select('yAxis').transition().duration(1000).call(yAxis);
@@ -106,7 +106,7 @@
 	  	   		//	.style("font", "14px times")
 		   		//	.call(yAxis);
 			}
-			function plotStockList(svg, xScale, yScale, stockList) {
+			function plotStockList(xScale, yScale, stockList) {
 			//	d3.selectAll("path").remove();
 
             	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
@@ -162,7 +162,7 @@
 
 			}
 
-/*			function updateAxis(svg, stockList) {
+/*			function updateAxis(stockList) {
 				for (i = 0; i < stockList.length; i++){
 					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv')
 					.then(function(data){
@@ -211,7 +211,7 @@
 					if (document.getElementById(ticker).checked)
 					{
 						stockList.push(stockId);
-						plotStockList(svg, xScale, yScale, stockList);  
+						plotStockList(xScale, yScale, stockList);  
 
 					}
 					else
@@ -222,9 +222,9 @@
 					}
 					//d3.selectAll("path.line").remove();
 					//var yScale = calculateYScale(stockList);
-					//updateYAxis(svg, yScale);
-					//plotXAxis(svg, xScale);
-				//	plotYAxis(svg, yScale);
+					//updateYAxis(yScale);
+					//plotXAxis(xScale);
+				//	plotYAxis(yScale);
 
 				}
 			});
