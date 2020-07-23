@@ -93,7 +93,7 @@
 			function updateYAxis(svg, yScale){
 
 				yScale.domain([0,1600000]);
-				yAxis.call(d3.axisLeft(yScale));
+				svg.select('.y').call(d3.axisLeft(yScale));
            		//var yAxis = d3.axisLeft(yScale);
 
 				//svg.append("g")
