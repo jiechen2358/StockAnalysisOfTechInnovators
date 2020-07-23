@@ -46,7 +46,7 @@
 				container.appendChild(br);
 
 			});
-			console.log(document.getElementById('checkboxContainer'));
+	//		console.log(document.getElementById('checkboxContainer'));
 //TODO: now stockShowList is stockList, exactly the same, need to remove duplicated var later.
 			var stockShowList = stockList;
 			stockShowList.forEach(function(stockId,index) {
@@ -70,6 +70,7 @@
 
 			console.log(stockShowList);
 
+		//	const plot = （stockList, svg）
 			var timeMin = new Date('07/19/2010');
 			var timeMax = new Date('07/17/2020');
 			var priceMin = 0;
@@ -135,100 +136,35 @@
 
 
 			});
-// 			const data_qqq = await d3.csv('Data/QQQ.csv');
-// 			const data_spy = await d3.csv('Data/SPY.csv');
-// 			const qqq_holdings = await d3.csv('Data/QQQHoldings.csv');
-// 			//const data_qqq = await d3.csv("https://www.nasdaq.com/api/v1/historical/QQQ/etf/2010-07-19/2020-07-19");
-// 			//dateString = data_qqq.map(function(d) {return d.Date; });
-// 			dates_qqq = data_qqq.map(function(d) {return new Date(d.Date); });
-// 			closes_qqq = data_qqq.map(function(d) {return Number.parseFloat(d.Close); });
-// 			dates_spy = data_spy.map(function(d) {return new Date(d.Date); });
-// 			closes_spy = data_spy.map(function(d) {return Number.parseFloat(d.Close); });
-// 			ticker = qqq_holdings.map(function(d) {return d.Ticker;});
-// 			company = qqq_holdings.map(function(d) {return d.Company});
-// 			percent = qqq_holdings.map(function(d){return d.PercentOfFund;});
-// 			// console.log(ticker);
-// 			// console.log(company);
-// 			// console.log(percent);
-// 			// volume = data_qqq.map(function(d) {return parseInt(d.Volume);});
-// 			// open = data_qqq.map(function(d) {return parseFloat(d.Open);});
-// 			// High = data_qqq.map(function(d) {return parseFloat(d.High);});
-// 			// Low = data_qqq.map(function(d) {return parseFloat(d.Low);});			
-// 			// console.log(volume);
-// 			// console.log(open);
-// 			// console.log(High);
-// 			// console.log(Low);
-// 			 xMin = Math.min(Math.min.apply(null, dates_qqq), Math.min.apply(null, dates_spy));
-// 			 xMax = Math.max(Math.max.apply(null, dates_qqq), Math.max.apply(null, dates_spy));
-// 			 yMin = Math.min(Math.min.apply(null, closes_qqq), Math.min.apply(null, closes_spy));
-// 			 yMax = Math.max(Math.max.apply(null, closes_qqq), Math.max.apply(null, closes_spy));
-// 			// yMin2 = Math.min.apply(null, prices2);
-// 			// yMax2 = Math.max.apply(null, prices2);
 
-// 			// console.log(yMin);
-// 			// console.log(yMax);
-// 			// console.log(yMin2);
-// 			// console.log(yMax2);
-			
-// 			// console.log(volume2);
-// 			// console.log(volume3);
+			var stockShowList = stockList;
+			stockShowList.forEach(function(stockId,index) {
+				var ticker = stockId.Ticker;
+				document.getElementById(ticker).onclick = function(){
+					if (document.getElementById(ticker).checked)
+					{
+						stockShowList.push(stockId);
+						console.log(ticker + " has been added to stock show list.");
+					}
+					else
+					{
+						var pos = stockShowList.indexOf(stockId);
+						stockShowList.splice(pos,1);
+						console.log(ticker + ' has been removed from stock show list');
+					}
 
-// 			width = 600;
-// 			height = 600;
+/*					priceMax = 800000;
 
-// 			//var xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, w]);
-//             var xScale = d3.scaleTime().domain([xMin, xMax]).range([0, width]);
-// 			var yScale = d3.scaleLinear().domain([yMin, yMax]).range([height, 0]);
+					yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+	
+            		yAxis = d3.axisLeft(yScale);*/
+            		//TODO: dynamically remove an svg element: http://www.java2s.com/Code/XML/SVG/DynamicallyRemovinganSVGElement.htm
+					//console.log(stockList);
+				}
+			});
 
-//             var xAxis = d3.axisBottom(xScale);
-//             var yAxis = d3.axisLeft(yScale);
+			console.log(stockShowList);
 
-// 			var line = d3.line()
-// 					     .x(function(d) {return xScale(new Date(d.Date));})
-// 					     .y(function(d) {return yScale(parseFloat(d.Close)); });
-
-// 			colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen'];
-
-// 			d3.select('svg')
-// 			  .append('g')
-// 			  .attr("transform", "translate(50, 50)")
-// 			  .append("path")
-// 			  .data([data_qqq])
-// 			  .attr("d", line)
-// 			  .attr("class", "line")
-// 			  .attr("stroke", colors[0]);
-
-// 			d3.select('svg')
-// 			  .append('g')
-// 			  .attr("transform", "translate(50, 50)")
-// 			  .append("path")
-// 			  .data([data_spy])
-// 			  .attr("d", line)
-// 			  .attr("class", "line")
-// 			  .attr("stroke", colors[1]);
-
-// 			d3.select("svg")
-// 			  .append("g")
-// 			  .attr("transform", "translate(50, 50)")
-// 			  .style("font", "14px times")
-// 			  .call(yAxis);
-// 			d3.select("svg")
-// 			  .append("g")
-// 			  .attr("transform", "translate(50, 650)")
-// 			  .style("font", "14px times")
-// 			  .call(xAxis);
-// 			/*marker = d3.select("svg")
-// 			           .append("g")
-// 			           .attr("transform", "translate(50,50)")
-// 			           .selectAll("circle")
-// 			           .data(data_qqq)
-// 			           .enter()
-// 			           .attr("class", "dot")
-// 			           .attr("cx", function(d, i) {return i;})
-// 			           .attr("cy", function(d, i) {return yScale(d.Close);})
-// 			           .attr("r", 4)
-// 			           .attr("fill", color);
-// */
 		}
 	</script>
 </body>
