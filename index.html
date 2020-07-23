@@ -64,8 +64,9 @@
 						var prices = data.map(function(d) {
 							return parseFloat(d.Close); });
 						var maxofStock = Math.max.apply(null, prices);
+						var minofStock = Math.min.apply(null, prices);
 						console.log(maxofStock);
-						priceMax = Math.max(priceMax, maxofStock);
+						priceMax = Math.max(priceMax, maxofStock/minofStock * 10000);
 						console.log(priceMax);
 					})
 					.catch(function(){
