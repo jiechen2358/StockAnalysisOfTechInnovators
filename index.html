@@ -218,7 +218,7 @@
 					{
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
-						d3.select('#'+ticker + 'line').remove();
+						d3.selectAll('#'+ticker + 'line').remove();
 					}
 					//d3.selectAll("path.line").remove();
 					//var yScale = calculateYScale(stockList);
