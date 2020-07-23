@@ -84,13 +84,14 @@
             var xAxis = d3.axisBottom(xScale);
             var yAxis = d3.axisLeft(yScale);
 
-            d3.select("svg")
-			  .append("g")
+            var svg = d3.select("svg");
+            //d3.select("svg")
+			svg.append("g")
 			  .attr("transform", "translate(100, 50)")
 			  .style("font", "14px times")
 			  .call(yAxis);
-			d3.select("svg")
-			  .append("g")
+			//d3.select("svg")
+			svg.append("g")
 			  .attr("transform", "translate(100, 950)")
 			  .style("font", "14px times")
 			  .call(xAxis);
@@ -120,8 +121,8 @@
 					             .x(function(d) {return xScale(new Date(d.Date));})
 					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-					d3.select('svg')
-			  		  .append('g')
+				//	d3.select('svg')
+			  		svg.append('g')
 			          .attr("transform", "translate(100, 50)")
 			          .append("path")
 			          .data([data])
