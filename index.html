@@ -131,7 +131,7 @@
 			         	   .append("path")
 			         	   .data([data])
 			         	   .attr("d", line)
-			         	   .attr('id', 'ticker'+'line')
+			         	   .attr('id', ticker+'line')
 			       		   .attr("class", "line")
 			          	   .attr("stroke", colors[index]);
 					})
@@ -194,19 +194,20 @@
 					if (document.getElementById(ticker).checked)
 					{
 						stockList.push(stockId);
+						plotStockList(svg, xScale, yScale, stockList);  
+
 					}
 					else
 					{
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
-						//d3.select('#'+ticker + 'line').remove();
+						d3.select(ticker + 'line').remove();
 					}
-					d3.selectAll("path.line").remove();
+					//d3.selectAll("path.line").remove();
 					//var yScale = calculateYScale(stockList);
 					//updateYAxis(svg, yScale);
 					//plotXAxis(svg, xScale);
 				//	plotYAxis(svg, yScale);
-					plotStockList(svg, xScale, yScale, stockList);  
 
 				}
 			});
