@@ -59,9 +59,17 @@
 
 				var priceMax = 10000;
 				for (i = 0; i < stockList.length; i++){
-					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv');
-					prices = data.map(function(d){return parseFloat(d.Close); });
-					priceMax = Math.max(priceMax, Math.max.apply(null, prices));
+					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv')
+					.then(function(data){
+						var prices = data.map(function(d) {
+							return parseFloat(d.Close); });
+						priceMax = Math.max(priceMax, Math.max.apply(null, prices));
+					})
+					.catch(function(){
+						console.log("error loading file");
+
+					});
+
 				}
 				var width = 1000;
 				var height = 900;
