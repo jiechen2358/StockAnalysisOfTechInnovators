@@ -51,9 +51,7 @@
 			plotStockList(svg, stockList);            	
 
 			function plotStockList(svg, stockList) {
-				while (svg.lastChild) {
-					svg.removeChild(svg.lastChild);
-				}
+				d3.selectAll("path").remove();
 
 				console.log(stockList);
 				var timeMin = new Date('07/19/2010');
