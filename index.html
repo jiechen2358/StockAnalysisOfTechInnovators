@@ -199,11 +199,11 @@
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
 					}
-					d3.selectAll("path").remove();
+					d3.selectAll("path.line").remove();
 					//var yScale = calculateYScale(stockList);
 					//updateYAxis(svg, yScale);
-					plotXAxis(svg, xScale);
-					plotYAxis(svg, yScale);
+					//plotXAxis(svg, xScale);
+				//	plotYAxis(svg, yScale);
 					plotStockList(svg, xScale, yScale, stockList);  
 
 				}
