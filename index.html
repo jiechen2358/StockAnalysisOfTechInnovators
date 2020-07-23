@@ -75,6 +75,7 @@
 				var xAxis = d3.axisBottom(xScale);
 
 				svg.append("g")
+					.attr("class", 'xAxis')
 		   			.attr("transform", "translate(100, 950)")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
@@ -84,6 +85,7 @@
            		var yAxis = d3.axisLeft(yScale);
 
 				svg.append("g")
+					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate(100, 50)")
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
@@ -92,10 +94,9 @@
 
 			function updateYAxis(svg, yScale){
 
-				yScale.domain([0,1600000]);
-				console.log(yScale);
+				var yScale = d3.scaleLinear().domain([0, 1600000]).range([900, 0]);
 				var yAxis = d3.axisLeft(yScale);
-				yAxis.scale(yScale);
+				svg.select('yAxis').transition().duration(1000).call(yAxis);
            		//var yAxis = d3.axisLeft(yScale);
 
 				//svg.append("g")
