@@ -63,7 +63,10 @@
 					.then(function(data){
 						var prices = data.map(function(d) {
 							return parseFloat(d.Close); });
-						priceMax = Math.max(priceMax, Math.max.apply(null, prices));
+						var maxofStock = Math.max.apply(null, prices);
+						console.log(maxofStock);
+						priceMax = Math.max(priceMax, maxofStock);
+						console.log(priceMax);
 					})
 					.catch(function(){
 						console.log("error loading file");
