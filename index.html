@@ -69,28 +69,26 @@
 					priceMax = Math.max(priceMax, maxofStock/minofStock * 10000);
 					console.log(priceMax);
 
-
-
-
 				}
-						var width = 1000;
-						var height = 900;
-						console.log(priceMax);
-            			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
-						var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 
-            			var xAxis = d3.axisBottom(xScale);
-            			var yAxis = d3.axisLeft(yScale);
+				var width = 1000;
+				var height = 900;
+				console.log(priceMax);
+            	var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+				var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 
-						svg.append("g")
-			  	   			.attr("transform", "translate(100, 50)")
-			  	   			.style("font", "14px times")
-			  	   			.call(yAxis);
+            	var xAxis = d3.axisBottom(xScale);
+            	var yAxis = d3.axisLeft(yScale);
 
-						svg.append("g")
-			 	   			.attr("transform", "translate(100, 950)")
-			  	   			.style("font", "14px times")
-			  	   			.call(xAxis);
+				svg.append("g")
+			  	   	.attr("transform", "translate(100, 50)")
+			  	   	.style("font", "14px times")
+			  	   	.call(yAxis);
+
+				svg.append("g")
+			 	   	.attr("transform", "translate(100, 950)")
+			  	   	.style("font", "14px times")
+			  	   	.call(xAxis);
 
             	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
 
