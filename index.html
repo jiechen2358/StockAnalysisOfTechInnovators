@@ -8,8 +8,7 @@
 </style>
 <!-- load the d3.js library -->   
 <script src='https://d3js.org/d3.v5.min.js'></script>
-<head>
-
+<head>]
 	<title> Stock Historical Data over Time</title>
 </head>
 <body onload="init()">
@@ -57,7 +56,13 @@
 				var timeMin = new Date('07/19/2010');
 				var timeMax = new Date('07/17/2020');
 				var priceMin = 0;
-				var priceMax = 800000;
+
+				var priceMax = 10000;
+				for (i = 0; i < stockList.length; i++){
+					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv');
+					prices = data.map(function(d){return parseFloat(d.Close); });
+					priceMax = Math.max(priceMax, Math.max.apply(null, prices));
+				}
 				var width = 1000;
 				var height = 900;
 
@@ -67,18 +72,18 @@
             	var xAxis = d3.axisBottom(xScale);
             	var yAxis = d3.axisLeft(yScale);
 
-            //d3.select("svg")
 				svg.append("g")
-			  		.attr("transform", "translate(100, 50)")
-			  		.style("font", "14px times")
-			  		.call(yAxis);
-			//d3.select("svg")
+			  	   .attr("transform", "translate(100, 50)")
+			  	   .style("font", "14px times")
+			  	   .call(yAxis);
+
 				svg.append("g")
-			 		.attr("transform", "translate(100, 950)")
-			  		.style("font", "14px times")
-			  		.call(xAxis);
+			 	   .attr("transform", "translate(100, 950)")
+			  	   .style("font", "14px times")
+			  	   .call(xAxis);
 
             	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
+
 				stockList.forEach(function(stockId, index){
 					var ticker = stockId.Ticker;
 					var company = stockId.Company;
@@ -90,7 +95,7 @@
 							return new Date(d.Date); });
 
 						closes = data.map(function(d) {
-							return Number.parseFloat(d.Close); });
+							return parseFloat(d.Close); });
 
 
 						var line = d3.line()
@@ -98,12 +103,12 @@
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
 			  			svg.append('g')
-			         	 .attr("transform", "translate(100, 50)")
-			         	 .append("path")
-			         	 .data([data])
-			         	 .attr("d", line)
-			       		 .attr("class", "line")
-			          	 .attr("stroke", colors[index]);
+			               .attr("transform", "translate(100, 50)")
+			         	   .append("path")
+			         	   .data([data])
+			         	   .attr("d", line)
+			       		   .attr("class", "line")
+			          	   .attr("stroke", colors[index]);
 					})
 					.catch(function(){
 						console.log("error loading file");
