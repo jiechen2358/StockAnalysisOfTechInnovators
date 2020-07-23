@@ -181,7 +181,11 @@
 						var pos = stockList.indexOf(stockId);
 						stockList.splice(pos,1);
 					}
-					plotStockList(svg, stockList);
+					
+					var xScale = calculateXScale();
+					var yScale = calculateYScale(stockList);
+					plotAxises(svg, xScale, yScale);
+					plotStockList(svg, xScale, yScale, stockList);  
 
 				}
 			});
