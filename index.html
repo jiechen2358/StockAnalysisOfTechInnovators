@@ -47,24 +47,31 @@
 			});
 
 			var svg = d3.select("svg");
-			plotStockList(svg, stockList);            	
 
-			function plotStockList(svg, stockList) {
-				d3.selectAll("path").remove();
+			var xScale = calculateXScale();
+			var yScale = calculateYScale(stockList);
+			plotAxises(svg, xScale, yScale);
+			plotStockList(svg, xScale, yScale, stockList);            	
 
-				console.log(stockList);
+			function calculateXScale(){
 				var timeMin = new Date('07/19/2010');
 				var timeMax = new Date('07/17/2020');
+				var width = 1000;
+				var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+				return xScale;
+			}
+
+			function calculateYScale(stockList){
 				var priceMin = 0;
 				var priceMax = 800000;
 
-				var width = 1000;
 				var height = 900;
-				console.log(priceMax);
-           		var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
 				var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+				return yScale;
+			}
 
-        		var xAxis = d3.axisBottom(xScale);
+			function plotAxises(svg, xScale, yScale){
+				var xAxis = d3.axisBottom(xScale);
            		var yAxis = d3.axisLeft(yScale);
 
 				svg.append("g")
@@ -76,6 +83,10 @@
 		   			.attr("transform", "translate(100, 950)")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
+			}
+
+			function plotStockList(svg, xScale, yScale, stockList) {
+				d3.selectAll("path").remove();
 
             	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
 
