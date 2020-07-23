@@ -56,8 +56,66 @@
 				var timeMin = new Date('07/19/2010');
 				var timeMax = new Date('07/17/2020');
 				var priceMin = 0;
+				var priceMax = 800000;
 
-				var priceMax = 10000;
+				var width = 1000;
+				var height = 900;
+				console.log(priceMax);
+           		var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+				var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+
+        		var xAxis = d3.axisBottom(xScale);
+           		var yAxis = d3.axisLeft(yScale);
+
+				svg.append("g")
+	  	   			.attr("transform", "translate(100, 50)")
+	  	   			.style("font", "14px times")
+		   			.call(yAxis);
+
+				svg.append("g")
+		   			.attr("transform", "translate(100, 950)")
+	  	   			.style("font", "14px times")
+	  	   			.call(xAxis);
+
+            	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
+
+				stockList.forEach(function(stockId, index){
+					var ticker = stockId.Ticker;
+					var company = stockId.Company;
+
+					const data = d3.csv('Data/' + ticker + '.csv')
+					.then(function(data){
+
+						dates = data.map(function(d) {
+							return new Date(d.Date); });
+
+						closes = data.map(function(d) {
+							return parseFloat(d.Close); });
+
+
+						var line = d3.line()
+					            	 .x(function(d) {return xScale(new Date(d.Date));})
+					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
+
+			  			svg.append('g')
+			               .attr("transform", "translate(100, 50)")
+			         	   .append("path")
+			         	   .data([data])
+			         	   .attr("d", line)
+			       		   .attr("class", "line")
+			          	   .attr("stroke", colors[index]);
+					})
+					.catch(function(){
+						console.log("error loading file");
+
+					});
+
+
+				});
+
+			}
+
+			function updateAxis(svg, stockList) {
 				for (i = 0; i < stockList.length; i++){
 					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv')
 					.then(function(data){
@@ -98,44 +156,6 @@
 					});
 
 				}
-
-
-            	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
-
-				stockList.forEach(function(stockId, index){
-					var ticker = stockId.Ticker;
-					var company = stockId.Company;
-
-					const data = d3.csv('Data/' + ticker + '.csv')
-					.then(function(data){
-
-						dates = data.map(function(d) {
-							return new Date(d.Date); });
-
-						closes = data.map(function(d) {
-							return parseFloat(d.Close); });
-
-
-						var line = d3.line()
-					            	 .x(function(d) {return xScale(new Date(d.Date));})
-					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
-
-			  			svg.append('g')
-			               .attr("transform", "translate(100, 50)")
-			         	   .append("path")
-			         	   .data([data])
-			         	   .attr("d", line)
-			       		   .attr("class", "line")
-			          	   .attr("stroke", colors[index]);
-					})
-					.catch(function(){
-						console.log("error loading file");
-
-					});
-
-
-				});
-
 			}
 
 			stockList.forEach(function(stockId,index) {
