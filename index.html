@@ -69,74 +69,78 @@
 			});
 
 			console.log(stockShowList);
+			var svg = d3.select("svg");
+			plotStockList(svg, stockList);            	
 
-		//	const plot = （stockList, svg）
-			var timeMin = new Date('07/19/2010');
-			var timeMax = new Date('07/17/2020');
-			var priceMin = 0;
-			var priceMax = 800000;
-			var width = 1000;
-			var height = 900;
+			function plotStockList(svg, stockList) {
+				var timeMin = new Date('07/19/2010');
+				var timeMax = new Date('07/17/2020');
+				var priceMin = 0;
+				var priceMax = 800000;
+				var width = 1000;
+				var height = 900;
 
-            var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
-			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+            	var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+				var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 
-            var xAxis = d3.axisBottom(xScale);
-            var yAxis = d3.axisLeft(yScale);
+            	var xAxis = d3.axisBottom(xScale);
+            	var yAxis = d3.axisLeft(yScale);
 
-            var svg = d3.select("svg");
             //d3.select("svg")
-			svg.append("g")
-			  .attr("transform", "translate(100, 50)")
-			  .style("font", "14px times")
-			  .call(yAxis);
+				svg.append("g")
+			  		.attr("transform", "translate(100, 50)")
+			  		.style("font", "14px times")
+			  		.call(yAxis);
 			//d3.select("svg")
-			svg.append("g")
-			  .attr("transform", "translate(100, 950)")
-			  .style("font", "14px times")
-			  .call(xAxis);
+				svg.append("g")
+			 		.attr("transform", "translate(100, 950)")
+			  		.style("font", "14px times")
+			  		.call(xAxis);
 
-            var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
-			stockList.forEach(function(stockId, index){
-				var ticker = stockId.Ticker;
-				var company = stockId.Company;
-				console.log(stockId);
-				console.log(index);
+            	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
+				stockList.forEach(function(stockId, index){
+					var ticker = stockId.Ticker;
+					var company = stockId.Company;
+					console.log(stockId);
+					console.log(index);
 				// if (stockId.localCompare('tsla') == 0) {
 
 				// }
 
-				const data = d3.csv('Data/' + ticker + '.csv')
-				.then(function(data){
+					const data = d3.csv('Data/' + ticker + '.csv')
+					.then(function(data){
 					// console.log(data);
-					dates = data.map(function(d) {
-						return new Date(d.Date); });
+						dates = data.map(function(d) {
+							return new Date(d.Date); });
 
-					closes = data.map(function(d) {
-						return Number.parseFloat(d.Close); });
+						closes = data.map(function(d) {
+							return Number.parseFloat(d.Close); });
 
-					console.log(dates[dates.length - 1]);
-					console.log(closes[closes.length - 1]);
-					var line = d3.line()
-					             .x(function(d) {return xScale(new Date(d.Date));})
-					             .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
+						console.log(dates[dates.length - 1]);
+						console.log(closes[closes.length - 1]);
+						var line = d3.line()
+					            	 .x(function(d) {return xScale(new Date(d.Date));})
+					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
 				//	d3.select('svg')
-			  		svg.append('g')
-			          .attr("transform", "translate(100, 50)")
-			          .append("path")
-			          .data([data])
-			          .attr("d", line)
-			          .attr("class", "line")
-			          .attr("stroke", colors[index]);
-				})
-				.catch(function(){
-					console.log("error loading file");
+			  			svg.append('g')
+			         	 .attr("transform", "translate(100, 50)")
+			         	 .append("path")
+			         	 .data([data])
+			         	 .attr("d", line)
+			       		 .attr("class", "line")
+			          	 .attr("stroke", colors[index]);
+					})
+					.catch(function(){
+						console.log("error loading file");
+
+					});
+
 
 				});
 
-
-			});
+			}
+		//	const plot = （stockList, svg）
 
 			var stockShowList = stockList;
 			stockShowList.forEach(function(stockId,index) {
