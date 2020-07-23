@@ -18,9 +18,14 @@
 	<div id='checkboxContainer'></div>
 	<script>
 		var svg = d3.select("svg");
-		var margin = 100;
-		var width = svg.attr('width') - margin;
-		var height = svg.attr('height') - margin;
+		var margin = {
+			top: 50,
+			bottom: 50,
+			left: 100,
+			right: 0
+		};
+		var width = svg.attr('width') - margin.left - margin.right;
+		var height = svg.attr('height') - margin.top - margin.bottom;
 
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
@@ -79,7 +84,7 @@
 
 				svg.append("g")
 					.attr("class", 'xAxis')
-		   			.attr("transform", "translate(100, 950)")
+		   			.attr("transform", "translate("+ margin.left +", " + margin.top + height +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
 	  	   		return xAxis;
@@ -89,7 +94,7 @@
 
 				svg.append("g")
 					.attr('class', 'yAxis')
-	  	   			.attr("transform", "translate(100, 50)")
+	  	   			.attr("transform", "translate("+margin.left+", "+margin.top")")
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 		   		return yAxis;
@@ -129,27 +134,52 @@
 					            	 .x(function(d) {return xScale(new Date(d.Date));})
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-			  			svg.append('g')
-			               .attr("transform", "translate(100, 50)")
-			         	   .append("path")
-			         	   .data([data])
-			         	   .attr("d", line)
-			         	   .attr('id', ticker+'line')
-			       		   .attr("class", "line")
-			          	   .attr("stroke", colors[index]);
+			  					svg.append('g')
+			               			.attr("transform", "translate("+margin.left+", "+margin.top+")")
+			         	   			.append("path")
+			         	   			.data([data])
+			         	   			.attr("d", line)
+			         	   			.attr('id', ticker+'line')
+			       		  			.attr("class", "line")
+			          	   			.attr("stroke", colors[index]);
 
-/*			          	svg.append('rect')
-			          	   .attr('class', 'mouseOverEffects')
-			          	   .attr()
-			          	   .on('mouseover', function(){
+			          	/*var tooltip = svg.append('g')
+			          					 .attr('class', 'focus')
+			          					 .style('opacity', '0');
 
-			          	   })
-			          	   .on('mousemove', function(){
+			          	tooltip.append('rect')
+			          	   .attr('class', 'tooltip')
+			          	   .attr('width', )
+			          	   .attr('height', 50)
+			          	   .attr('x', 10)
+			          	   .attr('y', -22)
+			          	   .attr('rx', 4)
+			          	   .attr('ry', 4);
 
-			          	   })
-			          	   .on('mouseout', function(){
+			          	tooltip.append('text')
+			          	    .attr('class', 'tooltip-date')
+			          	    .attr('x', 18)
+			          	    .attr('y', -2);
 
-			          	   });*/
+			          	tooltip.append('text')
+			          		.attr('x', 18)
+			          		.attr('y', 18)
+			          		.text(ticker+': ');
+
+			          	tooltip.append('text')
+			          		.attr('class', 'tooltip-price')
+			          		.attr('x', 60)
+			          		.attr('y', 18);
+
+			          	price_line.on('mouseover', function(){
+
+			            })
+			        	.on('mousemove', function(){
+
+			          	})
+			          	.on('mouseout', function(){
+
+			          	});*/
 
 					})
 					.catch(function(){
@@ -162,48 +192,6 @@
 
 			}
 
-/*			function updateAxis(stockList) {
-				for (i = 0; i < stockList.length; i++){
-					const data = d3.csv('Data/' + stockList[i].Ticker + '.csv')
-					.then(function(data){
-						var prices = data.map(function(d) {
-							return parseFloat(d.Close); });
-						var maxofStock = Math.max.apply(null, prices);
-						var minofStock = Math.min.apply(null, prices);
-						console.log(maxofStock);
-						priceMax = Math.max(priceMax, maxofStock/minofStock * 10000);
-						console.log(priceMax);
-
-						var width = 1000;
-						var height = 900;
-						console.log(priceMax);
-            			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
-						var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
-
-            			var xAxis = d3.axisBottom(xScale);
-            			var yAxis = d3.axisLeft(yScale);
-
-						svg.append("g")
-			  	   			.attr("transform", "translate(100, 50)")
-			  	   			.style("font", "14px times")
-			  	   			.call(yAxis);
-
-						svg.append("g")
-			 	   			.attr("transform", "translate(100, 950)")
-			  	   			.style("font", "14px times")
-			  	   			.call(xAxis);
-
-			  	   		svg.selectAll("g.x.axis").call(xAxis);
-			  	   		svg.selectAll("g.y.axis").call(yAxis);
-
-					})
-					.catch(function(){
-						console.log("error loading file");
-
-					});
-
-				}
-			}*/
 
 			stockList.forEach(function(stockId,index) {
 				var ticker = stockId.Ticker;
