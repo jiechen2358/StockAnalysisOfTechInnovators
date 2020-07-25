@@ -17,9 +17,9 @@
 	</svg>
 	<div id='checkboxContainer'></div>
 	<div style = 'display:none'>
-		<form id='eft_detail' action = 'eft_detail.html' method="get">
-<!-- 			<input id="etf_name" name="etf" value=''><br>
- -->			<button type='submit'></button>
+		<form id='eft_detail' action = 'eft_detail.html' method="GET">
+			<input id="etf_name" name="etf" value=''><br>
+			<button type='submit'></button>
 		</form>
 		
 	</div>
@@ -150,8 +150,8 @@
 			       		  			.attr("class", "line")
 			          	   			.attr("stroke", colors[index]);
 
-			          	line.on('click', function(){
-			          		//document.getElementById('etf_name').value=ticker;
+			          	stockline.on('click', function(){
+			          		document.getElementById('etf_name').value='test';
 			          		document.getElementById("eft_detail").submit();
 			          	});
 				 		// stockline.on('mouseover', function(){
