@@ -50,8 +50,8 @@
 
 			d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 
-			stockPie.on('click', function(){
-				document.getElementById('stock_name').value=d3.select(this).data()[0].Ticker;
+			stockPie.on('click', function(d, i){
+				document.getElementById('stock_name').value=d.Ticker;
 			    document.getElementById('stock_detail').submit();
 			});
 		}
