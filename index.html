@@ -17,7 +17,7 @@
 	</svg>
 	<div id='checkboxContainer'></div>
 	<div style = 'display:none'>
-		<form id='eft_detail' action = 'eft_detail.html' method="GET">
+		<form id='etf_detail' action = 'etf_detail.html' method="GET">
 			<input id="etf_name" name="etf" value=''><br>
 			<button type='submit'></button>
 		</form>
@@ -152,7 +152,7 @@
 
 			          	stockline.on('click', function(){
 			          		document.getElementById('etf_name').value='test';
-			          		document.getElementById("eft_detail").submit();
+			          		document.getElementById("etf_detail").submit();
 			          	});
 				 		// stockline.on('mouseover', function(){
 						 //   		d3.select('.tooltip-display')
