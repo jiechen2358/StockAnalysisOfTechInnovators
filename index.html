@@ -16,6 +16,13 @@
 	<svg width=1200 height=1000>
 	</svg>
 	<div id='checkboxContainer'></div>
+	<div style = 'display:none'>
+		<form id='eft_detail' action = 'eft_detail.html' method="get">
+			<input type="etf_name" name="etf" value=''><br>
+			<button type='submit'></button>
+		</form>
+		
+	</div>
 	<script>
 		var svg = d3.select("svg");
 		var margin = {
@@ -143,7 +150,10 @@
 			       		  			.attr("class", "line")
 			          	   			.attr("stroke", colors[index]);
 
-			          	
+			          	stockline.on('click', function(){
+			          		document.getElementById('etf_name').value=ticker;
+			          		document.getElementById("eft_detail").submit();
+			          	});
 				 		// stockline.on('mouseover', function(){
 						 //   		d3.select('.tooltip-display')
 						 //   		  .style('opacity', '1');
