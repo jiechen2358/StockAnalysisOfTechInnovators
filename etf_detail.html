@@ -8,12 +8,14 @@
 	<h1 id='h1Title'></h1>
 	<div class = 'holdings'>
 		<h2 id='holdingsTitle'></h2>
-
 	</div>
 
 	<div class = 'sectors'>
 		<h2 id='sectorsTitle'></h2>
-	
+	</div>
+
+	<div class = 'countries'>
+		<h2 id='counteriesTitle'></h2>
 	</div>
 	<script>
 		async function init() {
@@ -23,18 +25,23 @@
 			else {
 				etf = 'QQQ';
 			}
-			const data = await d3.csv("Data/" + etf + 'Holdings.csv');
+			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
+			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
+			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			document.getElementById("h1Title").innerHTML = etf + " Details";
 			document.getElementById('holdingsTitle').innerHTML = etf + ' Top 10 Holdings:';
-			document.getElementById('sectorsTitle').innerHTML = etf + ' Sectors:';
+			document.getElementById('sectorsTitle').innerHTML = etf + ' Top 10 Sectors:';
+			document.getElementById('counteriesTitle').innerHTML = etf+'Top 10 Countries';
 			var color = ['pink', 'lightcyan', '#f8b70a','lightblue','#6149c6','lightgreen', '#9f8170', 'lightyellow', '#8ABD4A',  'violet'];
 
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+
+			d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 		}
 	</script>
 </body>
