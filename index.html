@@ -143,84 +143,25 @@
 			       		  			.attr("class", "line")
 			          	   			.attr("stroke", colors[index]);
 
-/*			            var tooltip = svg.append('g')
-			            			.attr("transform", "translate("+margin.left+", "+margin.top+")");
+			          	
+				 		// stockline.on('mouseover', function(){
+						 //   		d3.select('.tooltip-display')
+						 //   		  .style('opacity', '1');
+						 //   		d3.selectAll('.priceline text')
+						 //   		  .style('opacity', '1');
 
-			            		tooltip.append('path')
-			          				.attr('class', 'tooltip-display')
-			          				.style('opacity', '0');
+			    //         })
+			    //     	.on('mouseout', function(){
+						 //   		d3.select('.tooltip-display')
+						 //   		  .style('opacity', '0');
+						 //   		d3.selectAll('.priceline text')
+						 //   		  .style('opacity', '0');
+    			//         })
+			    //       	.on('mousemove', function(){
+			    //       	   		var pointer = d3.mouse(this);
 
-			          	var stocks = document.getElementsById(ticker+'line');
 
-
-			          	var stock = tooltip.selectAll('.priceline')
-			          		.data(data)
-			          		.enter()
-			          		.append('g')
-			          		.attr('class', 'priceline');
-
-			          	stock.append('rect')
-			          	.attr('width',1)
-			          	.attr('height',1)
-			          	.style('opacity', '0');
-
-			          	stock.append('text');
-
-			          	tooltip.append('rect')
-			          	   .attr('fill', 'none')
-			          	   .attr('pointer-events', 'all')
-			          	   .attr('width', width)
-			          	   .attr('height', height)*/
-/*				 stockline.on('mouseover', function(){
-						   		d3.select('.tooltip-display')
-						   		  .style('opacity', '1');
-						   		d3.selectAll('.priceline text')
-						   		  .style('opacity', '1');
-
-			               })
-			        	   .on('mouseout', function(){
-						   		d3.select('.tooltip-display')
-						   		  .style('opacity', '0');
-						   		d3.selectAll('.priceline text')
-						   		  .style('opacity', '0');
-    			           })
-			          	   .on('mousemove', function(){
-			          	   		var pointer = d3.mouse(this);
-			          	   		d3.select('.tooltip-display')
-			          	   		  .attr('d', function() {
-			          	   		  	var d = 'M' + pointer[0] + ',' + height;
-			          	   		  	d += ' ' + pointer[0] + ',' + 0;
-			          	   		  	return d;
-			          	   		  });
-
-								d3.selectAll(".priceline")
-			  					  .attr("transform", function(d, i) {
-									var start = 0
-									var	end = stocks[i].getTotalLength()
-									var	result = null;
-
-									while (true){
-				 			 			result = Math.floor((start + end) / 2);
-				  						pos = stocks[i].getPointAtLength(result);
-				  						if ((result == end || result == start) && pos.x != pointer[0]) {
-					  						break;
-				  						}
-				  						if (pos.x < pointer[0]){
-											start = result;
-				  						}
-				  						else if (pos.x > pointer[0]){
-											end = result;
-				  						}
-				  						else break; 
-									}
-				
-								// display absolute population values
-									d3.select(this).select('text')
-				  					  .text(parseNumber(y.invert(pos.y).toFixed(0)));
-				  
-									return "translate(" + pointer[0] + "," + pos.y +")";
-			 					});
-			          	   });*/
+			    //       	});
 
 /*			          	tooltip.append('text')
 			          	    .attr('class', 'tooltip-date')
