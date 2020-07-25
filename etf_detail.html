@@ -9,7 +9,12 @@
 	<div class = 'holdings'>
 		<h2 id='holdingsTitle'></h2>
 	</div>
-
+	<div style="display: none">
+		<form id=stock_detail action="stock_detail.html" method="GET">
+			<input type="" name="stock" id='stock_name'>
+			<button type = 'submit'></button>
+		</form>
+	</div>
 	<div class = 'sectors'>
 		<h2 id='sectorsTitle'></h2>
 	</div>
@@ -17,6 +22,8 @@
 	<div class = 'countries'>
 		<h2 id='counteriesTitle'></h2>
 	</div>
+
+
 	<script>
 		async function init() {
 			if (window.location.href.includes('?')) {
@@ -37,11 +44,16 @@
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			var stockPie = d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
 			d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
 			d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
+
+			stockPie.on('click', function(){
+				document.getElementById('stock_name').value=d3.select(this).data().Ticker;
+			    document.getElementById('stock_detail').submit();
+			});
 		}
 	</script>
 </body>
