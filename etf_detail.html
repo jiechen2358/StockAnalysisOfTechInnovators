@@ -8,14 +8,12 @@
 	<h1 id='h1Title'></h1>
 	<div class = 'holdings'>
 		<h2 id='holdingsTitle'></h2>
-		<svg width=800 height=800>
-		</svg><br>	
+
 	</div>
 
 	<div class = 'sectors'>
 		<h2 id='sectorsTitle'></h2>
-		<svg width=800 height=800>
-		</svg><br>	
+	
 	</div>
 	<script>
 		async function init() {
@@ -34,9 +32,9 @@
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			d3.select('.holdings').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.sectors').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 		}
 	</script>
 </body>
