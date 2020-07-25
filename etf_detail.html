@@ -34,9 +34,9 @@
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			d3.select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			d3.select('.holdings').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-
+			d3.select('.sectors').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(data)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 		}
 	</script>
 </body>
