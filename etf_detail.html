@@ -5,7 +5,12 @@
 	<title>etf details</title>
 </head>
 <body onload = 'init()'>
-	<h1> ETF details</h1>
+	<h1 id='h1Title'></h1>
+	<div class = 'holdings'>
+		<h2 id='h2Title'></h2>
+		<svg width=600 height=600>
+		</svg><br>	
+	</div>
 
 	<script>
 		async function init() {
@@ -16,6 +21,10 @@
 				etf = 'QQQ';
 			}
 			const data = await d3.csv("Data/" + etf + 'Holdings.csv');
+			document.getElementById("h1Title").innerHTML = etf + " Details";
+
+
+
 		}
 	</script>
 </body>
