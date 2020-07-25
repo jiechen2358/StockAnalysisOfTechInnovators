@@ -132,7 +132,7 @@
 					var ticker = stockId.Ticker;
 					var company = stockId.Company;
 
-					const data = d3.csv('Data/' + ticker + '.csv')
+					const data = d3.csv('Data/' + ticker + '_PRICES.csv')
 					.then(function(data){
 
 						dates = data.map(function(d) {
