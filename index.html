@@ -143,14 +143,14 @@
 			       		  			.attr("class", "line")
 			          	   			.attr("stroke", colors[index]);
 
-			            tooltip = svg.append('g')
+			            var tooltip = svg.append('g')
 			            			.attr("transform", "translate("+margin.left+", "+margin.top+")");
 
 			            		tooltip.append('path')
 			          				.attr('class', 'tooltip-display')
 			          				.style('opacity', '0');
 
-			          	var stocks = document.getElementsByClassName('line');
+			          	var stocks = document.getElementsById(ticker+'line');
 
 
 			          	var stock = tooltip.selectAll('.priceline')
@@ -178,13 +178,13 @@
 						   		  .style('opacity', '1');
 
 			               })
-			        	   .on('mousemove', function(){
+			        	   .on('mouseout', function(){
 						   		d3.select('.tooltip-display')
 						   		  .style('opacity', '0');
 						   		d3.selectAll('.priceline text')
 						   		  .style('opacity', '0');
     			           })
-			          	   .on('mouseout', function(){
+			          	   .on('mousemove', function(){
 			          	   		var pointer = d3.mouse(this);
 			          	   		d3.select('.tooltip-display')
 			          	   		  .attr('d', function() {
@@ -192,6 +192,34 @@
 			          	   		  	d += ' ' + pointer[0] + ',' + 0;
 			          	   		  	return d;
 			          	   		  });
+
+								d3.selectAll(".priceline")
+			  					  .attr("transform", function(d, i) {
+									var start = 0
+									var	end = stocks[i].getTotalLength()
+									var	result = null;
+
+									while (true){
+				 			 			result = Math.floor((start + end) / 2);
+				  						pos = stocks[i].getPointAtLength(result);
+				  						if ((result == end || result == start) && pos.x != pointer[0]) {
+					  						break;
+				  						}
+				  						if (pos.x < pointer[0]){
+											start = result;
+				  						}
+				  						else if (pos.x > pointer[0]){
+											end = result;
+				  						}
+				  						else break; 
+									}
+				
+								// display absolute population values
+									d3.select(this).select('text')
+				  					  .text(parseNumber(y.invert(pos.y).toFixed(0)));
+				  
+									return "translate(" + pointer[0] + "," + pos.y +")";
+			 					});
 			          	   });
 
 /*			          	tooltip.append('text')
