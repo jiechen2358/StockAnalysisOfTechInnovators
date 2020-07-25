@@ -21,7 +21,12 @@
 			<input id="etf_name" name="etf" value=''><br>
 			<button type='submit'></button>
 		</form>
-		
+	</div>
+	<div style="display: none">
+		<form id='stock_detail' action ='stock_detail.html' method="GET">
+			<input id='stock_name' name='stock' value=""><br>
+			<button type="submit"></button>
+		</form>
 	</div>
 	<script>
 		var svg = d3.select("svg");
@@ -151,8 +156,17 @@
 			          	   			.attr("stroke", colors[index]);
 
 			          	stockline.on('click', function(){
-			          		document.getElementById('etf_name').value=ticker;
-			          		document.getElementById("etf_detail").submit();
+			          		if (ticker=="QQQ" || ticker=="SPY" || ticker =="EWH")
+			          		{
+			          			document.getElementById('etf_name').value=ticker;
+			          			document.getElementById("etf_detail").submit();
+			          		}
+			          		else
+			          		{
+			          			document.getElementById('stock_name').value=ticker;
+			          			document.getElementById('stock_detail').submit();
+			          		}
+
 			          	});
 				 		// stockline.on('mouseover', function(){
 						 //   		d3.select('.tooltip-display')

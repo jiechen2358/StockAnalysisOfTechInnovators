@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>stock details</title>
+</head>
+<body onload = 'init()'>
+	<h1>stock details</h1>
+
+	<script>
+		async function init() {
+			if (window.location.href.includes('?')) {
+				stock = location.search.substring(1).split("&")[0].split('=')[1];
+			}
+			else {
+				stock = 'QQQ';
+			}
+			//const data = await d3.csv("Data/" + etf + 'Holdings.csv');
+		}
+	</script>
+</body>
+</html>
