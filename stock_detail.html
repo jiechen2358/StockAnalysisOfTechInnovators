@@ -51,6 +51,8 @@
 			}
 			const data = await d3.csv("Data/" + stock + '_Financials.csv');
 			console.log(data);
+			console.log(data[0]);
+			console.log(data[data.length-1]);
 /*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
