@@ -6,8 +6,8 @@
 </head>
 <body onload = 'init()'>
 	<h1 id='heading1'></h1>
-	<div class = 'holdings'>
-		<h2 id='holdingsHeading'></h2>
+	<div class = 'revenue'>
+		<h2 id='revenueHeading'></h2>
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -43,12 +43,12 @@
 			else {
 				stock = 'FB';
 			}
-			const dataHoldings = await d3.csv("Data/" + stock + '_Financials.csv');
-			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
+			const data = await d3.csv("Data/" + stock + '_Financials.csv');
+/*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
-			document.getElementById("heading1").innerHTML = stock + " Details";
-			document.getElementById('holdingsHeading').innerHTML = stock + ' Revenue & Earnings:';
+			document.getElementById("heading1").innerHTML = stock + " Details";*/
+			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & Earnings:';
 			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 		}
