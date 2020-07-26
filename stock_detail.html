@@ -85,7 +85,7 @@
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return 50;}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', function(d){return yScale(parseInt(d.Revenue));});
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return yScale(parseInt(d.Revenue));}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', 0);
 
 
 		}
