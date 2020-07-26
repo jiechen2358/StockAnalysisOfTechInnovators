@@ -110,7 +110,7 @@
 			.selectAll('rect').data(data).enter().append('rect')
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.PEG));})
-			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
+			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10-15 ;})
 			.attr('y', function(d){return yScaleRevenue(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
 
