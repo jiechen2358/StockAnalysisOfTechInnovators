@@ -50,11 +50,8 @@
 				stock = 'FB';
 			}
 			const data = await d3.csv("Data/" + stock + '_Financials.csv');
-			console.log(data);
-			console.log(data[0]);
-			console.log(data[data.length-1]);
-			console.log(data[0].Date);
-			console.log(data[data.length-1].Date);
+
+			revenues = data.map(function(d, i){return parseInt(d.Revenue);});
 
 /*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
@@ -68,8 +65,8 @@
 			var timeMin = new Date(Math.min(data[0].Date, data[data.length-1].Date));
 			var timeMax = new Date(Math.max(data[0].Date, data[data.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
-			var revenueMin = 0;
-			var revenueMax = 800000;
+			var revenueMin = Math.min.apply(null, revenues);
+			var revenueMax = Math.max.apply(null, revenues);
 			var yScale = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
 			var xAxis = d3.axisBottom(xScale);
 			var yAxis = d3.axisLeft(yScale);
