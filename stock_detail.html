@@ -2,20 +2,55 @@
 <html>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
-	<title>stock details</title>
+	<title id='pageTitle'></title>
 </head>
 <body onload = 'init()'>
-	<h1 id = 'h1Title'></h1>
+	<h1 id='heading1'></h1>
+	<div class = 'holdings'>
+		<h2 id='holdingsHeading'></h2>
+	</div>
+	<div style="display: none">
+		<form id=stock_detail action="stock_detail.html" method="GET">
+			<input type="" name="stock" id='stock_name'>
+			<button type = 'submit'></button>
+		</form>
+	</div>
+	<div class = 'sectors'>
+		<h2 id='sectorsHeading'></h2>
+	</div>
+
+	<div class = 'countries'>
+		<h2 id='counteriesHeading'></h2>
+	</div>
 
 	<script>
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split('&');
+			for (var i=0;i<vars.length;i++) {
+				var pair = vars[i].split('=');
+				if (pair[0] == variable)
+				{
+					return pair[1];
+				}
+			}
+		}
 		async function init() {
 			if (window.location.href.includes('?')) {
-				stock = location.search.substring(1).split("&")[0].split('=')[1];
+				stock = getQueryVariable('stock');
 			}
 			else {
-				stock = 'QQQ';
+				stock = 'FB';
 			}
-			//const data = await d3.csv("Data/" + etf + 'Holdings.csv');
+			const dataHoldings = await d3.csv("Data/" + stock + '_Financials.csv');
+			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
+			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
+			document.getElementById("pageTitle").innerHTML = stock + " Details";
+			document.getElementById("heading1").innerHTML = stock + " Details";
+			document.getElementById('holdingsHeading').innerHTML = stock + ' Revenue & Earnings:';
+			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
+			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 		}
 	</script>
 </body>
