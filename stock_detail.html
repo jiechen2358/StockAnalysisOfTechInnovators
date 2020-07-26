@@ -49,10 +49,12 @@
 			else {
 				stock = 'FB';
 			}
-			const data = await d3.csv("Data/" + stock + '_Financials.csv');
+			const financialData = await d3.csv("Data/" + stock + '_Financials.csv');
+			const priceData = await d3.csv('Data/' + stock +'_PRICES.csv');
 
-			revenues = data.map(function(d){return parseFloat(d.Revenue);});
-			pegs = data.map(function(d){return parseFloat(d.PEG);});
+			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
+			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
+			prices = priceData.map(function(d){return parseFloat(d.Close);});
 /*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
@@ -60,23 +62,26 @@
 			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & PEG:';
 			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
-			console.log(new Date(data[0].Date) - new Date(data[1].Date));
+			console.log(new Date(financialData[0].Date) - new Date(financialData[1].Date));
 
-			var colors = ['Green','Pink'];
-			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
-			var timeMax = Math.max(new Date(data[0].Date), new Date(data[data.length-1].Date));
+			var colors = ['Green','Pink', 'DarkBlue'];
+			var timeMin = Math.min(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
+			var timeMax = Math.max(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1400]);
 			var xAxis = d3.axisBottom(xScale);
 
 			var revenueMin = 0;
 			var revenueMax = Math.max.apply(null, revenues);
-			var yScaleRevenue = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
-			var yAxisRevenue = d3.axisLeft(yScaleRevenue);
-
 			var pegMin = 0;
 			var pegMax = Math.max.apply(null, pegs);
-			var yScalePeg = d3.scaleLinear().domain([pegMin, pegMax]).range([800, 0]);
-			var yAxisPeg = d3.axisLeft(yScalePeg);
+
+			var priceMin = 0;
+			var priceMax = Math.max.apply(null, prices)/Math.min.apply(null,prices);
+
+			var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
+			var yScale = d3.scaleLinear().domain([0, yMax]).range([800, 0]);
+			var yAxis = d3.axisLeft(yScale);
+
 
 			revenueSVG = d3.select('.revenue').append('svg').attr('width', 1600).attr('height', 1000);
 			revenueSVG.append("g")
@@ -90,16 +95,10 @@
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
-		   			.call(yAxisRevenue);
-/*
-		   	revenueSVG.append("g")
-					.attr('class', 'yAxis')
-	  	   			.attr("transform", "translate("+ (margin.left + 1400)+ ", "+ margin.top + ")")
-	  	   			.style("font", "14px times")
-		   			.call(yAxisPeg);*/
+		   			.call(yAxis);
 
 			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
-			.selectAll('rect').data(data).enter().append('rect')
+			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.Revenue));})
 			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
@@ -107,13 +106,25 @@
 			.attr('fill', colors[0]);
 
 			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
-			.selectAll('rect').data(data).enter().append('rect')
+			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
-			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.PEG));})
+			.attr('height', function(d){return 800- yScale(parseFloat(d.PEG));})
 			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10-15 ;})
-			.attr('y', function(d){return yScaleRevenue(parseFloat(d.PEG));})
+			.attr('y', function(d){return yScale(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
 
+			var line = d3.line()
+					    .x(function(d) {return xScale(new Date(d.Date));})
+					    .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
+
+			var stockline=revenueSVG.append('g')
+			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
+			         	.append("path")
+			         	.data([priceData])
+			         	.attr("d", line)
+			         	.attr('id', price+'line')
+			       		.attr("class", "line")
+			          	.attr("stroke", colors[2]);
 		}
 	</script>
 </body>
