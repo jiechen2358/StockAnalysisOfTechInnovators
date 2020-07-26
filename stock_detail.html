@@ -114,11 +114,11 @@
 			.attr('y', function(d){return yScale(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
 
-/*			var line = d3.line()
+			var line = d3.line()
 					    .x(function(d) {return xScale(new Date(d.Date));})
 					    .y(function(d) {return yScale(parseFloat(d.Close)); });
 
-			var stockline=revenueSVG.append('g')
+	/*		var stockline=revenueSVG.append('g')
 			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
 			         	.append("path")
 			         	.data([priceData])
