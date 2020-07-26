@@ -36,6 +36,12 @@
 				}
 			}
 		}
+		var margin = {
+			top: 100,
+			bottom: 100,
+			left: 100,
+			right: 100
+		};
 		async function init() {
 			if (window.location.href.includes('?')) {
 				stock = getQueryVariable('stock');
@@ -53,7 +59,33 @@
 			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 
-			d3.select('.revenue').append('svg').attr('width', 1000).attr('height', 1000).append('g').attr('transform', 'translate(200, 200)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return 50;}).attr("x", function(d,i) {return i;}).attr('y', function(d){return 50;});
+			var colors = ['Green'];
+			var timeMin = Math.min(data[0].Date, data[data.length-1].Date);
+			var timeMax = Math.max(data[0].Date, data[data.length-1].Date);
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
+			var revenueMin = 0;
+			var revenueMax = 800000;
+			var yScale = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
+			var xAxis = d3.axisBottom(xScale);
+			var yAxis = d3.axisLeft(yScale);
+
+			revenueSVG = d3.select('.revenue').append('svg').attr('width', 1000).attr('height', 1000);
+				revenueSVG.append("g")
+					.attr("class", 'xAxis')
+		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
+	  	   			.style("font", "14px times")
+	  	   			.call(xAxis);
+
+
+				revenueSVG.append("g")
+					.attr('class', 'yAxis')
+	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+	  	   			.style("font", "14px times")
+		   			.call(yAxis);
+
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return 50;}).attr("x", function(d,i) {return i;}).attr('y', function(d){return 50;});
+
+
 		}
 	</script>
 </body>
