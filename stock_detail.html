@@ -65,8 +65,8 @@
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 
 			var colors = ['Green'];
-			var timeMin = Math.min(data[0].Date, data[data.length-1].Date);
-			var timeMax = Math.max(data[0].Date, data[data.length-1].Date);
+			var timeMin = new Date(Math.min(data[0].Date, data[data.length-1].Date));
+			var timeMax = new Date(Math.max(data[0].Date, data[data.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
 			var revenueMin = 0;
 			var revenueMax = 800000;
@@ -88,7 +88,7 @@
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return 50;}).attr("x", function(d,i) {return i;}).attr('y', function(d){return 50;});
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return 50;}).attr("x", function(d,i) {return xScale(d.Date);}).attr('y', function(d){return 50;});
 
 
 		}
