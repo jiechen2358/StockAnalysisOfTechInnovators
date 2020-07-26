@@ -64,7 +64,7 @@
 			var colors = ['Green'];
 			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var timeMax = Math.max(new Date(data[0].Date), new Date(data[data.length-1].Date));
-			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1400]);
 			var revenueMin = 0;
 			var revenueMax = Math.max.apply(null, revenues);
 			var yScale = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
@@ -90,7 +90,7 @@
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScale(parseInt(d.Revenue));})
 			.attr("x", function(d,i) {return xScale(new Date(d.Date));})
-			.attr('y', yScale(0))
+			.attr('y', function(d){return yScale(parseInt(d.Revenue));})
 			.attr('fill', colors[0]);
 
 
