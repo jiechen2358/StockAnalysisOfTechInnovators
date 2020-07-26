@@ -44,6 +44,7 @@
 				stock = 'FB';
 			}
 			const data = await d3.csv("Data/" + stock + '_Financials.csv');
+			console.log(data);
 /*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
