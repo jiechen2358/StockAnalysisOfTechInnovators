@@ -5,9 +5,9 @@
 	<title id='pageTitle'></title>
 </head>
 <body onload = 'init()'>
-	<h1 id='h1Title'></h1>
+	<h1 id='heading1'></h1>
 	<div class = 'holdings'>
-		<h2 id='holdingsTitle'></h2>
+		<h2 id='holdingsHeading'></h2>
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -16,11 +16,11 @@
 		</form>
 	</div>
 	<div class = 'sectors'>
-		<h2 id='sectorsTitle'></h2>
+		<h2 id='sectorsHeading'></h2>
 	</div>
 
 	<div class = 'countries'>
-		<h2 id='counteriesTitle'></h2>
+		<h2 id='counteriesHeading'></h2>
 	</div>
 
 
@@ -48,10 +48,10 @@
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
-			document.getElementById("h1Title").innerHTML = etf + " Details";
-			document.getElementById('holdingsTitle').innerHTML = etf + ' Top 10 Holdings:';
-			document.getElementById('sectorsTitle').innerHTML = etf + ' Top 10 Sectors:';
-			document.getElementById('counteriesTitle').innerHTML = etf+'Top 10 Countries';
+			document.getElementById("heading1").innerHTML = etf + " Details";
+			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings:';
+			document.getElementById('sectorsHeading').innerHTML = etf + ' Top 10 Sectors:';
+			document.getElementById('counteriesHeading').innerHTML = etf+'Top 10 Countries';
 			var color = ['pink', 'lightcyan', '#f8b70a','lightblue','#6149c6','lightgreen', '#9f8170', 'lightyellow', '#8ABD4A',  'violet'];
 
 
