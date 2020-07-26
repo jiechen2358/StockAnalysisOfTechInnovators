@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<style>
+.line {
+	fill: none;
+	stroke-width: 1px;
+}
+</style>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
 	<title id='pageTitle'></title>
@@ -116,7 +122,7 @@
 
 			var line = d3.line()
 					    .x(function(d) {return xScale(new Date(d.Date));})
-					    .y(function(d) {return yScale(parseFloat(d.Close)); });
+					    .y(function(d) {return yScale(parseFloat(d.Close)/10); });
 
 			var stockline=revenueSVG.append('g')
 			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
