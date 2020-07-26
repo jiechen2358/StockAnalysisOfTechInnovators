@@ -65,7 +65,7 @@
 			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var timeMax = Math.max(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
-			var revenueMin = Math.min.apply(null, revenues);
+			var revenueMin = 0;
 			var revenueMax = Math.max.apply(null, revenues);
 			var yScale = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
 			var xAxis = d3.axisBottom(xScale);
@@ -85,7 +85,7 @@
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return yScale(parseInt(d.Revenue));}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', 0).attr('fill', colors[0]);
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return yScale(parseInt(d.Revenue));}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', yScale(0)).attr('fill', colors[0]);
 
 
 		}
