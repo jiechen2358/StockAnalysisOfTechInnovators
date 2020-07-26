@@ -51,25 +51,32 @@
 			}
 			const data = await d3.csv("Data/" + stock + '_Financials.csv');
 
-			revenues = data.map(function(d, i){return parseInt(d.Revenue);});
-
+			revenues = data.map(function(d){return parseFloat(d.Revenue);});
+			pegs = data.map(function(d){return parseFloat(d.PEG);});
 /*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
 			document.getElementById("heading1").innerHTML = stock + " Details";*/
-			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & Earnings:';
+			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & PEG:';
 			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
+			console.log(data[0].Date - data[1].Date);
 
-			var colors = ['Green'];
+			var colors = ['Green','Pink'];
 			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var timeMax = Math.max(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1400]);
+			var xAxis = d3.axisBottom(xScale);
+
 			var revenueMin = 0;
 			var revenueMax = Math.max.apply(null, revenues);
-			var yScale = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
-			var xAxis = d3.axisBottom(xScale);
-			var yAxis = d3.axisLeft(yScale);
+			var yScaleRevenue = d3.scaleLinear().domain([revenueMin, revenueMax]).range([800, 0]);
+			var yAxisRevenue = d3.axisLeft(yScaleRevenue);
+
+			var pegMin = 0;
+			var pegMax = Math.max.apply(null, pegs);
+			var yScalePeg = d3.scaleLinear().domain([pegMin, pegMax]).range([800, 0]);
+			var yAxisPeg = d3.axisLeft(yScalePeg);
 
 			revenueSVG = d3.select('.revenue').append('svg').attr('width', 1600).attr('height', 1000);
 			revenueSVG.append("g")
@@ -83,16 +90,29 @@
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
-		   			.call(yAxis);
+		   			.call(yAxisRevenue);
+
+		   	revenueSVG.append("g")
+					.attr('class', 'yAxis')
+	  	   			.attr("transform", "translate("+ (margin.left + 1400)", "+ margin.top + ")")
+	  	   			.style("font", "14px times")
+		   			.call(yAxisPeg);
 
 			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(data).enter().append('rect')
 			.attr('width', 10)
-			.attr('height', function(d){return 800- yScale(parseInt(d.Revenue));})
-			.attr("x", function(d,i) {return xScale(new Date(d.Date));})
-			.attr('y', function(d){return yScale(parseInt(d.Revenue));})
+			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.Revenue));})
+			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
+			.attr('y', function(d){return yScaleRevenue(parseFloat(d.Revenue));})
 			.attr('fill', colors[0]);
 
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
+			.selectAll('rect').data(data).enter().append('rect')
+			.attr('width', 10)
+			.attr('height', function(d){return 800- yScalePeg(parseFloat(d.PEG));})
+			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
+			.attr('y', function(d){return yScalePeg(parseFloat(d.PEG));})
+			.attr('fill', colors[1]);
 
 		}
 	</script>
