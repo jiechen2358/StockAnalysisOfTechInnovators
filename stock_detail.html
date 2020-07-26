@@ -72,20 +72,20 @@
 			var yAxis = d3.axisLeft(yScale);
 
 			revenueSVG = d3.select('.revenue').append('svg').attr('width', 1000).attr('height', 1000);
-				revenueSVG.append("g")
+			revenueSVG.append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
 
 
-				revenueSVG.append("g")
+			revenueSVG.append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return yScale(parseInt(d.Revenue));}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', yScale(0)).attr('fill', colors[0]);
+			revenueSVG.append('g').attr('transform', 'translate(100, 100)').selectAll('rect').data(data).enter().append('rect').attr('width', 10).attr('height', function(d){return yScale(parseInt(d.Revenue));}).attr("x", function(d,i) {return xScale(new Date(d.Date));}).attr('y', 0).attr('fill', colors[0]);
 
 
 		}
