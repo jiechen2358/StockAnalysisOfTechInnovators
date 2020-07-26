@@ -60,7 +60,7 @@
 			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & PEG:';
 			document.getElementById('sectorsHeading').innerHTML = stock + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
-			console.log(data[0].Date - data[1].Date);
+			console.log(new Date(data[0].Date) - new Date(data[1].Date));
 
 			var colors = ['Green','Pink'];
 			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
@@ -91,12 +91,12 @@
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
 		   			.call(yAxisRevenue);
-
+/*
 		   	revenueSVG.append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ (margin.left + 1400)+ ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
-		   			.call(yAxisPeg);
+		   			.call(yAxisPeg);*/
 
 			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(data).enter().append('rect')
@@ -109,9 +109,9 @@
 			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(data).enter().append('rect')
 			.attr('width', 10)
-			.attr('height', function(d){return 800- yScalePeg(parseFloat(d.PEG));})
+			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.PEG));})
 			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
-			.attr('y', function(d){return yScalePeg(parseFloat(d.PEG));})
+			.attr('y', function(d){return yScaleRevenue(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
 
 		}
