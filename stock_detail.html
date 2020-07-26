@@ -62,8 +62,8 @@
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 
 			var colors = ['Green'];
-			var timeMin = new Date(Math.min(data[0].Date, data[data.length-1].Date));
-			var timeMax = new Date(Math.max(data[0].Date, data[data.length-1].Date));
+			var timeMin = Math.min(new Date(data[0].Date), new Date(data[data.length-1].Date));
+			var timeMax = Math.max(new Date(data[0].Date), new Date(data[data.length-1].Date));
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
 			var revenueMin = Math.min.apply(null, revenues);
 			var revenueMax = Math.max.apply(null, revenues);
