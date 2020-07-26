@@ -78,7 +78,8 @@
 			var priceMin = 0;
 			var priceMax = Math.max.apply(null, prices)/Math.min.apply(null,prices);
 
-			var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
+			//var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
+			yMax = 30;
 			var yScale = d3.scaleLinear().domain([0, yMax]).range([800, 0]);
 			var yAxis = d3.axisLeft(yScale);
 
