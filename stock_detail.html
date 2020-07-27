@@ -131,7 +131,7 @@ circle {
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings:';
 
 			var colors = ['Green','Red', 'DarkBlue'];
-			var timeMin = new Date("05/30/2019");
+			var timeMin = new Date("06/15/2019");
 			var timeMax = new Date("07/30/2020");
 			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
 			var xAxis = d3.axisBottom(xScale);
@@ -162,7 +162,7 @@ circle {
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
 			.attr('cy', function(d){return yScale(parseFloat(d.EPS));})
 			.attr('r', 20)
-			.attr('fill', function(d,i){return colors[0]; console.log(d.EPS);});
+			.attr('fill', function(d,i){return colors[0]; console.log(d);});
 
 			epsSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
