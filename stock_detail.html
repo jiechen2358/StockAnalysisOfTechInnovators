@@ -163,7 +163,7 @@ circle {
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
 			.attr('cy', function(d){return yScale(parseFloat(d.EPS));})
 			.attr('fill', function(d,i){
-				if (d.EPS[i] > d.ConsensusEPS[i]){
+				if (parseFloat(d.EPS[i]) > parseFloat(d.ConsensusEPS[i])){
 					return colors[0];
 				}
 				else
