@@ -5,6 +5,9 @@
 	fill: none;
 	stroke-width: 1px;
 }
+circle {
+	stroke: blue;
+}
 </style>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
@@ -157,7 +160,7 @@
 			epsSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
-			.attr('cy', function(d){return yScale(parseFloat(d.EPS));})
+			.attr('cy', function(d){if (d.Date > new Date('06/01/2019')){return yScale(parseFloat(d.EPS));}})
 			.attr('r', 20)
 			.attr('fill', colors[0]);
 
