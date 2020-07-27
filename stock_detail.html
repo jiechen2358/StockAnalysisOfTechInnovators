@@ -15,14 +15,9 @@
 	<div class = 'revenue'>
 		<h2 id='revenueHeading'></h2>
 	</div>
-	<div style="display: none">
-		<form id=stock_detail action="stock_detail.html" method="GET">
-			<input type="" name="stock" id='stock_name'>
-			<button type = 'submit'></button>
-		</form>
-	</div>
-	<div class = 'sectors'>
-		<h2 id='sectorsHeading'></h2>
+
+	<div class = 'eps'>
+		<h2 id='epsHeading'></h2>
 	</div>
 
 	<div class = 'countries'>
@@ -61,12 +56,8 @@
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
 			prices = priceData.map(function(d){return parseFloat(d.Close);});
-/*			const dataSectors = await d3.csv("Data/" + stock + 'Sectors.csv');
-			const dataCountries = await d3.csv("Data/" + stock + 'Countries.csv');
-			document.getElementById("pageTitle").innerHTML = stock + " Details";
-			document.getElementById("heading1").innerHTML = stock + " Details";*/
+
 			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & PEG:';
-			document.getElementById('sectorsHeading').innerHTML = stock + ' Earnings:';
 			document.getElementById('counteriesHeading').innerHTML = stock+'Top 10 Countries';
 			console.log(new Date(financialData[0].Date) - new Date(financialData[1].Date));
 
@@ -125,6 +116,68 @@
 					    .y(function(d) {return yScale(parseFloat(d.Close)/10); });
 
 			var stockline=revenueSVG.append('g')
+			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
+			         	.append("path")
+			         	.data([priceData])
+			         	.attr("d", line)
+			         	.attr('id', 'stockLine')
+			       		.attr("class", "line")
+			          	.attr("stroke", colors[2]);
+
+//section 2: earnings
+			document.getElementById('sectorsHeading').innerHTML = stock + ' Earnings:';
+
+			var colors = ['Green','Red', 'DarkBlue'];
+			var timeMin = new Date("06/30/2019");
+			var timeMax = new Date("06/30/2020");
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
+			var xAxis = d3.axisBottom(xScale);
+
+			var epsMin = 0.8;
+			var epsMax = 2.8;
+
+
+			//var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
+			yMax = 30;
+			var yScale = d3.scaleLinear().domain([0, yMax]).range([800, 0]);
+			var yAxis = d3.axisLeft(yScale);
+
+
+			epsSVG = d3.select('.eps').append('svg').attr('width', 1000).attr('height', 1000);
+			epsSVG.append("g")
+					.attr("class", 'xAxis')
+		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
+	  	   			.style("font", "14px times")
+	  	   			.call(xAxis);
+
+
+			epsSVG.append("g")
+					.attr('class', 'yAxis')
+	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+	  	   			.style("font", "14px times")
+		   			.call(yAxis);
+
+			epsSVG.append('g').attr('transform', 'translate(100, 100)')
+			.selectAll('rect').data(financialData).enter().append('rect')
+			.attr('width', 10)
+			.attr('height', function(d){return 800- yScale(parseFloat(d.eps));})
+			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
+			.attr('y', function(d){return yScale(parseFloat(d.eps));})
+			.attr('fill', colors[0]);
+
+			epsSVG.append('g').attr('transform', 'translate(100, 100)')
+			.selectAll('rect').data(financialData).enter().append('rect')
+			.attr('width', 10)
+			.attr('height', function(d){return 800- yScale(parseFloat(d.PEG));})
+			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10-15 ;})
+			.attr('y', function(d){return yScale(parseFloat(d.PEG));})
+			.attr('fill', colors[1]);
+
+			var line = d3.line()
+					    .x(function(d) {return xScale(new Date(d.Date));})
+					    .y(function(d) {return yScale(parseFloat(d.Close)/10); });
+
+			var stockline=epsSVG.append('g')
 			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
 			         	.append("path")
 			         	.data([priceData])
