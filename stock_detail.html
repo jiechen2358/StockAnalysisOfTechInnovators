@@ -6,6 +6,7 @@
 	stroke-width: 1px;
 }
 circle {
+	fill: none;
 	stroke: blue;
 	r: 20;
 }
@@ -167,9 +168,7 @@ circle {
 			epsSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
-			.attr('cy', function(d){return yScale(parseFloat(d.ConsensusEPS));})
-			.attr('fill', 'none');
-
+			.attr('cy', function(d){return yScale(parseFloat(d.ConsensusEPS));});
 
 		}
 	</script>
