@@ -162,16 +162,7 @@ circle {
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
 			.attr('cy', function(d){return yScale(parseFloat(d.EPS));})
-			.attr('fill', function(d,i){
-				if (parseFloat(d.EPS[i]) > parseFloat(d.ConsensusEPS[i])){
-					return colors[0];
-
-				}
-				else
-				{
-					return colors[1];
-				}
-			});
+			.attr('fill', function(d,i){return colors[d.BEAT];});
 
 			epsSVG.append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
