@@ -49,6 +49,8 @@ circle {
 		var width = d3.select('.overview').select('svg').attr('width') - margin.left - margin.right;
 		var height = d3.select('.overview').select('svg').attr('height') - margin.top - margin.bottom;
 
+		var colors = ['Red', 'Green'];
+
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -79,7 +81,6 @@ circle {
 			dates =priceData.map(function(d){return new Date(d.Date);});
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
-			console.log(pegs);
 			prices = priceData.map(function(d){return parseFloat(d.Close);});
 
 
@@ -134,8 +135,7 @@ circle {
 			{
 				pegMin = 0;
 			}
-			console.log(pegMin);
-			console.log(pegMax);
+
 			var yScalePEG = d3.scaleLinear().domain([pegMin, pegMax]).range([height, 0]);
 			var xAxisPEG = d3.axisBottom(xScalePEG);
 
@@ -199,40 +199,48 @@ circle {
 //section: eps
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
 
-			var colors = ['Red', 'Green'];
-			var timeMin = new Date("06/15/2019");
-			var timeMax = new Date("06/30/2020");
-			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1000]);
-			var xAxis = d3.axisBottom(xScale);
+			var timeMaxEPS = new Date(financialData[0].Date);
+			var timeMinEPS = new Date(financialData[3].Date);
 
-			var epsMin = 0.8;
-			var epsMax = 2.8;
+			var xScaleEPS = d3.scaleTime().domain([timeMinEPS, timeMaxEPS]).range([0, 1000]);
+			var xAxisEPS = d3.axisBottom(xScaleEPS);
 
-			var yScale = d3.scaleLinear().domain([epsMin, epsMax]).range([600, 0]);
-			var yAxis = d3.axisLeft(yScale);
+			var EPS = [];
+			var ConsensusEPS=[];
+
+			for (int i = 0; i < 4; i++)
+			{
+				EPS.push(financialData[i].EPS);
+				ConsensusEPS.push(financialData[i].ConsensusEPS);
+			}
 
 
-			epsSVG = d3.select('.eps').select('svg');
-			epsSVG.append("g")
+			var epsMin = Math.min(Math.min.apply(null, EPS), Math.min.apply(null, ConsensusEPS));
+			var epsMax = Math.max(Math.max.apply(null, EPS), Math.max.apply(null, ConsensusEPS));
+
+			var yScaleEPS = d3.scaleLinear().domain([epsMin, epsMax]).range([600, 0]);
+			var yAxisEPS = d3.axisLeft(yScaleEPS);
+
+			d3.select('.eps').select('svg').append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 600) +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
 
 
-			epsSVG.append("g")
+			d3.select('.eps').select('svg').append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-			epsSVG.append('g').attr('transform', 'translate(100, 100)')
+			d3.select('.eps').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
 			.attr('cy', function(d){return yScale(parseFloat(d.EPS));})
 			.attr('fill', function(d,i){return colors[d.BEAT];});
 
-			epsSVG.append('g').attr('transform', 'translate(100, 100)')
+			d3.select('.eps').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScale(new Date(d.Date));})
 			.attr('cy', function(d){return yScale(parseFloat(d.ConsensusEPS));})
