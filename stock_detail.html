@@ -35,6 +35,8 @@ circle {
 	</div>
 	<div class = 'eps' style="text-align: center;">
 		<h1 id='epsHeading'></h1>
+		<svg width=1200 height=800>
+		</svg>
 	</div>
 
 	<script>
@@ -95,11 +97,6 @@ circle {
 			{
 				revenueMin = 0;
 			}
-			else
-			{
-				revenueMin = revenueMin-(revenueMax-revenueMin)/10;
-			}
-
 
 			var yScaleRevenue = d3.scaleLinear().domain([revenueMin, revenueMax]).range([height, 0]);
 			var yAxisRevenue = d3.axisLeft(yScaleRevenue);
@@ -133,7 +130,10 @@ circle {
 
 			var pegMin = Math.min.apply(null, pegs);
 			var pegMax = Math.max.apply(null, pegs);
-			pegMin = revenueMin-(revenueMax-revenueMin)/10;
+			if (pegMin >= 0)
+			{
+				pegMin = 0;
+			}
 			console.log(pegMin);
 			console.log(pegMax);
 			var yScalePEG = d3.scaleLinear().domain([pegMin, pegMax]).range([height, 0]);
@@ -197,7 +197,7 @@ circle {
        		.attr("class", "line");
 
 //section: eps
-			document.getElementById('epsHeading').innerHTML = stock + ' Earnings:';
+			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
 
 			var colors = ['Red', 'Green'];
 			var timeMin = new Date("06/15/2019");
@@ -212,7 +212,7 @@ circle {
 			var yAxis = d3.axisLeft(yScale);
 
 
-			epsSVG = d3.select('.eps').append('svg').attr('width', 1000).attr('height', 1000);
+			epsSVG = d3.select('.eps').select('svg');
 			epsSVG.append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
