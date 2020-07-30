@@ -91,7 +91,15 @@ circle {
 
 			var revenueMin = Math.min.apply(null, revenues);
 			var revenueMax = Math.max.apply(null, revenues);
-			revenueMin = revenueMin-(revenueMax-revenueMin)/10;
+			if (revenueMin >= 0)
+			{
+				revenueMin = 0;
+			}
+			else
+			{
+				revenueMin = revenueMin-(revenueMax-revenueMin)/10;
+			}
+
 
 			var yScaleRevenue = d3.scaleLinear().domain([revenueMin, revenueMax]).range([height, 0]);
 			var yAxisRevenue = d3.axisLeft(yScaleRevenue);
