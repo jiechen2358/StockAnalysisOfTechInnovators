@@ -123,6 +123,8 @@ circle {
 
 			var pegMin = Math.min.apply(null, pegs);
 			var pegMax = Math.max.apply(null, pegs);
+			console.log(pegMin);
+			console.log(pegMax);
 			var yScalePEG = d3.scaleLinear().domain([pegMin, pegMax]).range([height, 0]);
 			var xAxisPEG = d3.axisBottom(xScalePEG);
 
