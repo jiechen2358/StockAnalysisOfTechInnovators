@@ -15,6 +15,8 @@
 	<h1 id='heading1'></h1>
 	<div class = 'overview'>
 		<h2 id='overviewHeading'></h2>
+		<svg width=1200 height=1000>
+		</svg>
 	</div>
 
 	<div class = 'holdings'>
@@ -109,7 +111,7 @@
 			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 			var xAxis = d3.axisBottom(xScale);
 
-			d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append("g")
+			d3.select('.overview').select('svg').append("g")
 				.attr("class", 'xAxis')
 	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
   	   			.style("font", "14px times")
@@ -117,7 +119,7 @@
 
   	   		var yAxis = d3.axisLeft(yScale);
 
-			d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append("g")
+			d3.select('.overview').select('svg').append("g")
 				.attr('class', 'yAxis')
   	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
   	   			.style("font", "14px times")
@@ -126,7 +128,7 @@
         	 .x(function(d) {return xScale(new Date(d.Date));})
         	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-  			var stockline=d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append('g')
+  			var stockline=d3.select('.overview').select('svg').append('g')
                			.attr("transform", "translate("+margin.left+", "+margin.top+")")
          	   			.append("path")
          	   			.data([dataPrice])
