@@ -187,8 +187,8 @@ circle {
   	   			.style("font", "14px times")
 	   			.call(yAxisOverview);
 			var line = d3.line()
-        	 .x(function(d) {return xScale(new Date(d.Date));})
-        	 .y(function(d) {return yScale(parseFloat(d.Close)); });
+        	 .x(function(d) {return xScaleOverview(new Date(d.Date));})
+        	 .y(function(d) {return yScaleOverview(parseFloat(d.Close)); });
 
   			var stockline=d3.select('.overview').select('svg').append('g')
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
