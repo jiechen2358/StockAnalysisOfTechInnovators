@@ -73,8 +73,8 @@
 			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
-			//document.getElementById("pageTitle").innerHTML = etf + " Details";
-			document.getElementById("heading1").innerHTML = etf + " Details";
+			document.getElementById("pageTitle").innerHTML = etf + " Details";
+			//document.getElementById("heading1").innerHTML = etf + " Details";
 			document.getElementById('overviewHeading').innerHTML = etf + ' Overview';
 			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings';
 			document.getElementById('sectorsHeading').innerHTML = etf + ' Top 10 Sectors';
