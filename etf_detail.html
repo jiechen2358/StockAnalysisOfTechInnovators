@@ -46,46 +46,7 @@
 		var width = 1200 - margin.left - margin.right;
 		var height = 1000 - margin.top - margin.bottom;
 
-		var xScale = calculateXScale();
-		var yScale = calculateYScale();
-		var xAxis = plotXAxis(xScale);
-		var yAxis = plotYAxis(yScale);			
 
-		function calculateXScale(){
-			var timeMin = new Date('07/19/2010');
-			var timeMax = new Date('07/17/2020');
-			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
-			return xScale;
-		}
-
-		function calculateYScale(){
-			var priceMin = 0;
-			var priceMax = 800000;
-
-			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
-			return yScale;
-		}
-
-		function plotXAxis(xScale){
-			var xAxis = d3.axisBottom(xScale);
-
-			svg.append("g")
-				.attr("class", 'xAxis')
-	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
-  	   			.style("font", "14px times")
-  	   			.call(xAxis);
-  	   		return xAxis;
-		}
-		function plotYAxis(yScale){
-       		var yAxis = d3.axisLeft(yScale);
-
-			svg.append("g")
-				.attr('class', 'yAxis')
-  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
-  	   			.style("font", "14px times")
-	   			.call(yAxis);
-		   	return yAxis;
-		}
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -138,6 +99,29 @@
 			closes = dataPrice.map(function(d) {
 				return parseFloat(d.Close); });
 
+			var timeMin = Math.min.apply(null, dates);
+			var timeMax = Math.max.apply(null, dates);
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+
+			var priceMin = Math.min.apply(null, closes);
+			var priceMax = Math.max.apply(null, closes);
+
+			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+			var xAxis = d3.axisBottom(xScale);
+
+			svg.append("g")
+				.attr("class", 'xAxis')
+	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+  	   			.style("font", "14px times")
+  	   			.call(xAxis);
+
+  	   		var yAxis = d3.axisLeft(yScale);
+
+			svg.append("g")
+				.attr('class', 'yAxis')
+  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+  	   			.style("font", "14px times")
+	   			.call(yAxis);
 			var line = d3.line()
         	 .x(function(d) {return xScale(new Date(d.Date));})
         	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
