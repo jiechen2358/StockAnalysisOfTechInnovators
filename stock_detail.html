@@ -157,7 +157,7 @@ circle {
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
-			.attr('height', function(d){return 800- yScalePEG(parseFloat(d.PEG));})
+			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10;})
 			.attr('y', function(d){return yScalePEG(Math.min(parseFloat(d.PEG), 0));})
 			.attr('fill', colors[1]);
