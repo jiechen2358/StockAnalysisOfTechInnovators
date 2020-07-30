@@ -77,6 +77,7 @@ circle {
 			dates =priceData.map(function(d){return new Date(d.Date);});
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
+			console.log(pegs);
 			prices = priceData.map(function(d){return parseFloat(d.Close);});
 
 
