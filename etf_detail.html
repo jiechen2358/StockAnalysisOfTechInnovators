@@ -14,13 +14,13 @@
 <body onload = 'init()'>
 	<h1 id='heading1'></h1>
 	<div class = 'overview' style="text-align: center;">
-		<h2 id='overviewHeading'></h2>
+		<h1 id='overviewHeading'></h1>
 		<svg width=1200 height=1000>
 		</svg>
 	</div>
 
 	<div class = 'holdings' style="text-align: center;">
-		<h2 id='holdingsHeading'></h2>
+		<h1 id='holdingsHeading'></h1>
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -29,11 +29,11 @@
 		</form>
 	</div>
 	<div class = 'sectors' style="text-align: center;">
-		<h2 id='sectorsHeading'></h2>
+		<h1 id='sectorsHeading'></h1>
 	</div>
 
 	<div class = 'countries' style="text-align: center;">
-		<h2 id='counteriesHeading'></h2>
+		<h1 id='counteriesHeading'></h1>
 	</div>
 
 
@@ -73,7 +73,7 @@
 			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
-			document.getElementById("pageTitle").innerHTML = etf + " Details";
+			//document.getElementById("pageTitle").innerHTML = etf + " Details";
 			document.getElementById("heading1").innerHTML = etf + " Details";
 			document.getElementById('overviewHeading').innerHTML = etf + ' Overview:';
 			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings:';
