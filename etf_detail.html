@@ -109,7 +109,7 @@
 			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 			var xAxis = d3.axisBottom(xScale);
 
-			svg.append("g")
+			d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append("g")
 				.attr("class", 'xAxis')
 	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
   	   			.style("font", "14px times")
@@ -117,7 +117,7 @@
 
   	   		var yAxis = d3.axisLeft(yScale);
 
-			svg.append("g")
+			d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append("g")
 				.attr('class', 'yAxis')
   	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
   	   			.style("font", "14px times")
