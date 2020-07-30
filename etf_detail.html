@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
+<style>
+.line {
+	fill: none;
+	stroke-width: 2px;
+	stroke: BlueViolet;
+}
+</style>
 <script src='https://d3js.org/d3.v5.min.js'></script>
 <head>
 	<title id='pageTitle'></title>
 </head>
 <body onload = 'init()'>
 	<h1 id='heading1'></h1>
+	<div class = 'overview'>
+		<h2 id='overviewHeading'></h2>
+	</div>
+
 	<div class = 'holdings'>
 		<h2 id='holdingsHeading'></h2>
 	</div>
@@ -25,6 +36,56 @@
 
 
 	<script>
+
+		var margin = {
+			top: 50,
+			bottom: 50,
+			left: 100,
+			right: 0
+		};
+		var width = 1200 - margin.left - margin.right;
+		var height = 1000 - margin.top - margin.bottom;
+
+		var xScale = calculateXScale();
+		var yScale = calculateYScale();
+		var xAxis = plotXAxis(xScale);
+		var yAxis = plotYAxis(yScale);			
+
+		function calculateXScale(){
+			var timeMin = new Date('07/19/2010');
+			var timeMax = new Date('07/17/2020');
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+			return xScale;
+		}
+
+		function calculateYScale(){
+			var priceMin = 0;
+			var priceMax = 800000;
+
+			var yScale = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+			return yScale;
+		}
+
+		function plotXAxis(xScale){
+			var xAxis = d3.axisBottom(xScale);
+
+			svg.append("g")
+				.attr("class", 'xAxis')
+	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+  	   			.style("font", "14px times")
+  	   			.call(xAxis);
+  	   		return xAxis;
+		}
+		function plotYAxis(yScale){
+       		var yAxis = d3.axisLeft(yScale);
+
+			svg.append("g")
+				.attr('class', 'yAxis')
+  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+  	   			.style("font", "14px times")
+	   			.call(yAxis);
+		   	return yAxis;
+		}
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -44,11 +105,14 @@
 			else {
 				etf = 'QQQ';
 			}
+
+			const dataPrice = await d3.csv("Data/" + etf + '_PRICES.csv');
 			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
 			document.getElementById("heading1").innerHTML = etf + " Details";
+			document.getElementById('overviewHeading').innerHTML = etf + ' Overview:';
 			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings:';
 			document.getElementById('sectorsHeading').innerHTML = etf + ' Top 10 Sectors:';
 			document.getElementById('counteriesHeading').innerHTML = etf+'Top 10 Countries';
@@ -67,7 +131,25 @@
 				document.getElementById('stock_name').value=d.data.Ticker;
 			    document.getElementById('stock_detail').submit();
 			});
-		}
+
+			dates = dataPrice.map(function(d) {
+				return new Date(d.Date); });
+
+			closes = dataPrice.map(function(d) {
+				return parseFloat(d.Close); });
+
+			var line = d3.line()
+        	 .x(function(d) {return xScale(new Date(d.Date));})
+        	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
+
+  			var stockline=d3.select('.overview').append('svg').attr('height', 1200).attr('width', 1000).append('g')
+               			.attr("transform", "translate("+margin.left+", "+margin.top+")")
+         	   			.append("path")
+         	   			.data([dataPrice])
+         	   			.attr("d", line)
+         	   			.attr('id', etf+'line')
+       		  			.attr("class", "line")
+}
 	</script>
 </body>
 </html>
