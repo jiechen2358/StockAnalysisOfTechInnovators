@@ -4,6 +4,7 @@
 .line {
 	fill: none;
 	stroke-width: 2px;
+	stroke: #008B00;
 }
 circle {
 	stroke: blue;
@@ -16,20 +17,29 @@ circle {
 </head>
 <body onload = 'init()'>
 	<h1 id='heading1'></h1>
-	<div class = 'overview'>
-		<h2 id='overviewHeading'></h2>
+	<div class = 'overview' style="text-align: center;">
+		<h1 id='overviewHeading'></h1>
 		<svg width=1200 height=1000>
 		</svg>
 	</div>
-	<div class = 'revenue'>
-		<h2 id='revenueHeading'></h2>
+	<div class = 'revenue' style="text-align: center;">
+		<h1 id='revenueHeading'></h1>
 	</div>
 
-	<div class = 'eps'>
-		<h2 id='epsHeading'></h2>
+	<div class = 'eps' style="text-align: center;">
+		<h1 id='epsHeading'></h1>
 	</div>
 
 	<script>
+		var margin = {
+			top: 100,
+			bottom: 100,
+			left: 100,
+			right: 100
+		};
+		var width = 1200 - margin.left - margin.right;
+		var height = 1000 - margin.top - margin.bottom;
+
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -42,12 +52,7 @@ circle {
 				}
 			}
 		}
-		var margin = {
-			top: 100,
-			bottom: 100,
-			left: 100,
-			right: 100
-		};
+
 		async function init() {
 			if (window.location.href.includes('?')) {
 				stock = getQueryVariable('stock');
@@ -57,6 +62,8 @@ circle {
 			}
 			const financialData = await d3.csv("Data/" + stock + '_Financials.csv');
 			const priceData = await d3.csv('Data/' + stock +'_PRICES.csv');
+			document.getElementById("pageTitle").innerHTML = stock + " Details";
+			document.getElementById('overviewHeading').innerHTML = stock + ' Overview';
 
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
@@ -75,8 +82,7 @@ circle {
 			var pegMin = 0;
 			var pegMax = Math.max.apply(null, pegs);
 
-			var priceMin = 0;
-			var priceMax = Math.max.apply(null, prices)/Math.min.apply(null,prices);
+
 
 			//var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
 			yMax = 30;
@@ -113,19 +119,6 @@ circle {
 			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10-15 ;})
 			.attr('y', function(d){return yScale(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
-
-			var line = d3.line()
-					    .x(function(d) {return xScale(new Date(d.Date));})
-					    .y(function(d) {return yScale(parseFloat(d.Close)/10); });
-
-			var stockline=revenueSVG.append('g')
-			            .attr("transform", "translate("+margin.left+", "+margin.top+")")
-			         	.append("path")
-			         	.data([priceData])
-			         	.attr("d", line)
-			         	.attr('id', 'stockLine')
-			       		.attr("class", "line")
-			          	.attr("stroke", colors[2]);
 
 //section 2: earnings
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings:';
@@ -170,6 +163,39 @@ circle {
 			.attr('fill', 'none');
 
 
+			var timeMinOverview = Math.min.apply(null, dates);
+			var timeMaxOverview = Math.max.apply(null, dates);
+			var xScaleOverview = d3.scaleTime().domain([timeMinOverview, timeMaxOverview]).range([0, width]);
+
+			var priceMin = Math.min.apply(null, prices);
+			var priceMax = Math.max.apply(null, prices);
+			var yScaleOverview = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+			var xAxisOverview = d3.axisBottom(xScaleOverview);
+
+			d3.select('.overview').select('svg').append("g")
+				.attr("class", 'xAxis')
+	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+  	   			.style("font", "14px times")
+  	   			.call(xAxisOverview);
+
+  	   		var yAxisOverview = d3.axisLeft(yScaleOverview);
+
+			d3.select('.overview').select('svg').append("g")
+				.attr('class', 'yAxis')
+  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+  	   			.style("font", "14px times")
+	   			.call(yAxisOverview);
+			var line = d3.line()
+        	 .x(function(d) {return xScale(new Date(d.Date));})
+        	 .y(function(d) {return yScale(parseFloat(d.Close)); });
+
+  			var stockline=d3.select('.overview').select('svg').append('g')
+            .attr("transform", "translate("+margin.left+", "+margin.top+")")
+         	.append("path")
+         	.data([priceData])
+         	.attr("d", line)
+         	.attr('id', 'stockLine')
+       		.attr("class", "line");
 		}
 	</script>
 </body>

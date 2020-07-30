@@ -48,6 +48,7 @@
 		var width = 1200 - margin.left - margin.right;
 		var height = 1000 - margin.top - margin.bottom;
 
+		var color = ['pink', 'lightcyan', '#f8b70a','lightblue','#6149c6','lightgreen', '#9f8170', 'lightyellow', '#8ABD4A',  'violet'];
 
 		function getQueryVariable(variable)
 		{
@@ -69,7 +70,7 @@
 				etf = 'QQQ';
 			}
 
-			const dataPrice = await d3.csv("Data/" + etf + '_PRICES.csv');
+			const dataPrices = await d3.csv("Data/" + etf + '_PRICES.csv');
 			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
@@ -79,7 +80,6 @@
 			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings';
 			document.getElementById('sectorsHeading').innerHTML = etf + ' Top 10 Sectors';
 			document.getElementById('counteriesHeading').innerHTML = etf+' Top 10 Countries';
-			var color = ['pink', 'lightcyan', '#f8b70a','lightblue','#6149c6','lightgreen', '#9f8170', 'lightyellow', '#8ABD4A',  'violet'];
 
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
@@ -95,10 +95,10 @@
 			    document.getElementById('stock_detail').submit();
 			});
 
-			dates = dataPrice.map(function(d) {
+			dates = dataPrices.map(function(d) {
 				return new Date(d.Date); });
 
-			closes = dataPrice.map(function(d) {
+			closes = dataPrices.map(function(d) {
 				return parseFloat(d.Close); });
 
 			var timeMin = Math.min.apply(null, dates);
@@ -131,7 +131,7 @@
   			var stockline=d3.select('.overview').select('svg').append('g')
                			.attr("transform", "translate("+margin.left+", "+margin.top+")")
          	   			.append("path")
-         	   			.data([dataPrice])
+         	   			.data([dataPrices])
          	   			.attr("d", line)
          	   			.attr('id', etf+'line')
        		  			.attr("class", "line")
