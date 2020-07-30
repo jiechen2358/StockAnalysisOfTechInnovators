@@ -148,7 +148,7 @@ circle {
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScalePEG(parseFloat(d.PEG));})
-			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10-15 ;})
+			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10;})
 			.attr('y', function(d){return yScalePEG(parseFloat(d.PEG));})
 			.attr('fill', colors[1]);
 //OverView
