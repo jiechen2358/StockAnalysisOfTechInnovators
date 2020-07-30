@@ -71,13 +71,14 @@ circle {
 			const priceData = await d3.csv('Data/' + stock +'_PRICES.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
 			document.getElementById('overviewHeading').innerHTML = stock + ' Overview';
+			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue';
+			document.getElementById('pegHeading').innerHTML = stock + ' PEG';
 
 			dates =priceData.map(function(d){return new Date(d.Date);});
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
 			prices = priceData.map(function(d){return parseFloat(d.Close);});
 
-			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue & PEG:';
 
 			var colors = ['Green','Pink', 'DarkBlue'];
 			var timeMin = Math.min(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
