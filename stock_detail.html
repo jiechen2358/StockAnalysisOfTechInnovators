@@ -159,7 +159,7 @@ circle {
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScalePEG(parseFloat(d.PEG));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10;})
-			.attr('y', function(d){return yScalePEG(parseFloat(d.PEG));})
+			.attr('y', function(d){return yScalePEG(Math.min(parseFloat(d.PEG), 0));})
 			.attr('fill', colors[1]);
 //OverView
 			var timeMinOverview = Math.min.apply(null, dates);
