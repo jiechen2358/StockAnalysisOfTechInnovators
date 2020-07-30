@@ -202,20 +202,20 @@ circle {
 			var colors = ['Red', 'Green'];
 			var timeMin = new Date("06/15/2019");
 			var timeMax = new Date("06/30/2020");
-			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 800]);
+			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1000]);
 			var xAxis = d3.axisBottom(xScale);
 
 			var epsMin = 0.8;
 			var epsMax = 2.8;
 
-			var yScale = d3.scaleLinear().domain([epsMin, epsMax]).range([800, 0]);
+			var yScale = d3.scaleLinear().domain([epsMin, epsMax]).range([600, 0]);
 			var yAxis = d3.axisLeft(yScale);
 
 
 			epsSVG = d3.select('.eps').select('svg');
 			epsSVG.append("g")
 					.attr("class", 'xAxis')
-		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
+		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 600) +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
 
