@@ -125,7 +125,7 @@ circle {
 
 			var pegMin = Math.min.apply(null, pegs);
 			var pegMax = Math.max.apply(null, pegs);
-
+			pegMin = revenueMin-(revenueMax-revenueMin)/10;
 			console.log(pegMin);
 			console.log(pegMax);
 			var yScalePEG = d3.scaleLinear().domain([pegMin, pegMax]).range([height, 0]);
@@ -158,7 +158,7 @@ circle {
 			var timeMaxOverview = Math.max.apply(null, dates);
 			var xScaleOverview = d3.scaleTime().domain([timeMinOverview, timeMaxOverview]).range([0, width]);
 
-			var priceMin = Math.min.apply(null, prices);
+			var priceMin = 0;
 			var priceMax = Math.max.apply(null, prices);
 			var yScaleOverview = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
 			var xAxisOverview = d3.axisBottom(xScaleOverview);
