@@ -112,9 +112,9 @@ circle {
 			.attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
-			.attr('height', function(d){return 800- yScale(parseFloat(d.Revenue));})
-			.attr("x", function(d,i) {return xScale(new Date(d.Date)) -10;})
-			.attr('y', function(d){return yScale(parseFloat(d.Revenue));})
+			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.Revenue));})
+			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -10;})
+			.attr('y', function(d){return yScaleRevenue(parseFloat(d.Revenue));})
 			.attr('fill', colors[0]);
 
 
