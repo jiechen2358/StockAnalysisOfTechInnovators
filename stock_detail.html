@@ -65,6 +65,7 @@ circle {
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
 			document.getElementById('overviewHeading').innerHTML = stock + ' Overview';
 
+			dates =priceData.map(function(d){return new Date(d.Date);});
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
 			prices = priceData.map(function(d){return parseFloat(d.Close);});
