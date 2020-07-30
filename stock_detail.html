@@ -82,37 +82,33 @@ circle {
 			var colors = ['Green','Pink', 'DarkBlue'];
 			var timeMin = Math.min(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
 			var timeMax = Math.max(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
-			var xScale = d3.scaleTime().domain([timeMin, timeMax]).range([0, 1400]);
-			var xAxis = d3.axisBottom(xScale);
+	
+//revenue
+			var xScaleRevenue = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+			var xAxisRevenue = d3.axisBottom(xScaleRevenue);
 
-			var revenueMin = 0;
+			var revenueMin = Math.min.apply(null, revenues);
 			var revenueMax = Math.max.apply(null, revenues);
-			var pegMin = 0;
-			var pegMax = Math.max.apply(null, pegs);
+
+			var yScaleRevenue = d3.scaleLinear().domain([revenueMin, revenueMax]).range([height, 0]);
+			var yAxisRevenue = d3.axisLeft(yScaleRevenue);
 
 
-
-			//var yMax = Math.max(Math.max(revenueMax, pegMax), priceMax);
-			yMax = 30;
-			var yScale = d3.scaleLinear().domain([0, yMax]).range([800, 0]);
-			var yAxis = d3.axisLeft(yScale);
-
-
-			revenueSVG = d3.select('.revenue').append('svg').attr('width', 1600).attr('height', 1000);
-			revenueSVG.append("g")
+			d3.select('.revenue').append('svg').append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
 	  	   			.style("font", "14px times")
-	  	   			.call(xAxis);
+	  	   			.call(xAxisRevenue);
 
 
-			revenueSVG.append("g")
+			d3.select('.revenue').append('svg').append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
-		   			.call(yAxis);
+		   			.call(yAxisRevenue);
 
-			revenueSVG.append('g').attr('transform', 'translate(100, 100)')
+			d3.select('.revenue').append('svg').append("g")
+			.attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 10)
 			.attr('height', function(d){return 800- yScale(parseFloat(d.Revenue));})
