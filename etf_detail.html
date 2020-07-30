@@ -126,7 +126,7 @@
 	   			.call(yAxis);
 			var line = d3.line()
         	 .x(function(d) {return xScale(new Date(d.Date));})
-        	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
+        	 .y(function(d) {return yScale(parseFloat(d.Close)); });
 
   			var stockline=d3.select('.overview').select('svg').append('g')
                			.attr("transform", "translate("+margin.left+", "+margin.top+")")
