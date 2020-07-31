@@ -177,10 +177,9 @@
 						// .style("z-index", "10")
 						
 					//	.style("visibility", "hidden")
-
+								//.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 
 				 		stockline.on('mouseover', function(d){return tooltip.style('opacity', 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").html("d.Date");})
-								.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 								.on("mouseout", function(){return tooltip.style('opacity', 0);});
 						 //   		d3.select('.tooltip-display')
 						 //   		  .style('opacity', '1');
