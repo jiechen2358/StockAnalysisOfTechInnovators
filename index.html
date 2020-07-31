@@ -177,9 +177,15 @@
 						
 					//	.style("visibility", "hidden")
 						tooltip.text(ticker+"test");
-						stockline.on("mouseover", function(){ tooltip.style("visibility", 'visible');})
-								 .on("mousemove", function(){ tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-								 .on("mouseout", function(){ tooltip.style("visibility", 'hidden');});
+						stockline.on("mouseover", function(){
+							tooltip.style("visibility", 'visible');
+						});
+						stockline.on("mousemove", function(){
+							tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+						});
+						stockline.on("mouseout", function(){
+							tooltip.style("visibility", 'hidden');
+						});
 				 		// stockline.on('mouseover', function(d){
 				 		// 	tooltip.transition().duration(250).style('opacity', 1);
 				 		// 	tooltip.html("<p><strong>" + d.Date + "</strong></p><br />" + "<p><strong>" + ticker + ": " + d.Close + "</strong></p>").style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
