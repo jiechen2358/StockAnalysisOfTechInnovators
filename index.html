@@ -176,9 +176,9 @@
 						// .style("z-index", "10")
 						
 					//	.style("visibility", "hidden")
-						tooltip.text(ticker+"test");
+						tooltip.text("test");
 						stockline.on("mouseover", function(){
-							tooltip.style("visibility", 'visible');
+							tooltip.style("visibility", 'visible').text(ticker);
 						});
 						stockline.on("mousemove", function(){
 							tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
