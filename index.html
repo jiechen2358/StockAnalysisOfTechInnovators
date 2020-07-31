@@ -174,12 +174,13 @@
 			          	var tooltip = d3.select('body').append('div')
 			          	.style("position", "absolute")
 						.style("z-index", "10")
+						.style('opacity', 0)
 						.style("visibility", "hidden")
 						.text(ticker+"TEST");
 
-				 		stockline.on('mouseover', function(){return tooltip.style("visibility", "visible");})
+				 		stockline.on('mouseover', function(){return tooltip.style("visibility", "visible").style('opacity', 1);})
 								.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-								.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+								.on("mouseout", function(){return tooltip.style("visibility", "hidden").style('opacity', 0);});
 						 //   		d3.select('.tooltip-display')
 						 //   		  .style('opacity', '1');
 						 //   		d3.selectAll('.priceline text')
