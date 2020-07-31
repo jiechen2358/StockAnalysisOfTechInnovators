@@ -176,7 +176,7 @@
 						stockline.on("mouseover", function(d){
 							d3.select(this).attr('fill','DarkSlateGrey');
 							tooltip.transition()
-								   .duration(150)
+								   .duration(10)
 								   .style("opacity", 1)
 							tooltip.html(
 								"<p><strong>" + ticker + ', ' + d.Close + '</strong></p><br>');
@@ -187,7 +187,7 @@
 						});
 						stockline.on("mouseout", function(){
 							tooltip.transition()
-								   .duration(150)
+								   .duration(10)
 								   .style("opacity", 0);
 						});
 				 		// stockline.on('mouseover', function(d){
