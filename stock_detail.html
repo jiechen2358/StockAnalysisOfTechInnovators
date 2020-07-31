@@ -150,7 +150,7 @@ circle {
 
 			d3.select('.revenue').select('svg').append("g")
 					.attr("class", 'xAxis')
-		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 800) +")")
+		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + yScaleRevenue(0)) +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxisRevenue);
 
@@ -164,10 +164,10 @@ circle {
 			d3.select('.revenue').select('svg').append("g")
 			.attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(financialData).enter().append('rect')
-			.attr('width', 10)
-			.attr('height', function(d){return 800- yScaleRevenue(parseFloat(d.Revenue));})
+			.attr('width', 15)
+			.attr('height', function(d){return Math.abs(yScaleRevenue(parseFloat(d.Revenue)) - yScaleRevenue(0));})
 			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -10;})
-			.attr('y', function(d){return yScaleRevenue(parseFloat(d.Revenue));})
+			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.PEG)), yScaleRevenue(0));})
 			.attr('fill', barChartColors[0]);
 
 
@@ -201,7 +201,7 @@ circle {
 			d3.select('.peg').select('svg').append('g')
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
 			.selectAll('rect').data(financialData).enter().append('rect')
-			.attr('width', 10)
+			.attr('width', 15)
 			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10;})
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
