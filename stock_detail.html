@@ -199,8 +199,8 @@ circle {
 //section: eps
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
 
-			var timeMaxEPS = new Date(financialData[0].Date);
-			var timeMinEPS = new Date(financialData[3].Date);
+			var timeMaxEPS = new Date(financialData[0].Date) + (new Date("02/01/2020") - new Date("01/01/2020"));
+			var timeMinEPS = new Date(financialData[3].Date) - (new Date("02/01/2020") - new Date("01/01/2020"));
 
 			var xScaleEPS = d3.scaleTime().domain([timeMinEPS, timeMaxEPS]).range([0, 1000]);
 			var xAxisEPS = d3.axisBottom(xScaleEPS);
