@@ -178,6 +178,7 @@
 					//	.style("visibility", "hidden")
 						tooltip.text("test");
 						stockline.on("mouseover", function(){
+							d3.select(this).attr('fill','DarkSlateGrey');
 							tooltip.style("visibility", 'visible').text(ticker);
 						});
 						stockline.on("mousemove", function(){
