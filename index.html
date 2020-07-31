@@ -173,12 +173,12 @@
 			          	});
 
 
-						stockline.on("mouseover", function(d){
+						stockline.on("mouseover", function(d,i){
 							d3.select(this).attr('fill','DarkSlateGrey');
 							tooltip.style("opacity", 1)
 							tooltip.html(
 								"<p><strong>" + ticker + ', ' + d.Close + '</strong></p><br>');
-							console.log(d.Date);
+							console.log(d);
 						});
 						stockline.on("mousemove", function(){
 							tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
