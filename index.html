@@ -178,7 +178,7 @@
 						.text(ticker+"TEST");
 
 				 		stockline.on('mouseover', function(){return tooltip.style("visibility", "visible");})
-								.on("mousemove", function(){return tooltip.style("visibility", "visible");})
+								.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 								.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 						 //   		d3.select('.tooltip-display')
 						 //   		  .style('opacity', '1');
