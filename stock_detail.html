@@ -27,10 +27,15 @@ circle {
 		<svg width=1600 height=1000>
 		</svg>
 	</div>
-
 	<div class = 'peg' style="text-align: center;">
 		<h1 id='pegHeading'></h1>
 		<svg width=1600 height=1000>
+		</svg>
+	</div>
+	<div class="eps" style="text-align: center;">
+		<h1 id='epsHeading'></h1>
+		<svg width=1600 height=1000>
+			
 		</svg>
 	</div>
 	<div class = 'epsComparison' style="text-align: center;">
@@ -78,12 +83,53 @@ circle {
 			document.getElementById('overviewHeading').innerHTML = stock + ' Overview';
 			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue';
 			document.getElementById('pegHeading').innerHTML = stock + ' PEG';
+			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
 
-			dates =priceData.map(function(d){return new Date(d.Date);});
+			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share within one year';
+
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
-			prices = priceData.map(function(d){return parseFloat(d.Close);});
+			eps = financialData.map(function(d){return parseFloat(d.EPS);};
 
+//OverView
+
+			dates =priceData.map(function(d){return new Date(d.Date);});
+			prices = priceData.map(function(d){return parseFloat(d.Close);});
+			var timeMinOverview = Math.min.apply(null, dates);
+			var timeMaxOverview = Math.max.apply(null, dates);
+			var xScaleOverview = d3.scaleTime().domain([timeMinOverview, timeMaxOverview]).range([0, width]);
+
+			var priceMin = 0;
+			var priceMax = Math.max.apply(null, prices);
+			var yScaleOverview = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
+			var xAxisOverview = d3.axisBottom(xScaleOverview);
+
+			d3.select('.overview').select('svg').append("g")
+				.attr("class", 'xAxis')
+	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+  	   			.style("font", "14px times")
+  	   			.call(xAxisOverview);
+
+  	   		var yAxisOverview = d3.axisLeft(yScaleOverview);
+
+			d3.select('.overview').select('svg').append("g")
+				.attr('class', 'yAxis')
+  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+  	   			.style("font", "14px times")
+	   			.call(yAxisOverview);
+			var line = d3.line()
+        	 .x(function(d) {return xScaleOverview(new Date(d.Date));})
+        	 .y(function(d) {return yScaleOverview(parseFloat(d.Close)); });
+
+  			var stockline=d3.select('.overview').select('svg').append('g')
+            .attr("transform", "translate("+margin.left+", "+margin.top+")")
+         	.append("path")
+         	.data([priceData])
+         	.attr("d", line)
+         	.attr('id', 'stockLine')
+       		.attr("class", "line");
+
+//time in financialData       		
 			var timeMin = Math.min(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
 			var timeMax = Math.max(new Date(financialData[0].Date), new Date(financialData[financialData.length-1].Date));
 	
@@ -160,43 +206,45 @@ circle {
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -10;})
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
 			.attr('fill', barChartColors[1]);
-//OverView
-			var timeMinOverview = Math.min.apply(null, dates);
-			var timeMaxOverview = Math.max.apply(null, dates);
-			var xScaleOverview = d3.scaleTime().domain([timeMinOverview, timeMaxOverview]).range([0, width]);
 
-			var priceMin = 0;
-			var priceMax = Math.max.apply(null, prices);
-			var yScaleOverview = d3.scaleLinear().domain([priceMin, priceMax]).range([height, 0]);
-			var xAxisOverview = d3.axisBottom(xScaleOverview);
 
-			d3.select('.overview').select('svg').append("g")
+//EPS
+			var xScaleEPS  = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
+
+			var epsMin = Math.min.apply(null, eps);
+			var epsMax = Math.max.apply(null, eps);
+			if (epsMin >= 0)
+			{
+				epsMin = 0;
+			}
+
+			var yScaleEPS = d3.scaleLinear().domain([epsMin, epsMax]).range([height, 0]);
+			var xAxisEPS = d3.axisBottom(xScaleEPS);
+
+			d3.select('.eps').select('svg').append("g")
 				.attr("class", 'xAxis')
-	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+	   			.attr("transform", "translate("+ margin.left +", " + (margin.top + yScaleEPS(0)) +")")
   	   			.style("font", "14px times")
-  	   			.call(xAxisOverview);
+  	   			.call(xAxisEPS);
 
-  	   		var yAxisOverview = d3.axisLeft(yScaleOverview);
+  	   		var yAxisEPS = d3.axisLeft(yScaleEPS);
 
-			d3.select('.overview').select('svg').append("g")
+			d3.select('.eps').select('svg').append("g")
 				.attr('class', 'yAxis')
   	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
   	   			.style("font", "14px times")
-	   			.call(yAxisOverview);
-			var line = d3.line()
-        	 .x(function(d) {return xScaleOverview(new Date(d.Date));})
-        	 .y(function(d) {return yScaleOverview(parseFloat(d.Close)); });
+	   			.call(yAxisEPS);
 
-  			var stockline=d3.select('.overview').select('svg').append('g')
+			d3.select('.eps').select('svg').append('g')
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
-         	.append("path")
-         	.data([priceData])
-         	.attr("d", line)
-         	.attr('id', 'stockLine')
-       		.attr("class", "line");
+			.selectAll('rect').data(financialData).enter().append('rect')
+			.attr('width', 10)
+			.attr('height', function(d){return Math.abs(yScaleEPS(parseFloat(d.EPS)) - yScaleEPS(0));})
+			.attr("x", function(d,i) {return xScaleEPS(new Date(d.Date)) -10;})
+			.attr('y', function(d){return Math.min(yScaleEPS(parseFloat(d.EPS)), yScaleEPS(0));})
+			.attr('fill', barChartColors[1]);
 
 //section: epsComparison
-			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share';
 
 			var timeMaxEPSComparison = new Date(financialData[0].Date);
 			var timeMinEPSComparison = new Date(financialData[3].Date);
