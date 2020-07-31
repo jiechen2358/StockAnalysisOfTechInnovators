@@ -202,7 +202,7 @@ circle {
 			var timeMinEPS = new Date(financialData[3].Date);
 
 			var xScaleEPS = d3.scaleTime().domain([timeMinEPS, timeMaxEPS]).range([0, 1000]);
-			var xAxisEPS = d3.axisBottom(xScaleEPS);
+			var xAxisEPS = d3.axisBottom(xScaleEPS).tickFormat(d3.timeFormat('%b-%Y'));
 
 			var EPS = [];
 			var ConsensusEPS=[];
