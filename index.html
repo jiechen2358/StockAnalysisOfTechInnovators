@@ -12,9 +12,12 @@
 	<title> Stock Historical Data over Time</title>
 </head>
 <body onload="init()">
-	<h1>Growth of $10,000 as of July 17,2020</h1>
-	<svg width=1200 height=1000>
-	</svg>
+	<div class = 'overview' style = 'text-align: center;'>
+		<h1>Growth of $10,000 as of July 17,2020</h1>
+		<svg width=1200 height=1000>
+		</svg>
+	</div>
+
 	<div id='checkboxContainer'></div>
 	<div style = 'display:none'>
 		<form id='etf_detail' action = 'etf_detail.html' method="GET">
@@ -36,8 +39,8 @@
 			left: 100,
 			right: 0
 		};
-		var width = svg.attr('width') - margin.left - margin.right;
-		var height = svg.attr('height') - margin.top - margin.bottom;
+		var width = d3.select('.overview').select("svg").attr('width') - margin.left - margin.right;
+		var height = d3.select('.overview').select("svg").attr('height') - margin.top - margin.bottom;
 
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
@@ -94,7 +97,7 @@
 			function plotXAxis(xScale){
 				var xAxis = d3.axisBottom(xScale);
 
-				svg.append("g")
+				d3.select('.overview').select("svg").append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
 	  	   			.style("font", "14px times")
@@ -104,7 +107,7 @@
 			function plotYAxis(yScale){
            		var yAxis = d3.axisLeft(yScale);
 
-				svg.append("g")
+				d3.select('.overview').select("svg").append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
@@ -115,7 +118,7 @@
 			function updateYAxis(yScale){
 
 				yScale.domain([0, 1600000]);
-				svg.select('yAxis').transition().duration(1000).call(yAxis);
+				d3.select('.overview').select("svg").select('yAxis').transition().duration(1000).call(yAxis);
            		//var yAxis = d3.axisLeft(yScale);
 
 				//svg.append("g")
@@ -146,7 +149,7 @@
 					            	 .x(function(d) {return xScale(new Date(d.Date));})
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-			  			var stockline=svg.append('g')
+			  			var stockline=d3.select('.overview').select("svg").append('g')
 			               			.attr("transform", "translate("+margin.left+", "+margin.top+")")
 			         	   			.append("path")
 			         	   			.data([data])
