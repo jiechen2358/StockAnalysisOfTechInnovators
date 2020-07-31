@@ -218,6 +218,11 @@ circle {
 			var epsMin = Math.min(Math.min.apply(null, EPS), Math.min.apply(null, ConsensusEPS));
 			var epsMax = Math.max(Math.max.apply(null, EPS), Math.max.apply(null, ConsensusEPS));
 
+			if (epsMin >0)
+			{
+				epsMin -= (epsMax-epsMin)/10;
+			}
+
 			var yScaleEPS = d3.scaleLinear().domain([epsMin, epsMax]).range([600, 0]);
 			var yAxisEPS = d3.axisLeft(yScaleEPS);
 
