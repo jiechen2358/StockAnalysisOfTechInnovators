@@ -167,7 +167,7 @@ circle {
 			.attr('width', 15)
 			.attr('height', function(d){return Math.abs(yScaleRevenue(parseFloat(d.Revenue)) - yScaleRevenue(0));})
 			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -10;})
-			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.PEG)), yScaleRevenue(0));})
+			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.Revenue)), yScaleRevenue(0));})
 			.attr('fill', barChartColors[0]);
 
 
