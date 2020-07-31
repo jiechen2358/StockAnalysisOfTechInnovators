@@ -41,7 +41,7 @@
 		var width = d3.select('.overview').select("svg").attr('width') - margin.left - margin.right;
 		var height = d3.select('.overview').select("svg").attr('height') - margin.top - margin.bottom;
 
-		var tooltip = d3.select('body').append('div').style("visibility", 'hidden');
+		var tooltip = d3.select('body').append('div').style('position','absolute').style("visibility", 'hidden');
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
 
