@@ -33,8 +33,8 @@ circle {
 		<svg width=1600 height=1000>
 		</svg>
 	</div>
-	<div class = 'eps' style="text-align: center;">
-		<h1 id='epsHeading'></h1>
+	<div class = 'epsComparison' style="text-align: center;">
+		<h1 id='epsComparisonHeading'></h1>
 		<svg width=1200 height=800>
 		</svg>
 	</div>
@@ -195,14 +195,14 @@ circle {
          	.attr('id', 'stockLine')
        		.attr("class", "line");
 
-//section: eps
-			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
+//section: epsComparison
+			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share';
 
-			var timeMaxEPS = new Date(financialData[0].Date);
-			var timeMinEPS = new Date(financialData[3].Date);
+			var timeMaxEPSComparison = new Date(financialData[0].Date);
+			var timeMinEPSComparison = new Date(financialData[3].Date);
 
-			var xScaleEPS = d3.scaleTime().domain([timeMinEPS, timeMaxEPS]).range([0, 1000]);
-			var xAxisEPS = d3.axisBottom(xScaleEPS).tickFormat(d3.timeFormat('%b-%Y'));
+			var xScaleEPSComparison = d3.scaleTime().domain([timeMinEPSComparison, timeMaxEPSComparison]).range([0, 1000]);
+			var xAxisepsComparison = d3.axisBottom(xScaleEPSComparison).tickFormat(d3.timeFormat('%b-%Y'));
 
 			var EPS = [];
 			var ConsensusEPS=[];
@@ -214,40 +214,40 @@ circle {
 			}
 
 
-			var epsMin = Math.min(Math.min.apply(null, EPS), Math.min.apply(null, ConsensusEPS));
-			var epsMax = Math.max(Math.max.apply(null, EPS), Math.max.apply(null, ConsensusEPS));
+			var epsComparisonMin = Math.min(Math.min.apply(null, EPS), Math.min.apply(null, ConsensusEPS));
+			var epsComparisonMax = Math.max(Math.max.apply(null, EPS), Math.max.apply(null, ConsensusEPS));
 
-			if (epsMin >0)
+			if (epsComparisonMin >0)
 			{
-				epsMin -= (epsMax-epsMin)/10;
+				epsComparisonMin -= (epsComparisonMax-epsComparisonMin)/10;
 			}
 
-			var yScaleEPS = d3.scaleLinear().domain([epsMin, epsMax]).range([600, 0]);
-			var yAxisEPS = d3.axisLeft(yScaleEPS);
+			var yScaleEPSComparison = d3.scaleLinear().domain([epsComparisonMin, epsComparisonMax]).range([600, 0]);
+			var yAxisEPSComparison = d3.axisLeft(yScaleEPSComparison);
 
-			d3.select('.eps').select('svg').append("g")
+			d3.select('.epsComparison').select('svg').append("g")
 					.attr("class", 'xAxis')
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + 600) +")")
 	  	   			.style("font", "14px times")
-	  	   			.call(xAxisEPS);
+	  	   			.call(xAxisEPSComparison);
 
 
-			d3.select('.eps').select('svg').append("g")
+			d3.select('.epsComparison').select('svg').append("g")
 					.attr('class', 'yAxis')
 	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   			.style("font", "14px times")
-		   			.call(yAxisEPS);
+		   			.call(yAxisEPSComparison);
 
-			d3.select('.eps').select('svg').append('g').attr('transform', 'translate(100, 100)')
+			d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
-			.attr("cx", function(d,i) {return xScaleEPS(new Date(d.Date));})
-			.attr('cy', function(d){return yScaleEPS(parseFloat(d.EPS));})
+			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
+			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.EPS));})
 			.attr('fill', function(d,i){return EPSColors[d.BEAT];});
 
-			d3.select('.eps').select('svg').append('g').attr('transform', 'translate(100, 100)')
+			d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
-			.attr("cx", function(d,i) {return xScaleEPS(new Date(d.Date));})
-			.attr('cy', function(d){return yScaleEPS(parseFloat(d.ConsensusEPS));})
+			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
+			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.ConsensusEPS));})
 			.attr('fill', 'none');
 		}
 	</script>
