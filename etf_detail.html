@@ -105,6 +105,9 @@
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY-30) +'px')
 				.html(d.Ticker + ': ' + d.PercentOfFund);
+
+				console.log(d);
+				console.log(i);
 			});
 			holdingsPie.on("mousemove", function(){
 				d3.select('#holdingsTooltip')
