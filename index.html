@@ -47,16 +47,15 @@
 		var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
 
 		var colors_try = {
-			FB: 'Brown'
-			AMZN: 'DarkGreen'
-			AAPL: 'DarkOrange'
-			GOOG: 'magenta'
-			GOOGL: 'IndianRed'
-			MSFT: 'DarkSlateGrey'
-			TSLA: 'BlueViolet'
-			QQQ: 'BurlyWood'
+			FB: 'Brown',
+			AMZN: 'DarkGreen',
+			AAPL: 'DarkOrange',
+			GOOG: 'magenta',
+			GOOGL: 'IndianRed',
+			MSFT: 'DarkSlateGrey',
+			TSLA: 'BlueViolet',
+			QQQ: 'BurlyWood',
 			SPY: 'LawnGreen'
-
 		};
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
@@ -170,7 +169,7 @@
 			         	   			.attr("d", line)
 			         	   			.attr('id', ticker+'line')
 			       		  			.attr("class", "line")
-			          	   			.attr("stroke", 'colors_try.' + ticker);
+			          	   			.attr("stroke", colors_try.String(ticker));
 
 			          	stockline.on('click', function(){
 			          		if (ticker=="QQQ" || ticker=="SPY" || ticker =="EWH")
