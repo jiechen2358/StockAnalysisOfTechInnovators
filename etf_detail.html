@@ -102,7 +102,16 @@
 				document.getElementById('stock_name').value=d.data.Ticker;
 			    document.getElementById('stock_detail').submit();
 			});
-			holdingsPie.on("mouseover", function(d,i) {
+
+			holdingsPie.on('mouseover',function(d){
+				d3.select(this).attr("class", 'pie_highlight');
+				d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
+			});
+
+			holdingsPie.on('mouseout', function(){
+				d3.select('.holdings').select('svg').select('text').text("");
+			});
+/*			holdingsPie.on("mouseover", function(d,i) {
 				d3.select(this).attr("class", 'pie_highlight');
 				d3.select('#holdingsTooltip')
 				.style('opacity',1)
@@ -122,7 +131,7 @@
 				d3.select(this).attr('class', 'pie');
 				d3.select('#holdingsTooltip')
 				.style('opacity',0);
-			});
+			});*/
 
 			sectorsPie.on('mouseout', function(){
 
