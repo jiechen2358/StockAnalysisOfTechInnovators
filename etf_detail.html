@@ -13,6 +13,9 @@
 </head>
 <body onload = 'init()'>
 	<h1 id='heading1'></h1>
+	<div class = 'navigation'>
+		<button class='nav_back' onclick="window.location.href = 'index.html';">Return to overview</button>
+	</div>
 	<div class = 'overview' style="text-align: center;">
 		<h1 id='overviewHeading'></h1>
 		<svg width=1200 height=1000>
@@ -35,9 +38,7 @@
 	<div class = 'countries' style="text-align: center;">
 		<h1 id='counteriesHeading'></h1>
 	</div>
-	<div class = 'navigation'>
-		<button class='nav_back' onclick="window.location.href = 'index.html';">Return to overview</button>
-	</div>
+
 
 	<div id='holdingsTooltip'></div>
 	<script>
@@ -87,15 +88,18 @@
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			var stockPie = d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			var holdingsPie = d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			var sectorsPie = d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
+			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 
-			stockPie.on('click', function(d){
+			holdingsPie.on('click', function(d){
 				document.getElementById('stock_name').value=d.data.Ticker;
 			    document.getElementById('stock_detail').submit();
+			});
+			holdingsPie.on("mouseover", function(d,i) {
+				d3.select(this).attr("class", 'pie_highlight');
 			});
 
 //Overview
