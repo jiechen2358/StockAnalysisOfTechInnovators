@@ -24,6 +24,7 @@
 
 	<div class = 'holdings' style="text-align: center;">
 		<h1 id='holdingsHeading'></h1>
+		<text text-anchor='middle' x="400" y='400'> Test</text>
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -104,9 +105,9 @@
 				.style('opacity',1)
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY-30) +'px')
-				.html(d.data.Ticker + ': ' + d.data.PercentOfFund);
+				.html(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
 
-				console.log(d.data.Ticker + ': ' + d.data.PercentOfFund);
+				console.log(d.data.Ticker + ': ' + d.data.PercentOfFund+ "%");
 			});
 			holdingsPie.on("mousemove", function(){
 				d3.select('#holdingsTooltip')
