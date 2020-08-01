@@ -111,7 +111,7 @@
 
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
+				d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%" +'\n Click for stock details.');
 			});
 
 			holdingsPie.on('mouseout', function(){
