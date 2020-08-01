@@ -187,6 +187,9 @@
 
 
 						stockline.on("mouseover", function(d,i){
+							console.log(d);
+							console.log(i);
+							console.log(d[i]);
 							d3.select(this).attr('fill','DarkSlateGrey');
 							tooltip.style("opacity", 1)
 							tooltip.html(
