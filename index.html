@@ -38,10 +38,26 @@
 			left: 100,
 			right: 0
 		};
+
 		var width = d3.select('.overview').select("svg").attr('width') - margin.left - margin.right;
 		var height = d3.select('.overview').select("svg").attr('height') - margin.top - margin.bottom;
 
 		var tooltip = d3.select('body').append('div').style('position','absolute').style("opacity", 0);
+
+		var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
+
+		var colors_try = {
+			FB: 'Brown'
+			AMZN: 'DarkGreen'
+			AAPL: 'DarkOrange'
+			GOOG: 'magenta'
+			GOOGL: 'IndianRed'
+			MSFT: 'DarkSlateGrey'
+			TSLA: 'BlueViolet'
+			QQQ: 'BurlyWood'
+			SPY: 'LawnGreen'
+
+		};
 		async function init() {
 			const stockList = await d3.csv('Data/StockList.csv');
 
@@ -129,8 +145,6 @@
 			function plotStockList(xScale, yScale, stockList) {
 			//	d3.selectAll("path").remove();
 
-            	var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
-
 				stockList.forEach(function(stockId, index){
 					var ticker = stockId.Ticker;
 					var company = stockId.Company;
@@ -156,7 +170,7 @@
 			         	   			.attr("d", line)
 			         	   			.attr('id', ticker+'line')
 			       		  			.attr("class", "line")
-			          	   			.attr("stroke", colors[index]);
+			          	   			.attr("stroke", 'colors_try.' + ticker);
 
 			          	stockline.on('click', function(){
 			          		if (ticker=="QQQ" || ticker=="SPY" || ticker =="EWH")
