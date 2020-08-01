@@ -111,7 +111,12 @@
 
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%" +'\n Click for stock details.');
+				d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
+				if (d.data.Ticker != 'Others')
+				{
+					d3.select('.holdings').select('svg').append('text').attr("text-anchor",'middle').attr('x','400').attr('y','410').text('Click for stock details.');
+					text-anchor='middle' x='400' y='400'
+				}
 			});
 
 			holdingsPie.on('mouseout', function(){
