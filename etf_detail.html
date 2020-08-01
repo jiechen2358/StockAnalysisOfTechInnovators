@@ -90,6 +90,7 @@
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			const stockList = await d3.csv("Data/StockList.csv");
 			var tickerArray = stockList.columns.slice(0,1);
+			console.log(stockList);
 			console.log(tickerArray);
 
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
