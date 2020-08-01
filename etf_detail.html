@@ -90,6 +90,7 @@
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			const stockList = await d3.csv("Data/StockList.csv");
 			var tickerArray = stockList.columns.slice(0,1);
+			console.log(tickerArray);
 
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
 			//document.getElementById("heading1").innerHTML = etf + " Details";
@@ -119,6 +120,7 @@
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
 				document.getElementById('holdingsText1').innerHTML = d.data.Ticker + ': ' + d.data.PercentOfFund + "%";
+				console.log(tickerArray.includes(d.data.Ticker));
 				if(tickerArray.includes(d.data.Ticker) == true)
 				{
 					document.getElementById('holdingsText2').innerHTML = 'Click for stock details.';
