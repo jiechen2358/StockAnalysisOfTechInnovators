@@ -25,7 +25,8 @@
 	<div class = 'holdings' style="text-align: center;">
 		<h1 id='holdingsHeading'></h1>
 		<svg width=800 height=800>
-			<text id= 'holdingsText' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'holdingsText1' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'holdingsText2' text-anchor='middle' x='400' y='420'></text>
 		</svg>
 	</div>
 	<div style="display: none">
@@ -81,6 +82,9 @@
 			const dataHoldings = await d3.csv("Data/" + etf + 'Holdings.csv');
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
+			const stockList = await d3.csv("Data/StockList.csv");
+			var tickerArray = stockList.columns.slice(0,1);
+
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
 			//document.getElementById("heading1").innerHTML = etf + " Details";
 			document.getElementById('overviewHeading').innerHTML = etf + ' Overview';
@@ -98,11 +102,8 @@
 			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 
 			holdingsPie.on('click', function(d){
-				if(d.data.Ticker == 'Others')
+				if(tickerArray.includes(d.data.Ticker) == true)
 				{
-
-				}
-				else{
 					document.getElementById('stock_name').value=d.data.Ticker;
 			    	document.getElementById('stock_detail').submit();
 				}
@@ -111,16 +112,16 @@
 
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				document.getElementById('holdingsText').innerHTML = d.data.Ticker + ': ' + d.data.PercentOfFund + "%";
-			//	d3.select('.holdings').select('svg').select('text').text(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
-				if (d.data.Ticker != 'Others')
+				document.getElementById('holdingsText1').innerHTML = d.data.Ticker + ': ' + d.data.PercentOfFund + "%";
+				if(tickerArray.includes(d.data.Ticker) == true)
 				{
-					d3.select('.holdings').select('svg').append('text').attr("text-anchor",'middle').attr('x','400').attr('y','420').text('Click for stock details.');
+					document.getElementById('holdingsText2').innerHTML = 'Click for stock details.';
 				}
 			});
 
 			holdingsPie.on('mouseout', function(){
-				d3.select('.holdings').select('svg').select('text').text("");
+				document.getElementById('holdingsText1').innerHTML = '';
+				document.getElementById('holdingsText2').innerHTML = '';
 			});
 /*			holdingsPie.on("mouseover", function(d,i) {
 				d3.select(this).attr("class", 'pie_highlight');
