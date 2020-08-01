@@ -162,9 +162,6 @@
 					            	 .x(function(d) {return xScale(new Date(d.Date));})
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
-					    var color = "colors_try." + ticker;
-					    console.log(color);
-					    console.log(colors_try.ticker);
 			  			var stockline=d3.select('.overview').select("svg").append('g')
 			               			.attr("transform", "translate("+margin.left+", "+margin.top+")")
 			         	   			.append("path")
@@ -172,7 +169,7 @@
 			         	   			.attr("d", line)
 			         	   			.attr('id', ticker+'line')
 			       		  			.attr("class", "line")
-			          	   			.attr("stroke", color);
+			          	   			.attr("stroke", colors_try[ticker]);
 
 			          	stockline.on('click', function(){
 			          		if (ticker=="QQQ" || ticker=="SPY" || ticker =="EWH")
