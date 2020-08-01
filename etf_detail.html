@@ -24,7 +24,9 @@
 
 	<div class = 'holdings' style="text-align: center;">
 		<h1 id='holdingsHeading'></h1>
-
+		<svg width=800 height=800>
+			<text id= 'holdingsText' text-anchor='middle' x='400' y='400'></text>
+		</svg>
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -89,9 +91,9 @@
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
-			var holdingsPie = d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			var holdingsPie = d3.select('.holdings').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.holdings').select('svg').append('text').attr('transform', 'translate(400,400)').attr('text-anchor','middle').text('test');
+			d3.select('.holdings').select('svg').select('text').text('test');
 			var sectorsPie = d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
 			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
@@ -122,6 +124,9 @@
 				.style('opacity',0);
 			});
 
+			sectorsPie.on('mouseout' function(){
+
+			});
 //Overview
 			dates = dataPrices.map(function(d) {
 				return new Date(d.Date); });
