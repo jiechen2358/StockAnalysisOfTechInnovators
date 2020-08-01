@@ -24,7 +24,7 @@
 
 	<div class = 'holdings' style="text-align: center;">
 		<h1 id='holdingsHeading'></h1>
-		<text text-anchor='middle' x="400" y='400'> Test</text>
+
 	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
@@ -91,6 +91,7 @@
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
 			var holdingsPie = d3.select('.holdings').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
+			d3.select('.holdings').select('svg').append('text').attr('transform', 'translate(400,400)').attr('text-anchor','middle').text('test');
 			var sectorsPie = d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
 			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
