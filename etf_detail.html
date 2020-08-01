@@ -89,7 +89,7 @@
 			const dataSectors = await d3.csv("Data/" + etf + 'Sectors.csv');
 			const dataCountries = await d3.csv("Data/" + etf + 'Countries.csv');
 			const stockList = await d3.csv("Data/StockList.csv");
-			var tickerArray = stockList.map(function(){
+			var tickerArray = stockList.map(function(d){
 				return d.Ticker;
 			});
 			console.log(stockList);
