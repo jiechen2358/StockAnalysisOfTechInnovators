@@ -92,8 +92,6 @@
 			var tickerArray = stockList.map(function(d){
 				return d.Ticker;
 			});
-			console.log(stockList);
-			console.log(tickerArray);
 
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
 			//document.getElementById("heading1").innerHTML = etf + " Details";
@@ -123,10 +121,8 @@
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
 				document.getElementById('holdingsText1').innerHTML = d.data.Ticker + ': ' + d.data.PercentOfFund + "%";
-				console.log(tickerArray.includes(d.data.Ticker));
 				if(tickerArray.includes(d.data.Ticker) == true)
 				{
-					console.log("it works");
 					document.getElementById('holdingsText2').innerHTML = 'Click for stock details.';
 				}
 			});
@@ -162,8 +158,6 @@
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY-30) +'px')
 				.html(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
-
-				console.log(d.data.Ticker + ': ' + d.data.PercentOfFund+ "%");
 			});
 			holdingsPie.on("mousemove", function(){
 				d3.select('#holdingsTooltip')
