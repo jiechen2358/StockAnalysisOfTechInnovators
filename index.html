@@ -162,6 +162,8 @@
 					            	 .x(function(d) {return xScale(new Date(d.Date));})
 					            	 .y(function(d) {return yScale(parseFloat(d.Close)/parseFloat(closes[closes.length - 1])*10000); });
 
+					    var color = "colors_try." + ticker;
+					    console.log(color);
 			  			var stockline=d3.select('.overview').select("svg").append('g')
 			               			.attr("transform", "translate("+margin.left+", "+margin.top+")")
 			         	   			.append("path")
@@ -169,7 +171,7 @@
 			         	   			.attr("d", line)
 			         	   			.attr('id', ticker+'line')
 			       		  			.attr("class", "line")
-			          	   			.attr("stroke", colors_try.String(ticker));
+			          	   			.attr("stroke", "colors_try." + ticker);
 
 			          	console.log(String(ticker));
 			          	console.log(colors_try);
