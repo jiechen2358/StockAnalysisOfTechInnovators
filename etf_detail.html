@@ -29,20 +29,26 @@
 			<text id= 'holdingsText2' text-anchor='middle' x='400' y='420'></text>
 		</svg>
 	</div>
+
+	<div class = 'sectors' style="text-align: center;">
+		<h1 id='sectorsHeading'></h1>
+		<svg width=800 height=800>
+			<text id= 'sectorsText' text-anchor='middle' x='400' y='400'></text>
+		</svg>
+	</div>
+
+	<div class = 'countries' style="text-align: center;">
+		<h1 id='counteriesHeading'></h1>
+		<svg width=800 height=800>
+			<text id= 'contriesText' text-anchor='middle' x='400' y='400'></text>
+		</svg>
+	</div>
 	<div style="display: none">
 		<form id=stock_detail action="stock_detail.html" method="GET">
 			<input type="" name="stock" id='stock_name'>
 			<button type = 'submit'></button>
 		</form>
 	</div>
-	<div class = 'sectors' style="text-align: center;">
-		<h1 id='sectorsHeading'></h1>
-	</div>
-
-	<div class = 'countries' style="text-align: center;">
-		<h1 id='counteriesHeading'></h1>
-	</div>
-
 
 	<div id='holdingsTooltip'></div>
 	<script>
@@ -97,9 +103,9 @@
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
 			var holdingsPie = d3.select('.holdings').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			var sectorsPie = d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
+			var sectorsPie = d3.select('.sectors').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
+			var countriesPie = d3.select('.countries').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 
 			holdingsPie.on('click', function(d){
 				if(tickerArray.includes(d.data.Ticker) == true)
@@ -123,6 +129,26 @@
 				document.getElementById('holdingsText1').innerHTML = '';
 				document.getElementById('holdingsText2').innerHTML = '';
 			});
+
+			sectorsPie.on('mouseover',function(d){
+				d3.select(this).attr("class", 'pie_highlight');
+				document.getElementById('sectorsText').innerHTML = d.data.Sector + ': ' + d.data.PercentOfFund + "%";
+			});
+
+			sectorsPie.on('mouseout', function(){
+				document.getElementById('sectorsText').innerHTML = '';
+
+			});
+
+			countriesPie.on('mouseover',function(d){
+				d3.select(this).attr("class", 'pie_highlight');
+				document.getElementById('contriesText').innerHTML = d.data.Country + ': ' + d.data.PercentOfFund + "%";
+			});
+
+			countriesPie.on('mouseout', function(){
+				document.getElementById('contriesText').innerHTML = '';
+
+			});
 /*			holdingsPie.on("mouseover", function(d,i) {
 				d3.select(this).attr("class", 'pie_highlight');
 				d3.select('#holdingsTooltip')
@@ -145,9 +171,7 @@
 				.style('opacity',0);
 			});*/
 
-			sectorsPie.on('mouseout', function(){
 
-			});
 //Overview
 			dates = dataPrices.map(function(d) {
 				return new Date(d.Date); });
