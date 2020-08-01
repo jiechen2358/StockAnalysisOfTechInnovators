@@ -135,7 +135,30 @@
          	   			.data([dataPrices])
          	   			.attr("d", line)
          	   			.attr('id', etf+'line')
-       		  			.attr("class", "line")
+       		  			.attr("class", "line");
+
+       		
+			stockline.on("mouseover", function(d,i){
+				console.log(d);
+				console.log(i);
+				console.log(d[i]);
+				d3.select(this).attr('fill','DarkSlateGrey');
+				tooltip.style("opacity", 1)
+				tooltip.html(
+					"<p><strong>" + ticker + ', ' + d[i].Date + '</strong></p><br>' +
+					"<p><strong>" + 'Open: ' + d[i].Open + '</strong></p><br>' +
+					"<p><strong>" + 'CLose: ' + d[i].Close + '</strong></p><br>' +
+					"<p><strong>" + 'High: ' + d[i].High + '</strong></p><br>' +
+					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
+					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
+
+			});
+			stockline.on("mousemove", function(){
+				tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+			});
+			stockline.on("mouseout", function(){
+				tooltip.style("opacity", 0);
+			});
 }
 	</script>
 </body>
