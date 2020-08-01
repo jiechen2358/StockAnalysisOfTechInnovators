@@ -98,8 +98,15 @@
 			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
 
 			holdingsPie.on('click', function(d){
-				document.getElementById('stock_name').value=d.data.Ticker;
-			    document.getElementById('stock_detail').submit();
+				if(d.data.Ticker == 'Others')
+				{
+
+				}
+				else{
+					document.getElementById('stock_name').value=d.data.Ticker;
+			    	document.getElementById('stock_detail').submit();
+				}
+
 			});
 
 			holdingsPie.on('mouseover',function(d){
