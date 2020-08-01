@@ -84,16 +84,15 @@
 			document.getElementById("pageTitle").innerHTML = etf + " Details";
 			//document.getElementById("heading1").innerHTML = etf + " Details";
 			document.getElementById('overviewHeading').innerHTML = etf + ' Overview';
-			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings';
-			document.getElementById('sectorsHeading').innerHTML = etf + ' Top 10 Sectors';
-			document.getElementById('counteriesHeading').innerHTML = etf+' Top 10 Countries';
+			document.getElementById('holdingsHeading').innerHTML = etf + ' Top 10 Holdings(%)';
+			document.getElementById('sectorsHeading').innerHTML = etf + ' Sector Allocation(%)';
+			document.getElementById('counteriesHeading').innerHTML = etf+' Geographic Allocation(%)';
 
 
 			var pie = d3.pie().value(function(d) {return d.PercentOfFund;});
 			var arc = d3.arc().innerRadius(150).outerRadius(300);
 			var holdingsPie = d3.select('.holdings').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataHoldings)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
-			d3.select('.holdings').select('svg').select('text').text('test');
 			var sectorsPie = d3.select('.sectors').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataSectors)).enter().append('path').attr('d', arc).attr('fill', function(d, i){return color[i];});
 
 			var countriesPie = d3.select('.countries').append('svg').attr('height', 800).attr('width', 800).append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return color[i];});
