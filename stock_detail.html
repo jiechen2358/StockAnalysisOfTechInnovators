@@ -384,13 +384,13 @@ circle {
 	  	   			.style("font", "14px times")
 		   			.call(yAxisEPSComparison);
 
-			d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
+			actualEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.EPS));})
 			.attr('fill', function(d,i){return EPSColors[d.BEAT];});
 
-			d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
+			estimateEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.ConsensusEPS));})
