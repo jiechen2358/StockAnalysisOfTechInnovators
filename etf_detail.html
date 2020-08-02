@@ -132,7 +132,7 @@
             d3.select('.sectors').select("svg").append("g").attr("class", 'legend')
 	  	   	.selectAll('rect')
 	  	   	.data(dataSectors).enter().append('rect')
-	  	   	.attr('x', legend_xpos)
+	  	   	.attr('x', legend_xpos-50)
 	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
 	  	   	.attr('width', legendLabelSize)
 	  	   	.attr('height', legendLabelSize)
