@@ -64,6 +64,10 @@
 
 		var pieColors = ['pink', 'lightcyan', '#f8b70a','lightblue','#6149c6','lightgreen', '#9f8170', 'lightyellow', '#8ABD4A',  'violet', 'DarkSlateGrey'];
 
+        var legend_xpos = 600;
+        var legend_ypos = 20;
+        var legendLabelSize = 20;
+
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -109,9 +113,6 @@
 
 			var countriesPie = d3.select('.countries').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return pieColors[i];}).attr('class','pie');
 
-            var legend_xpos = 600;
-            var legend_ypos = 20;
-            var legendLabelSize = 20;
             d3.select('.holdings').select("svg").append("g").attr("class", 'legend')
 	  	   	.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   	.selectAll('rect')
