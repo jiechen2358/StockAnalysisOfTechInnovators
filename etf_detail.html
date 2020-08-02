@@ -114,7 +114,6 @@
 			var countriesPie = d3.select('.countries').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return pieColors[i];}).attr('class','pie');
 
             d3.select('.holdings').select("svg").append("g").attr("class", 'legend')
-	  	   	.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   	.selectAll('rect')
 	  	   	.data(dataHoldings).enter().append('rect')
 	  	   	.attr('x', legend_xpos)
