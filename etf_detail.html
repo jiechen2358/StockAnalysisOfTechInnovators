@@ -132,16 +132,16 @@
             d3.select('.sectors').select("svg").append("g").attr("class", 'legend')
 	  	   	.selectAll('rect')
 	  	   	.data(dataSectors).enter().append('rect')
-	  	   	.attr('x', legend_xpos-50)
-	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
+	  	   	.attr('x', legend_xpos-60)
+	  	   	.attr('y', function(d, i) {return legend_ypos-5+i*(legendLabelSize+10);})
 	  	   	.attr('width', legendLabelSize)
 	  	   	.attr('height', legendLabelSize)
 	  	   	.attr('fill', function(d,i){return pieColors[i];});
 
 	  	   	d3.select('.sectors').select("svg").append("g")
 	  	   	.selectAll('text').data(dataSectors).enter().append('text')
-	  	   	.attr('x', legend_xpos+legendLabelSize-40)
-	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
+	  	   	.attr('x', legend_xpos+legendLabelSize-50)
+	  	   	.attr('y', function(d, i) {return legend_ypos+10+i*(legendLabelSize+10);})
 	  	   	.text(function(d) {return d.Sector+ ' '+d.PercentOfFund + '%';})
 	  	 	.style('font-size','12px');
 
