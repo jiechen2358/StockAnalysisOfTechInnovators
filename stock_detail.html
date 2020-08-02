@@ -263,7 +263,7 @@
 			.attr('height', function(d){return Math.abs(yScaleRevenue(parseFloat(d.Revenue)) - yScaleRevenue(0));})
 			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -15;})
 			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.Revenue)), yScaleRevenue(0));})
-			.attr('fill', colors[0])
+			.attr('fill', colors[1])
 			.attr('class', 'rect_barchart');
 
 			revenueBarChart.on('mouseover', function(d,i){
@@ -337,10 +337,10 @@
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.PEG) > 0){
-					return colors[0];
+					return colors[1];
 				}
 				else{
-					return colors[1];
+					return colors[0];
 				}
 			});
 
@@ -417,10 +417,10 @@
 			.attr('y', function(d){return Math.min(yScaleEPS(parseFloat(d.EPS)), yScaleEPS(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.EPS) > 0){
-					return colors[0];
+					return colors[1];
 				}
 				else{
-					return colors[1];
+					return colors[0];
 				}
 			});
 
