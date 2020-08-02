@@ -101,6 +101,9 @@
           	legend_label.on('mouseover', function(d, i){
           		d3.select(this).style('font-size','14px');
 			});
+          	legend_label.on('mouseout', function(d, i){
+          		d3.select(this).style('font-size','12px');
+			});
            	legend_label.on('click', function(d, i){
           		if (d.Ticker=="QQQ" || d.Ticker=="SPY") {
           			document.getElementById('etf_name').value=d.Ticker;
