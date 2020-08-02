@@ -124,17 +124,6 @@
 		   		return yAxis;
 			}
 
-			function updateYAxis(yScale){
-
-				yScale.domain([0, 1600000]);
-				d3.select('.overview').select("svg").select('yAxis').transition().duration(1000).call(yAxis);
-           		//var yAxis = d3.axisLeft(yScale);
-
-				//svg.append("g")
-	  	   		//	.attr("transform", "translate(100, 50)")
-	  	   		//	.style("font", "14px times")
-		   		//	.call(yAxis);
-			}
 			function plotStockList(xScale, yScale, stockList) {
 			//	d3.selectAll("path").remove();
 
