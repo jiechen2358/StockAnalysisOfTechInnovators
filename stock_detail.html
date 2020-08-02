@@ -67,8 +67,7 @@
 		var width = d3.select('.overview').select('svg').attr('width') - margin.left - margin.right;
 		var height = d3.select('.overview').select('svg').attr('height') - margin.top - margin.bottom;
 
-		var EPSColors = ['Red', 'Green'];
-		var barChartColors = ['Green','Pink', 'DarkBlue'];
+		var colors = ['Red', 'Green'];
 
 		function getQueryVariable(variable)
 		{
@@ -264,7 +263,7 @@
 			.attr('height', function(d){return Math.abs(yScaleRevenue(parseFloat(d.Revenue)) - yScaleRevenue(0));})
 			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -15;})
 			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.Revenue)), yScaleRevenue(0));})
-			.attr('fill', barChartColors[0])
+			.attr('fill', colors[0])
 			.attr('class', 'rect_barchart');
 
 			revenueBarChart.on('mouseover', function(d,i){
@@ -338,10 +337,10 @@
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.PEG) > 0){
-					return barChartColors[0];
+					return colors[0];
 				}
 				else{
-					return barChartColors[1];
+					return colors[1];
 				}
 			});
 
@@ -418,10 +417,10 @@
 			.attr('y', function(d){return Math.min(yScaleEPS(parseFloat(d.EPS)), yScaleEPS(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.EPS) > 0){
-					return barChartColors[0];
+					return colors[0];
 				}
 				else{
-					return barChartColors[1];
+					return colors[1];
 				}
 			});
 
@@ -505,7 +504,7 @@
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.EPS));})
-			.attr('fill', function(d,i){return EPSColors[d.BEAT];});
+			.attr('fill', function(d,i){return color[d.BEAT];});
 
 			estimateEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
