@@ -1,7 +1,5 @@
 svg {
 	background-color: beige;
-	width: 1400;
-	height: 500;
 }
 
 rect.rect_highlight {fill: Blue; stroke: black; stroke-width: 2px;}
