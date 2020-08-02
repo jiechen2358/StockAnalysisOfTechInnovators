@@ -208,7 +208,14 @@ circle {
 			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -18;})
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
-			.attr('fill', function(d){ return barChartColors[1]});
+			.attr('fill', function(d){ 
+				if (parseFloat(d.PEG) > 0){
+					return barChartColors[1];
+				}
+				else{
+					return barChartColors[0];
+				}
+				});
 
 
 //EPS
