@@ -99,10 +99,10 @@
 	  	   	.text(function(d) {return d.Ticker;})
 	  	 	.style('font-size','12px');
           	legend_label.on('mouseover', function(d, i){
-          		d3.select(this).style('font-size','14px');
+          		d3.select(this).style('font-size','15px').style('font-weight', 'bold');
 			});
           	legend_label.on('mouseout', function(d, i){
-          		d3.select(this).style('font-size','12px');
+          		d3.select(this).style('font-size','12px').style('font-weight', 'normal');
 			});
            	legend_label.on('click', function(d, i){
           		if (d.Ticker=="QQQ" || d.Ticker=="SPY") {
