@@ -33,7 +33,8 @@
 	<div class = 'sectors' style="text-align: center;">
 		<h1 id='sectorsHeading'></h1>
 		<svg width=800 height=800>
-			<text id= 'sectorsText' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'sectorsText1' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'sectorsText2' text-anchor='middle' x='400' y='420'></text>
 		</svg>
 	</div>
 
@@ -187,7 +188,8 @@
 
 			sectorsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				document.getElementById('sectorsText').innerHTML = d.data.Sector + ': <br>' + d.data.PercentOfFund + "%";
+				document.getElementById('sectorsText1').innerHTML = d.data.Sector;
+				document.getElementById('sectorsText1').innerHTML = d.data.PercentOfFund + "%";
 			});
 
 			sectorsPie.on('mouseout', function(){
