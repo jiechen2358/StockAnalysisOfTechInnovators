@@ -401,10 +401,22 @@
 
 			actualEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
-				d3.select('#epsComparisonTooltip').style('opacity', 1)
-				.style('left', (d3.event.pageX) + 'px')
-				.style('top', (d3.event.pageY) + 'px')
-				.html('Actual EPS: '+d.EPS + 'ConsensusE EPS: '+d.ConsensusEPS );
+				if (d.BEAT == 1)
+				{
+					d3.select('#epsComparisonTooltip').style('opacity', 1)
+					.style('left', (d3.event.pageX) + 'px')
+					.style('top', (d3.event.pageY) + 'px')
+					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
+						+'<br>' + "Beat expectation!");
+				}
+				else
+				{
+					d3.select('#epsComparisonTooltip').style('opacity', 1)
+					.style('left', (d3.event.pageX) + 'px')
+					.style('top', (d3.event.pageY) + 'px')
+					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
+						+'<br>' + "Lose expectation!");
+				}
 			});
 			actualEPSCircle.on('mousemove', function(d,i){
 				d3.select('#epsComparisonTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
@@ -416,11 +428,23 @@
 
 			estimateEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
-				console.log(d);
-				d3.select('#epsComparisonTooltip').style('opacity', 1)
-				.style('left', (d3.event.pageX) + 'px')
-				.style('top', (d3.event.pageY) + 'px')
-				.html('Actual EPS: '+d.EPS + 'ConsensusE EPS: '+d.ConsensusEPS );
+				if (d.BEAT == 1)
+				{
+					d3.select('#epsComparisonTooltip').style('opacity', 1)
+					.style('left', (d3.event.pageX) + 'px')
+					.style('top', (d3.event.pageY) + 'px')
+					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
+						+'<br>' + "Beat expectation!");
+				}
+				else
+				{
+					d3.select('#epsComparisonTooltip').style('opacity', 1)
+					.style('left', (d3.event.pageX) + 'px')
+					.style('top', (d3.event.pageY) + 'px')
+					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
+						+'<br>' + "Lose expectation!");
+				}
+
 			});
 			estimateEPSCircle.on('mousemove', function(d,i){
 				d3.select('#epsComparisonTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
