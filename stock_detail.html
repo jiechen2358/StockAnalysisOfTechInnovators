@@ -47,7 +47,9 @@ circle {
 		</svg>
 	</div>
 	<div id='revenueTooltip'></div>
-
+	<div id='pegTooltip'></div>
+	<div id='epsTooltip'></div>
+	<div id='epsComparisonTooltip'></div>
 	<script>
 		var margin = {
 			top: 100,
@@ -216,9 +218,9 @@ circle {
   	   			.style("font", "14px times")
 	   			.call(yAxisPEG);
 
-			d3.select('.peg').select('svg').append('g')
+			pegBarChart = d3.select('.peg').select('svg').append('g')
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
-			.selectAll('rect').data(financialData).enter().append('rect')
+			.selectAll('rect').data(financialData).enter().append('rect').attr('class', 'rect_barchart')
 			.attr('width', 20)
 			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -18;})
@@ -230,6 +232,21 @@ circle {
 				else{
 					return barChartColors[1];
 				}
+			});
+
+			pegBarChart.on('mouseover', function(d,i){
+				d3.select(this).attr('class', 'rect_highlight');
+				d3.select('#pegTooltip').style('opacity', 1)
+				.style('left', (d3.event.pageX) + 'px')
+				.style('top', (d3.event.pageY) + 'px')
+				.html("test");
+			});
+			pegBarChart.on('mousemove', function(d,i){
+				d3.select('#pegTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
+			});
+			pegBarChart.on('mouseout', function(){
+				d3.select(this).attr('class', 'rect_barchart');
+				d3.select('#pegTooltip').style('opacity', 0);
 			});
 
 
@@ -260,9 +277,9 @@ circle {
   	   			.style("font", "14px times")
 	   			.call(yAxisEPS);
 
-			d3.select('.eps').select('svg').append('g')
+			epsBarChart = d3.select('.eps').select('svg').append('g')
             .attr("transform", "translate("+margin.left+", "+margin.top+")")
-			.selectAll('rect').data(financialData).enter().append('rect')
+			.selectAll('rect').data(financialData).enter().append('rect').attr('class', 'rect_barchart')
 			.attr('width', 20)
 			.attr('height', function(d){return Math.abs(yScaleEPS(parseFloat(d.EPS)) - yScaleEPS(0));})
 			.attr("x", function(d,i) {return xScaleEPS(new Date(d.Date)) -18;})
@@ -276,6 +293,20 @@ circle {
 				}
 			});
 
+			epsBarChart.on('mouseover', function(d,i){
+				d3.select(this).attr('class', 'rect_highlight');
+				d3.select('#epsTooltip').style('opacity', 1)
+				.style('left', (d3.event.pageX) + 'px')
+				.style('top', (d3.event.pageY) + 'px')
+				.html("test");
+			});
+			epsBarChart.on('mousemove', function(d,i){
+				d3.select('#epsTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
+			});
+			epsBarChart.on('mouseout', function(){
+				d3.select(this).attr('class', 'rect_barchart');
+				d3.select('#epsTooltip').style('opacity', 0);
+			});
 //section: epsComparison
 
 			var timeMaxEPSComparison = new Date(financialData[0].Date);
