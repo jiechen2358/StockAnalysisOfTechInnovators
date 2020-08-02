@@ -130,6 +130,7 @@
 			});
 
 			holdingsPie.on('mouseout', function(){
+				d3.select(this).attr("class", 'pie');
 				document.getElementById('holdingsText1').innerHTML = '';
 				document.getElementById('holdingsText2').innerHTML = '';
 			});
@@ -140,8 +141,8 @@
 			});
 
 			sectorsPie.on('mouseout', function(){
+				d3.select(this).attr("class", 'pie');
 				document.getElementById('sectorsText').innerHTML = '';
-
 			});
 
 			countriesPie.on('mouseover',function(d){
@@ -150,8 +151,8 @@
 			});
 
 			countriesPie.on('mouseout', function(){
+				d3.select(this).attr("class", 'pie');
 				document.getElementById('contriesText').innerHTML = '';
-
 			});
 /*			holdingsPie.on("mouseover", function(d,i) {
 				d3.select(this).attr("class", 'pie_highlight');
