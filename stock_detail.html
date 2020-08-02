@@ -252,7 +252,14 @@ circle {
 			.attr('height', function(d){return Math.abs(yScaleEPS(parseFloat(d.EPS)) - yScaleEPS(0));})
 			.attr("x", function(d,i) {return xScaleEPS(new Date(d.Date)) -18;})
 			.attr('y', function(d){return Math.min(yScaleEPS(parseFloat(d.EPS)), yScaleEPS(0));})
-			.attr('fill', barChartColors[1]);
+			.attr('fill', function(d){ 
+				if (parseFloat(d.EPS) > 0){
+					return barChartColors[0];
+				}
+				else{
+					return barChartColors[1];
+				}
+			});
 
 //section: epsComparison
 
