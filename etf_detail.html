@@ -200,7 +200,7 @@
 		   		.attr('x', -height/2)
 		   		.attr('y', -margin.left*3/4)
 		   		.attr('transform','rotate(-90)')
-		   		.text('Value($)');	
+		   		.text('Price($)');	
 			var line = d3.line()
         	 .x(function(d) {return xScale(new Date(d.Date));})
         	 .y(function(d) {return yScale(parseFloat(d.Close)); });
