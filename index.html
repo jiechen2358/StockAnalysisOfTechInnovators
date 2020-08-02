@@ -113,7 +113,25 @@
           			document.getElementById('stock_detail').submit();
           		}
 			});
-
+          	legend_rect.on('mouseover', function(d, i){
+          		d3.select(this)
+          		.attr('width', legendLabelSize+2)
+	  	   		.attr('height', legendLabelSize+2);
+			});
+          	legend_rect.on('mouseout', function(d, i){
+          		d3.select(this)
+          		.attr('width', legendLabelSize)
+	  	   		.attr('height', legendLabelSize);
+			});
+           	legend_rect.on('click', function(d, i){
+          		if (d.Ticker=="QQQ" || d.Ticker=="SPY") {
+          			document.getElementById('etf_name').value=d.Ticker;
+          			document.getElementById("etf_detail").submit();
+          		} else {
+          			document.getElementById('stock_name').value=d.Ticker;
+          			document.getElementById('stock_detail').submit();
+          		}
+			});
 			var xScale = calculateXScale();
 			var yScale = calculateYScale(stockList);
 			var xAxis = plotXAxis(xScale);
