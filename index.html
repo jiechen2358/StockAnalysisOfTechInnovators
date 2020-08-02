@@ -95,7 +95,7 @@
 
 	  	   	d3.select('.legend').selectAll('text').data(stockList).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
-	  	   	.attr('y', function(d, i) {return legend_ypos+10+i*(legendLabelSize+10);})
+	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
 	  	   	.text(function(d) {return d.Ticker;})
 	  	 	.style('font-size','12px');
 
