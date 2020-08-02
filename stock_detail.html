@@ -150,6 +150,12 @@ circle {
 					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
 					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
 
+				console.log(xScaleOverview.invert(100));
+				console.log(xScaleOverview.invert(1500));
+				console.log(yScaleOverview.invert(100));
+				console.log(yScaleOverview.invert(900));
+				console.log(d3.mouse(this));
+
 			});
 			stockline.on("mousemove", function(){
 				d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
