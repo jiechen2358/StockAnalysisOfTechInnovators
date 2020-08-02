@@ -46,6 +46,7 @@ circle {
 		<svg width=1200 height=800>
 		</svg>
 	</div>
+	<div id='revenueTooltip'></div>
 
 	<script>
 		var margin = {
@@ -164,7 +165,7 @@ circle {
 	  	   			.style("font", "14px times")
 		   			.call(yAxisRevenue);
 
-			d3.select('.revenue').select('svg').append("g")
+			revenueBarChart = d3.select('.revenue').select('svg').append("g")
 			.attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 20)
@@ -172,8 +173,22 @@ circle {
 			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -18;})
 			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.Revenue)), yScaleRevenue(0));})
 			.attr('fill', barChartColors[0]);
+			.attr('class', 'rect_barchart');
 
-
+			revenueBarChart.on('mouseover', function(d,i){
+				d3.select(this).attr('class', 'rect_height');
+				d3.select('#revenueTooltip').style('opacity', 1)
+				.style('left', (d3.event.pageX) + 'px')
+				.style('top', (d3.event.pageY) + 'px')
+				.html("test");
+			});
+			revenueBarChart.on('mousemove', function(d,i){
+				d3.select('#revenueTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
+			});
+			revenueBarChart.on('mouseout', function(){
+				d3.select(this).attr('class', 'rect_barchart');
+				d3.select('#revenueTooltip').style('opacity', 0);
+			});
 //PEG
 			var xScalePEG  = d3.scaleTime().domain([timeMin, timeMax]).range([0, width]);
 
