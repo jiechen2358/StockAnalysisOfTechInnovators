@@ -109,6 +109,26 @@
 
 			var countriesPie = d3.select('.countries').select('svg').append('g').attr('transform', 'translate(400,400)').selectAll('path').data(pie(dataCountries)).enter().append('path').attr('d',arc).attr('fill', function(d,i){return pieColors[i];}).attr('class','pie');
 
+            var legend_xpos = 600;
+            var legend_ypos = 20;
+            var legendLabelSize = 20;
+            d3.select('.holdings').select("svg").append("g").attr("class", 'legend')
+	  	   	.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+	  	   	.selectAll('rect')
+	  	   	.data(dataHoldings).enter().append('rect')
+	  	   	.attr('x', legend_xpos)
+	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
+	  	   	.attr('width', legendLabelSize)
+	  	   	.attr('height', legendLabelSize)
+	  	   	.attr('fill', function(d){return pieColors[d.Ticker];});
+
+	  	   	d3.select('.holdings').selectAll('text').data(dataHoldings).enter().append('text')
+	  	   	.attr('x', legend_xpos+legendLabelSize+10)
+	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
+	  	   	.text(function(d) {return d.Ticker;})
+	  	 	.style('font-size','12px');
+
+
 			holdingsPie.on('click', function(d){
 				if(tickerArray.includes(d.data.Ticker) == true)
 				{
