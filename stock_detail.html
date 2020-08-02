@@ -84,7 +84,7 @@
 			const financialData = await d3.csv("Data/" + stock + '_Financials.csv');
 			const priceData = await d3.csv('Data/' + stock +'_PRICES.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
-			document.getElementById('overviewHeading').innerHTML = stock + ' Overview';
+			document.getElementById('overviewHeading').innerHTML = stock + ' Stock Price Over Time';
 			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue';
 			document.getElementById('pegHeading').innerHTML = stock + ' PEG';
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
