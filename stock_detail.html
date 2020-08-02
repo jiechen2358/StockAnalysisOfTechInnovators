@@ -401,7 +401,7 @@
 
 			actualEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
-				var ratio = ((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2);
+				var ratio = Math.abs(((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2));
 				if (d.BEAT == 1)
 				{
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
@@ -429,7 +429,7 @@
 
 			estimateEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
-				var ratio = ((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2);
+				var ratio = Math.abs(((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2));
 				if (d.BEAT == 1)
 				{
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
