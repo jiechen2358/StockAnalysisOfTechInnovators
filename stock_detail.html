@@ -401,13 +401,14 @@
 
 			actualEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
+				var ratio = ((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2);
 				if (d.BEAT == 1)
 				{
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation!");
+						+'<br>' + "Beat expectation by " + ratio + '%!' );
 				}
 				else
 				{
@@ -415,7 +416,7 @@
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Lose expectation!");
+						+'<br>' + "Beat expectation by " + ratio + '%!' );
 				}
 			});
 			actualEPSCircle.on('mousemove', function(d,i){
@@ -428,13 +429,14 @@
 
 			estimateEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
+				var ratio = ((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2);
 				if (d.BEAT == 1)
 				{
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation!");
+						+'<br>' + "Beat expectation by " + ratio + '%!' );
 				}
 				else
 				{
@@ -442,7 +444,7 @@
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Lose expectation!");
+						+'<br>' + "Beat expectation by " + ratio + '%!' );
 				}
 
 			});
