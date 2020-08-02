@@ -152,25 +152,6 @@
 				d3.select(this).attr("class", 'pie');
 				document.getElementById('contriesText').innerHTML = '';
 			});
-/*			holdingsPie.on("mouseover", function(d,i) {
-				d3.select(this).attr("class", 'pie_highlight');
-				d3.select('#holdingsTooltip')
-				.style('opacity',1)
-				.style('left', (d3.event.pageX) + 'px')
-				.style('top', (d3.event.pageY-30) +'px')
-				.html(d.data.Ticker + ': ' + d.data.PercentOfFund + "%");
-			});
-			holdingsPie.on("mousemove", function(){
-				d3.select('#holdingsTooltip')
-				.style('left', (d3.event.pageX) + 'px')
-				.style('top', (d3.event.pageY-30) +'px');
-			});
-
-			holdingsPie.on('mouseout', function(){
-				d3.select(this).attr('class', 'pie');
-				d3.select('#holdingsTooltip')
-				.style('opacity',0);
-			});*/
 
 
 //Overview
@@ -217,18 +198,17 @@
 
 
 			stockline.on("mouseover", function(d,i){
-				console.log(d);
-				console.log(i);
-				console.log(d[i]);
-				d3.select(this).attr('fill','DarkSlateGrey');
-				d3.select('#lineTooltip').style("opacity", 1)
+				var pointer = d3.mouse(this);
+				index = d.length - 1 - Math.round(pointer[0] * (d.length-1)/1400);
+
+				d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px")
 				.html(
-					"<p><strong>" + etf + ', ' + d[i].Date + '</strong></p><br>' +
-					"<p><strong>" + 'Open: ' + d[i].Open + '</strong></p><br>' +
-					"<p><strong>" + 'CLose: ' + d[i].Close + '</strong></p><br>' +
-					"<p><strong>" + 'High: ' + d[i].High + '</strong></p><br>' +
-					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
-					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
+					"<p><strong>" + etf + ', ' + d[index].Date + '</strong></p><br>' +
+					"<p><strong>" + 'Open: ' + d[index].Open + '</strong></p><br>' +
+					"<p><strong>" + 'CLose: ' + d[index].Close + '</strong></p><br>' +
+					"<p><strong>" + 'High: ' + d[index].High + '</strong></p><br>' +
+					"<p><strong>" + 'Low: ' + d[index].Low + '</strong></p><br>' +	
+					"<p><strong>" + 'Volume: ' + d[index].Volume + '</strong></p><br>');
 
 			});
 			stockline.on("mousemove", function(){
