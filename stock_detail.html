@@ -208,7 +208,7 @@ circle {
 			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
 			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -18;})
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
-			.attr('fill', barChartColors[1]);
+			.attr('fill', function(d){ return barChartColors[1]});
 
 
 //EPS
