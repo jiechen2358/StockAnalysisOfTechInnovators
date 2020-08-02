@@ -4,10 +4,7 @@
 .line {
 	stroke: #008B00;
 }
-circle {
-	stroke: blue;
-	r: 15;
-}
+
 </style>
 <head>
 	<!-- load the d3.js library -->   
@@ -391,16 +388,46 @@ circle {
 		   			.call(yAxisEPSComparison);
 
 			actualEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
-			.selectAll('circle').data(financialData).enter().append('circle')
+			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.EPS));})
 			.attr('fill', function(d,i){return EPSColors[d.BEAT];});
 
 			estimateEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
-			.selectAll('circle').data(financialData).enter().append('circle')
+			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.ConsensusEPS));})
 			.attr('fill', 'none');
+
+			actualEPSCircle.on('mouseover', function(d,i){
+				d3.select(this).attr('class', 'circle_highlight');
+				d3.select('#epsComparisonTooltip').style('opacity', 1)
+				.style('left', (d3.event.pageX) + 'px')
+				.style('top', (d3.event.pageY) + 'px')
+				.html('Actual EPS: '+d.EPS + 'ConsensusE EPS: '+d.ConsensusEPS );
+			});
+			actualEPSCircle.on('mousemove', function(d,i){
+				d3.select('#epsComparisonTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
+			});
+			actualEPSCircle.on('mouseout', function(){
+				d3.select(this).attr('class', 'circle_normal');
+				d3.select('#epsComparisonTooltip').style('opacity', 0);
+			});
+
+			estimateEPSCircle.on('mouseover', function(d,i){
+				d3.select(this).attr('class', 'circle_highlight');
+				d3.select('#epsComparisonTooltip').style('opacity', 1)
+				.style('left', (d3.event.pageX) + 'px')
+				.style('top', (d3.event.pageY) + 'px')
+				.html('Actual EPS: '+d.EPS + 'ConsensusE EPS: '+d.ConsensusEPS );
+			});
+			estimateEPSCircle.on('mousemove', function(d,i){
+				d3.select('#epsComparisonTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
+			});
+			estimateEPSCircle.on('mouseout', function(){
+				d3.select(this).attr('class', 'circle_normal');
+				d3.select('#epsComparisonTooltip').style('opacity', 0);
+			});
 		}
 	</script>
 </body>

@@ -14,6 +14,14 @@ div.navigation {
 	align-content: center;
 
 }
+circle.circle_normal {
+	stroke: blue;
+	r: 15;
+}
+circle.circle_highlight {
+	stroke: Gold;
+	r: 17;
+}
 #lineTooltip {
 	opacity: 0;
 	position: absolute;
