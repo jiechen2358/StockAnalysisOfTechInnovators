@@ -187,7 +187,7 @@
 
 			sectorsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				document.getElementById('sectorsText').innerHTML = d.data.Sector + ': ' + d.data.PercentOfFund + "%";
+				document.getElementById('sectorsText').innerHTML = d.data.Sector + ': <br>' + d.data.PercentOfFund + "%";
 			});
 
 			sectorsPie.on('mouseout', function(){
