@@ -185,6 +185,7 @@
 
 							var pointer = d3.mouse(this);
 							index = Math.round(pointer[0] * (d.length-1)/width);
+							console.log(d.length);
 							if (ticker != 'MSFT')
 							{
 								index = d.length -1-index;
