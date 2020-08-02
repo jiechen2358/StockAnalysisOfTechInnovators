@@ -210,12 +210,12 @@ circle {
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.PEG) > 0){
-					return barChartColors[1];
-				}
-				else{
 					return barChartColors[0];
 				}
-				});
+				else{
+					return barChartColors[1];
+				}
+			});
 
 
 //EPS
