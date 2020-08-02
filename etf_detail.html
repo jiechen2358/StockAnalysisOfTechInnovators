@@ -125,7 +125,7 @@
 	  	   	d3.select('.holdings').selectAll('text').data(dataHoldings).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
 	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
-	  	   	.text(function(d) {return d.Ticker;})
+	  	   	.text(function(d) {console.log(d);return d.Ticker;})
 	  	 	.style('font-size','12px');
 
             d3.select('.sectors').select("svg").append("g").attr("class", 'legend')
