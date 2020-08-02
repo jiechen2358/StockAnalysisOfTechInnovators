@@ -205,9 +205,11 @@ circle {
 				d3.select('#revenueTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY) + 'px')
-				.html("test");
-				console.log(d);
-				console.log(i);
+				.html('Date: ' + d.Date + '<br>'
+					'Quarterly Revenue: ' + d.Revenue + '<br>'
+					'PEG: ' + d.PEG + '<br>'
+					'EPS: ' + d.EPS);
+
 			});
 			revenueBarChart.on('mousemove', function(d,i){
 				d3.select('#revenueTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
@@ -264,7 +266,10 @@ circle {
 				d3.select('#pegTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY) + 'px')
-				.html("test");
+				.html('Date: ' + d.Date + '<br>'
+					'Quarterly Revenue: ' + d.Revenue + '<br>'
+					'PEG: ' + d.PEG + '<br>'
+					'EPS: ' + d.EPS);
 			});
 			pegBarChart.on('mousemove', function(d,i){
 				d3.select('#pegTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
@@ -323,7 +328,10 @@ circle {
 				d3.select('#epsTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX) + 'px')
 				.style('top', (d3.event.pageY) + 'px')
-				.html("test");
+				.html('Date: ' + d.Date + '<br>'
+					'Quarterly Revenue: ' + d.Revenue + '<br>'
+					'PEG: ' + d.PEG + '<br>'
+					'EPS: ' + d.EPS);
 			});
 			epsBarChart.on('mousemove', function(d,i){
 				d3.select('#epsTooltip').style('left', (d3.event.pageX) + 'px').style('top', (d3.event.pageY) + 'px');
