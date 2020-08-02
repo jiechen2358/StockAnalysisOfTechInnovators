@@ -130,15 +130,14 @@
 	  	   			.style("font", "14px times")
 		   			.call(yAxis);
 
-				d3.select('.overview').select("svg").append("g").append('text')
-					.attr('class', 'y label')
-					.attr('text-anchor', 'middle')
-	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
-		   			.attr('x', -(height/2))
-		   			.attr('y', -margin.left)
-		   			.attr('dy', '1em')
-		   			.attr('transform','rotate(-90)')
-		   			.text('Value($)');		
+		   		d3.select('.overview').select("svg").append("g").append('text')
+				.attr('class', 'y label')
+	  	   		.attr("transform", "translate("+ margin.left + ", "+ margin.top + ") rotate(-90)")
+	  	   		.attr('x', -(height/2))
+		   		.attr('y', -margin.left)
+		   		.attr('dy', '1em')
+				.attr('text-anchor', 'middle')
+		   		.text('Value($)');		
 		   		return yAxis;
 			}
 
