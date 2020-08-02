@@ -14,6 +14,7 @@
 	</div>
 
 	<div id='checkboxContainer'></div>
+	<div id='lineTooltip'></div>
 	<div style = 'display:none'>
 		<form id='etf_detail' action = 'etf_detail.html' method="GET">
 			<input id="etf_name" name="etf" value=''><br>
@@ -36,8 +37,6 @@
 
 		var width = d3.select('.overview').select("svg").attr('width') - margin.left - margin.right;
 		var height = d3.select('.overview').select("svg").attr('height') - margin.top - margin.bottom;
-
-		var tooltip = d3.select('body').append('div').style('position','absolute').style("opacity", 0);
 
 		var colors = ['DarkOrange','SkyBlue','Crimson','LawnGreen', 'magenta', 'BlueViolet', 'BurlyWood', 'Brown', 'DarkGreen', 'DarkSlateGrey','IndianRed','LawnGreen','LightSalmon'];
 
@@ -187,8 +186,9 @@
 							console.log(i);
 							console.log(d[i]);
 							d3.select(this).attr('fill','DarkSlateGrey');
-							tooltip.style("opacity", 1)
-							tooltip.html(
+							d3.select('#lineTooltip')
+							.style("opacity", 1)
+							.html(
 								"<p><strong>" + ticker + ', ' + d[i].Date + '</strong></p><br>' +
 								"<p><strong>" + 'Open: ' + d[i].Open + '</strong></p><br>' +
 								"<p><strong>" + 'CLose: ' + d[i].Close + '</strong></p><br>' +
@@ -198,10 +198,10 @@
 
 						});
 						stockline.on("mousemove", function(){
-							tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+							d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
 						});
 						stockline.on("mouseout", function(){
-							tooltip.style("opacity", 0);
+							d3.select('#lineTooltip').style("opacity", 0);
 						});
 
 
