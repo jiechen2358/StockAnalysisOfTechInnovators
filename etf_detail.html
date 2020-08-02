@@ -287,6 +287,14 @@
 			});
 			stockline.on("mousemove", function(){
 				d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+				var pointer = d3.mouse(this);
+				index = d.length - 1 - Math.round(pointer[0] * (d.length-1)/width);
+				if (index < 0){
+					index = 0;
+				}
+				if (index > d.length - 1){
+					index = d.length - 1;
+				}
 			});
 			stockline.on("mouseout", function(){
 				d3.select('#lineTooltip').style("opacity", 0);
