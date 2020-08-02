@@ -80,8 +80,8 @@
 
 			});
 //legend
-            var legend_xpos = 450;
-            var legend_ypos = 60;
+            var legend_xpos = 500;
+            var legend_ypos = 30;
             var legendLabelSize = 20;
             d3.select('.overview').select("svg").append("g").attr("class", 'legend')
 	  	   	.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
@@ -95,7 +95,7 @@
 
 	  	   	d3.select('.legend').selectAll('text').data(stockList).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
-	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
+	  	   	.attr('y', function(d, i) {return legend_ypos+5+i*(legendLabelSize+10);})
 	  	   	.text(function(d) {return d.Ticker;})
 	  	 	.style('font-size','12px');
 
