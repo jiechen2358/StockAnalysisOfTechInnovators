@@ -149,12 +149,14 @@ circle {
 					"<p><strong>" + 'High: ' + d[i].High + '</strong></p><br>' +
 					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
 					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
+				var pointer = d3.mouse(this);
 
-				console.log(xScaleOverview.invert(100));
-				console.log(xScaleOverview.invert(1500));
-				console.log(yScaleOverview.invert(100));
-				console.log(yScaleOverview.invert(900));
-				console.log(d3.mouse(this));
+				console.log(xScaleOverview.invert(0));
+				console.log(xScaleOverview.invert(1400));
+				console.log(yScaleOverview.invert(0));
+				console.log(yScaleOverview.invert(800));
+				console.log(xScaleOverview.invert(pointer[0]));
+				console.log(yScaleOverview.invert(pointer[1]));
 
 			});
 			stockline.on("mousemove", function(){
