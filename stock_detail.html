@@ -504,7 +504,7 @@
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
 			.attr('cy', function(d){return yScaleEPSComparison(parseFloat(d.EPS));})
-			.attr('fill', function(d,i){return color[d.BEAT];});
+			.attr('fill', function(d,i){return colors[d.BEAT];});
 
 			estimateEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
