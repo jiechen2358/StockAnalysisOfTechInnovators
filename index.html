@@ -111,6 +111,13 @@
 		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
 	  	   			.style("font", "14px times")
 	  	   			.call(xAxis);
+
+	  	   		d3.select('.overview').select("svg").append("g").append('text')
+					.attr("class", 'x label')
+		   			.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+		   			.attr('x', width/2)
+		   			.attr('y', height/10)
+		   			.text('Year');
 	  	   		return xAxis;
 			}
 			function plotYAxis(yScale){
