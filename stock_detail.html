@@ -143,8 +143,6 @@ circle {
 				{
 					index = d.length -1-index;
 				}
-
-				d3.select(this).attr('fill','DarkSlateGrey');
 				d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px")
 				.html(
 					"<p><strong>" + stock + ', ' + d[index].Date + '</strong></p><br>' +
