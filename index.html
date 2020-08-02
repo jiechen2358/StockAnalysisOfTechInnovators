@@ -83,7 +83,7 @@
             var legend_xpos = 500;
             var legend_ypos = 30;
             var legendLabelSize = 20;
-            d3.select('.overview').select("svg").append("g").attr("class", 'legend')
+            legend_rect = d3.select('.overview').select("svg").append("g").attr("class", 'legend')
 	  	   	.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
 	  	   	.selectAll('rect')
 	  	   	.data(stockList).enter().append('rect')
@@ -93,7 +93,7 @@
 	  	   	.attr('height', legendLabelSize)
 	  	   	.attr('fill', function(d){return colors_try[d.Ticker];});
 
-	  	   	d3.select('.legend').selectAll('text').data(stockList).enter().append('text')
+	  	   	legend_label = d3.select('.legend').selectAll('text').data(stockList).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
 	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
 	  	   	.text(function(d) {return d.Ticker;})
