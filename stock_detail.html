@@ -137,7 +137,7 @@
 		   		.attr('y', -margin.left)
 		   		.attr('dy', '1em')
 				.attr('text-anchor', 'middle')
-		   		.text('Price($)');	
+		   		.text(stock + ' Stock Price($)');	
 
 			var line = d3.line()
         	 .x(function(d) {return xScaleOverview(new Date(d.Date));})
