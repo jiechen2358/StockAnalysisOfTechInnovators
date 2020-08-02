@@ -92,12 +92,12 @@
 			const financialData = await d3.csv("Data/" + stock + '_Financials.csv');
 			const priceData = await d3.csv('Data/' + stock +'_PRICES.csv');
 			document.getElementById("pageTitle").innerHTML = stock + " Details";
-			document.getElementById('overviewHeading').innerHTML = stock + ' Stock Price Over Time';
-			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue';
-			document.getElementById('pegHeading').innerHTML = stock + ' PEG';
-			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share';
+			document.getElementById('overviewHeading').innerHTML = stock + ' Stock Price in the past 10 Years';
+			document.getElementById('revenueHeading').innerHTML = stock + ' Revenue in the past 10 Years';
+			document.getElementById('pegHeading').innerHTML = stock + ' PEG in the past 10 Years';
+			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share in the past 10 Years';
 
-			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share within one year';
+			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share VS. Expectation within one year';
 
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
