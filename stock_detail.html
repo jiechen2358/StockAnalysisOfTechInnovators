@@ -471,7 +471,7 @@
 		   		.attr('y', -margin.left)
 		   		.attr('dy', '1em')
 				.attr('text-anchor', 'middle')
-		   		.text(stock + ' PEG Ratio');
+		   		.text(stock + ' Actual EPS($) VS. Consensus EPS($)');
 
 			actualEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
