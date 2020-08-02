@@ -132,7 +132,12 @@
 
 				d3.select('.overview').select("svg").append("g")
 					.attr('class', 'y label')
-	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")		   		
+					.attr('text-anchor', 'end')
+	  	   			.attr("transform", "translate("+ margin.left + ", "+ margin.top + ")")
+		   			.attr('x', width/2)
+		   			.attr('y', height/10)
+		   			.attr('transform','rotate(-90)')
+		   			.text('Value($)');		
 		   		return yAxis;
 			}
 
