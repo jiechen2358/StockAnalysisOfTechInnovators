@@ -203,31 +203,23 @@
 
 			          	});
 
-
 						stockline.on("mouseover", function(d,i){
-
 							var pointer = d3.mouse(this);
 							index = Math.round(pointer[0] * (d.length-1)/width);
-							if (ticker != 'MSFT')
-							{
+							if (ticker != 'MSFT') {
 								index = d.length-1-index;
 							}
-
-							if (ticker == 'GOOG' || ticker =='FB')
-							{
+							if (ticker == 'GOOG' || ticker =='FB') {
 								index = Math.round(2518*(width-pointer[0])/width);
 							}
-
-							if (index < 0)
-							{
+							if (index < 0) {
 								index = 0;
 							}
-							if (index > d.length - 1)
-							{
+							if (index > d.length - 1) {
 								index = d.length - 1;
 							}
-							d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px")
-							.html("<p><strong>" + ticker + ', ' + d[index].Date + '</strong></p><br>' +
+							d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").html(
+							"<p><strong>" + ticker + ', ' + d[index].Date + '</strong></p><br>' +
 							"<p><strong>" + 'Open: ' + d[index].Open + '</strong></p><br>' +
 							"<p><strong>" + 'CLose: ' + d[index].Close + '</strong></p><br>' +
 							"<p><strong>" + 'High: ' + d[index].High + '</strong></p><br>' +
@@ -236,8 +228,29 @@
 							"Click to view details");
 
 						});
-						stockline.on("mousemove", function(){
-							d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+						stockline.on("mousemove", function(d,i){
+							var pointer = d3.mouse(this);
+							index = Math.round(pointer[0] * (d.length-1)/width);
+							if (ticker != 'MSFT') {
+								index = d.length-1-index;
+							}
+							if (ticker == 'GOOG' || ticker =='FB') {
+								index = Math.round(2518*(width-pointer[0])/width);
+							}
+							if (index < 0) {
+								index = 0;
+							}
+							if (index > d.length - 1) {
+								index = d.length - 1;
+							}
+							d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").html(
+							"<p><strong>" + ticker + ', ' + d[index].Date + '</strong></p><br>' +
+							"<p><strong>" + 'Open: ' + d[index].Open + '</strong></p><br>' +
+							"<p><strong>" + 'CLose: ' + d[index].Close + '</strong></p><br>' +
+							"<p><strong>" + 'High: ' + d[index].High + '</strong></p><br>' +
+							"<p><strong>" + 'Low: ' + d[index].Low + '</strong></p><br>' +	
+							"<p><strong>" + 'Volume: ' + d[index].Volume + '</strong></p><br>'+
+							"Click to view details");
 						});
 						stockline.on("mouseout", function(){
 							d3.select('#lineTooltip').style("opacity", 0);
