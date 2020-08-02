@@ -138,8 +138,7 @@ circle {
 
        		stockline.on("mouseover", function(d,i){
 				console.log(d);
-				console.log(i);
-				console.log(d[i]);
+				console.log(d.length);
 				d3.select(this).attr('fill','DarkSlateGrey');
 				d3.select('#lineTooltip').style("opacity", 1)
 				.html(
@@ -150,13 +149,12 @@ circle {
 					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
 					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
 				var pointer = d3.mouse(this);
+				index = Math.round(pointer[0] * (d.length-1)/1400);
+				console.log(index);
+				console.log(d[index].Date);
+				console.log(d[index].Close);
 
-				console.log(xScaleOverview.invert(0));
-				console.log(xScaleOverview.invert(1400));
-				console.log(yScaleOverview.invert(0));
-				console.log(yScaleOverview.invert(800));
-				console.log(xScaleOverview.invert(pointer[0]));
-				console.log(yScaleOverview.invert(pointer[1]));
+
 
 			});
 			stockline.on("mousemove", function(){
