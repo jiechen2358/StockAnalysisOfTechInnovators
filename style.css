@@ -3,3 +3,8 @@ rect.rect_barchart {stroke: black; stroke-width:1px;}
 
 path.pie {stroke: black; stroke-width:1px;}
 path.pie_highlight {stroke: Gold; stroke-width: 3px;}
+
+path.line {
+	fill:none;
+	stroke-width:2px;
+}
