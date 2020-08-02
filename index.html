@@ -193,7 +193,16 @@
 							if (ticker == 'GOOG' || ticker =='FB')
 							{
 								index = Math.round(2518*(width-pointer[0])/width);
-							} 
+							}
+
+							if (index < 0)
+							{
+								index = 0;
+							}
+							if (index > d.length - 1)
+							{
+								index = d.length - 1;
+							}
 							d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px")
 							.html("<p><strong>" + ticker + ', ' + d[index].Date + '</strong></p><br>' +
 							"<p><strong>" + 'Open: ' + d[index].Open + '</strong></p><br>' +

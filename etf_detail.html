@@ -200,7 +200,12 @@
 			stockline.on("mouseover", function(d,i){
 				var pointer = d3.mouse(this);
 				index = d.length - 1 - Math.round(pointer[0] * (d.length-1)/width);
-
+				if (index < 0){
+					index = 0;
+				}
+				if (index > d.length - 1){
+					index = d.length - 1;
+				}
 				d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px")
 				.html(
 					"<p><strong>" + etf + ', ' + d[index].Date + '</strong></p><br>' +
