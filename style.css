@@ -1,2 +1,5 @@
 rect.rect_highlight {fill: Blue; stroke: black; stroke-width: 2px;}
 rect.rect_barchart {stroke: black; stroke-width:1px;}
+
+path.pie {stroke: black; stroke-width:1px;}
+path.pie_highlight {stroke: Gold; stroke-width: 3px;}
