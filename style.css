@@ -86,13 +86,13 @@ circle.circle_highlight {
 	pointer-events: none;
 }
 button.nav_back {
-    background-color: SteelBlue;
+    background-color: beige;
     color: white;
-    padding: 15px 15px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
-    margin-left: 100px;
+    margin-left: 50px;
 }
