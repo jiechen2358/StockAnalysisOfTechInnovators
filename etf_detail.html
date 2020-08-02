@@ -285,7 +285,7 @@
 					"<p><strong>" + 'Volume: ' + d[index].Volume + '</strong></p><br>');
 
 			});
-			stockline.on("mousemove", function(){
+			stockline.on("mousemove", function(d,i){
 				var pointer = d3.mouse(this);
 				index = d.length - 1 - Math.round(pointer[0] * (d.length-1)/width);
 				if (index < 0){
