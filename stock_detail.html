@@ -137,19 +137,23 @@ circle {
        		.attr("class", "line");
 
        		stockline.on("mouseover", function(d,i){
-				console.log(d);
-				console.log(d.length);
+				var pointer = d3.mouse(this);
+				index = Math.round(pointer[0] * (d.length-1)/1400);
+				if (stock != 'MSFT')
+				{
+					index = d.length -1-index;
+				}
+
 				d3.select(this).attr('fill','DarkSlateGrey');
 				d3.select('#lineTooltip').style("opacity", 1)
 				.html(
-					"<p><strong>" + stock + ', ' + d[i].Date + '</strong></p><br>' +
-					"<p><strong>" + 'Open: ' + d[i].Open + '</strong></p><br>' +
-					"<p><strong>" + 'CLose: ' + d[i].Close + '</strong></p><br>' +
-					"<p><strong>" + 'High: ' + d[i].High + '</strong></p><br>' +
-					"<p><strong>" + 'Low: ' + d[i].Low + '</strong></p><br>' +	
-					"<p><strong>" + 'Volume: ' + d[i].Volume + '</strong></p><br>');
-				var pointer = d3.mouse(this);
-				index = Math.round(pointer[0] * (d.length-1)/1400);
+					"<p><strong>" + stock + ', ' + d[index].Date + '</strong></p><br>' +
+					"<p><strong>" + 'Open: ' + d[index].Open + '</strong></p><br>' +
+					"<p><strong>" + 'CLose: ' + d[index].Close + '</strong></p><br>' +
+					"<p><strong>" + 'High: ' + d[index].High + '</strong></p><br>' +
+					"<p><strong>" + 'Low: ' + d[index].Low + '</strong></p><br>' +	
+					"<p><strong>" + 'Volume: ' + d[index].Volume + '</strong></p><br>');
+
 				console.log(index);
 				console.log(d[index].Date);
 				console.log(d[index].Close);
