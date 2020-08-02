@@ -416,7 +416,7 @@
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation by " + ratio + '%!' );
+						+'<br>' + "Lose expectation by " + ratio + '%!' );
 				}
 			});
 			actualEPSCircle.on('mousemove', function(d,i){
@@ -444,7 +444,7 @@
 					.style('left', (d3.event.pageX) + 'px')
 					.style('top', (d3.event.pageY) + 'px')
 					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation by " + ratio + '%!' );
+						+'<br>' + "Lose expectation by " + ratio + '%!' );
 				}
 
 			});
