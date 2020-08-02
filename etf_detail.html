@@ -25,8 +25,9 @@
 	<div class = 'holdings' style="text-align: center;">
 		<h1 id='holdingsHeading'></h1>
 		<svg width=800 height=800>
-			<text id= 'holdingsText1' text-anchor='middle' x='400' y='400'></text>
-			<text id= 'holdingsText2' text-anchor='middle' x='400' y='420'></text>
+			<text id= 'holdingsText1' text-anchor='middle' x='400' y='380'></text>
+			<text id= 'holdingsText2' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'holdingsText3' text-anchor='middle' x='400' y='420'></text>
 		</svg>
 	</div>
 
@@ -41,7 +42,8 @@
 	<div class = 'countries' style="text-align: center;">
 		<h1 id='counteriesHeading'></h1>
 		<svg width=800 height=800>
-			<text id= 'contriesText' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'contriesText1' text-anchor='middle' x='400' y='400'></text>
+			<text id= 'contriesText2' text-anchor='middle' x='400' y='400'></text>
 		</svg>
 	</div>
 	<div class = 'navigation'>
@@ -176,10 +178,11 @@
 
 			holdingsPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				document.getElementById('holdingsText1').innerHTML = d.data.Ticker + ': ' + d.data.PercentOfFund + "%";
+				document.getElementById('holdingsText1').innerHTML = d.data.Ticker;
+				document.getElementById('holdingsText2').innerHTML = d.data.PercentOfFund + "%";
 				if(tickerArray.includes(d.data.Ticker) == true)
 				{
-					document.getElementById('holdingsText2').innerHTML = 'Click to view stock details.';
+					document.getElementById('holdingsText3').innerHTML = 'Click to view details.';
 				}
 			});
 
@@ -187,6 +190,7 @@
 				d3.select(this).attr("class", 'pie');
 				document.getElementById('holdingsText1').innerHTML = '';
 				document.getElementById('holdingsText2').innerHTML = '';
+				document.getElementById('holdingsText3').innerHTML = '';
 			});
 
 			sectorsPie.on('mouseover',function(d){
@@ -197,20 +201,21 @@
 
 			sectorsPie.on('mouseout', function(){
 				d3.select(this).attr("class", 'pie');
-				document.getElementById('sectorsText').innerHTML = '';
+				document.getElementById('sectorsText1').innerHTML = '';
+				document.getElementById('sectorsText2').innerHTML = '';				
 			});
 
 			countriesPie.on('mouseover',function(d){
 				d3.select(this).attr("class", 'pie_highlight');
-				document.getElementById('contriesText').innerHTML = d.data.Country + ': ' + d.data.PercentOfFund + "%";
+				document.getElementById('contriesText1').innerHTML = d.data.Country;
+				document.getElementById('contriesText2').innerHTML = d.data.PercentOfFund + "%";
 			});
 
 			countriesPie.on('mouseout', function(){
 				d3.select(this).attr("class", 'pie');
-				document.getElementById('contriesText').innerHTML = '';
+				document.getElementById('contriesText1').innerHTML = '';
+				document.getElementById('contriesText2').innerHTML = '';
 			});
-
-
 //Overview
 			dates = dataPrices.map(function(d) {
 				return new Date(d.Date); });
