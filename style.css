@@ -8,3 +8,9 @@ path.line {
 	fill:none;
 	stroke-width:2px;
 }
+div.navigation {
+	margin-left: 50px;
+	width:600px;
+	align-content: center;
+
+}
