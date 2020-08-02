@@ -281,6 +281,7 @@
 
 
 			stockline.on("mouseover", function(d,i){
+				d3.select(this).attr("class", 'line_highlight');
 				var pointer = d3.mouse(this);
 				index = d.length - 1 - Math.round(pointer[0] * (d.length-1)/width);
 				if (index < 0){
