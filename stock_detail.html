@@ -456,6 +456,23 @@
 	  	   			.style("font", "14px times")
 		   			.call(yAxisEPSComparison);
 
+	   		d3.select('.epsComparison').select("svg").append("g").append('text')
+				.attr("class", 'x label')
+				.attr('text-anchor', 'end')
+		   		.attr("transform", "translate("+ margin.left +", " + (margin.top + height) +")")
+		   		.attr('x', width/2)
+		   		.attr('y', height/10)
+		   		.text('Month');
+
+		   	d3.select('.epsComparison').select("svg").append("g").append('text')
+				.attr('class', 'y label')
+	  	   		.attr("transform", "translate("+ margin.left + ", "+ margin.top + ") rotate(-90)")
+	  	   		.attr('x', -(height/2))
+		   		.attr('y', -margin.left)
+		   		.attr('dy', '1em')
+				.attr('text-anchor', 'middle')
+		   		.text(stock + ' PEG Ratio');
+
 			actualEPSCircle = d3.select('.epsComparison').select('svg').append('g').attr('transform', 'translate(100, 100)')
 			.selectAll('circle').data(financialData).enter().append('circle').attr('class','circle_normal')
 			.attr("cx", function(d,i) {return xScaleEPSComparison(new Date(d.Date));})
