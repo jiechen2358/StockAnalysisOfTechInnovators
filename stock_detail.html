@@ -227,14 +227,14 @@
 		   		.attr('y', -margin.left)
 		   		.attr('dy', '1em')
 				.attr('text-anchor', 'middle')
-		   		.text(stock + 'Quarterly Revenue(Billion Dollors)');	
+		   		.text(stock + ' Quarterly Revenue(Billion Dollors)');	
 
 			revenueBarChart = d3.select('.revenue').select('svg').append("g")
 			.attr('transform', 'translate(100, 100)')
 			.selectAll('rect').data(financialData).enter().append('rect')
 			.attr('width', 15)
 			.attr('height', function(d){return Math.abs(yScaleRevenue(parseFloat(d.Revenue)) - yScaleRevenue(0));})
-			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -18;})
+			.attr("x", function(d,i) {return xScaleRevenue(new Date(d.Date)) -15;})
 			.attr('y', function(d){return Math.min(yScaleRevenue(parseFloat(d.Revenue)), yScaleRevenue(0));})
 			.attr('fill', barChartColors[0])
 			.attr('class', 'rect_barchart');
