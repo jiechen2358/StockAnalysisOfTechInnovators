@@ -120,7 +120,7 @@
 	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
 	  	   	.attr('width', legendLabelSize)
 	  	   	.attr('height', legendLabelSize)
-	  	   	.attr('fill', function(d){return pieColors[d.Ticker];});
+	  	   	.attr('fill', function(d, i){return pieColors[i];});
 
 	  	   	d3.select('.holdings').selectAll('text').data(dataHoldings).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
@@ -135,7 +135,7 @@
 	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
 	  	   	.attr('width', legendLabelSize)
 	  	   	.attr('height', legendLabelSize)
-	  	   	.attr('fill', function(d){return pieColors[d.Ticker];});
+	  	   	.attr('fill', function(d,i){return pieColors[i];});
 
 	  	   	d3.select('.sectors').selectAll('text').data(dataSectors).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
@@ -150,7 +150,7 @@
 	  	   	.attr('y', function(d, i) {return legend_ypos+i*(legendLabelSize+10);})
 	  	   	.attr('width', legendLabelSize)
 	  	   	.attr('height', legendLabelSize)
-	  	   	.attr('fill', function(d){return pieColors[d.Ticker];});
+	  	   	.attr('fill', function(d,i){return pieColors[i];});
 
 	  	   	d3.select('.countries').selectAll('text').data(dataCountries).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
