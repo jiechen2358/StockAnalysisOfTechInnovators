@@ -97,7 +97,7 @@
 			document.getElementById('pegHeading').innerHTML = stock + ' PEG in the past 10 Years';
 			document.getElementById('epsHeading').innerHTML = stock + ' Earnings Per Share in the past 10 Years';
 
-			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share VS. Expectation within one year';
+			document.getElementById('epsComparisonHeading').innerHTML = stock + ' Earnings Per Share VS. Expectation in Recent Year';
 
 			revenues = financialData.map(function(d){return parseFloat(d.Revenue);});
 			pegs = financialData.map(function(d){return parseFloat(d.PEG);});
