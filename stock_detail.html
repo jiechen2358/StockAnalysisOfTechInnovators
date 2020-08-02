@@ -306,7 +306,7 @@
 			.selectAll('rect').data(financialData).enter().append('rect').attr('class', 'rect_barchart')
 			.attr('width', 15)
 			.attr('height', function(d){return Math.abs(yScalePEG(parseFloat(d.PEG)) - yScalePEG(0));})
-			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -18;})
+			.attr("x", function(d,i) {return xScalePEG(new Date(d.Date)) -15;})
 			.attr('y', function(d){return Math.min(yScalePEG(parseFloat(d.PEG)), yScalePEG(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.PEG) > 0){
@@ -386,7 +386,7 @@
 			.selectAll('rect').data(financialData).enter().append('rect').attr('class', 'rect_barchart')
 			.attr('width', 15)
 			.attr('height', function(d){return Math.abs(yScaleEPS(parseFloat(d.EPS)) - yScaleEPS(0));})
-			.attr("x", function(d,i) {return xScaleEPS(new Date(d.Date)) -18;})
+			.attr("x", function(d,i) {return xScaleEPS(new Date(d.Date)) -15;})
 			.attr('y', function(d){return Math.min(yScaleEPS(parseFloat(d.EPS)), yScaleEPS(0));})
 			.attr('fill', function(d){ 
 				if (parseFloat(d.EPS) > 0){
