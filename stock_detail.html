@@ -350,7 +350,7 @@
 			var timeMaxEPSComparison = new Date(financialData[0].Date);
 			var timeMinEPSComparison = new Date(financialData[3].Date);
 
-			var xScaleEPSComparison = d3.scaleTime().domain([timeMinEPSComparison, timeMaxEPSComparison]).range([0, 1000]);
+			var xScaleEPSComparison = d3.scaleTime().domain([timeMinEPSComparison, timeMaxEPSComparison]).range([0, width]);
 			var xAxisEPSComparison = d3.axisBottom(xScaleEPSComparison).tickFormat(d3.timeFormat('%b-%Y'));
 
 			var EPS = [];
@@ -371,7 +371,7 @@
 				epsComparisonMin -= (epsComparisonMax-epsComparisonMin)/10;
 			}
 
-			var yScaleEPSComparison = d3.scaleLinear().domain([epsComparisonMin, epsComparisonMax]).range([600, 0]);
+			var yScaleEPSComparison = d3.scaleLinear().domain([epsComparisonMin, epsComparisonMax]).range([height, 0]);
 			var yAxisEPSComparison = d3.axisLeft(yScaleEPSComparison);
 
 			d3.select('.epsComparison').select('svg').append("g")
