@@ -126,7 +126,7 @@
 	  	   	.selectAll('text').data(dataHoldings).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
 	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
-	  	   	.text(function(d) {return d.Ticker;})
+	  	   	.text(function(d) {return d.Ticker+ ' '+d.PercentOfFund + '%';})
 	  	 	.style('font-size','12px');
 
             d3.select('.sectors').select("svg").append("g").attr("class", 'legend')
@@ -142,7 +142,7 @@
 	  	   	.selectAll('text').data(dataSectors).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
 	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
-	  	   	.text(function(d) {return d.Sector;})
+	  	   	.text(function(d) {return d.Sector+ ' '+d.PercentOfFund + '%';})
 	  	 	.style('font-size','12px');
 
             d3.select('.countries').select("svg").append("g").attr("class", 'legend')
@@ -158,7 +158,7 @@
 	  	   	.selectAll('text').data(dataCountries).enter().append('text')
 	  	   	.attr('x', legend_xpos+legendLabelSize+10)
 	  	   	.attr('y', function(d, i) {return legend_ypos+15+i*(legendLabelSize+10);})
-	  	   	.text(function(d) {return d.Country;})
+	  	   	.text(function(d) {return d.Country + ' '+d.PercentOfFund + '%';})
 	  	 	.style('font-size','12px');
 
 			holdingsPie.on('click', function(d){
