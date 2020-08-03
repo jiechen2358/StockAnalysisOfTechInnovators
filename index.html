@@ -7,10 +7,10 @@
 	<title> Stock Historical Data over Time</title>
 </head>
 <body onload="init()">
-	<div class = 'overview' style = 'text-align: center;'>
-		<h1>Growth of $10,000 as of July 17,2020</h1>
-		<p id = 'overviewMessage'></p>>
-		<svg width=1000 height=800>
+	<div class = 'overview'>
+		<h1  style = 'text-align: center;'>Growth of $10,000 as of July 17,2020</h1>
+		<p id = 'overviewMessage'></p>
+		<svg width=1000 height=800 display:block margin:auto>
 		</svg>
 	</div>
 	<div id='checkboxContainer'></div>
@@ -28,7 +28,7 @@
 		</form>
 	</div>
 	<script>
-		document.getElementById("overviewMessage").innerHTML = "By Comparing the stock prices of tech";
+		document.getElementById("overviewMessage").innerHTML = "By Comparing the stock prices in past 10 years of the world leading tech giants, we want show the differences and similarities of ";
 		var margin = {
 			top: 100,
 			bottom: 100,
