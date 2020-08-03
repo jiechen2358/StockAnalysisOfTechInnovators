@@ -175,11 +175,11 @@
 				}
 				d3.select('#lineTooltip').style("opacity", 1).style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").html(
 					"<strong>" + stock + ', ' + d[index].Date + '</strong><br>' +
-					"<strong>" + 'Open: ' + d[index].Open + '</strong><br>' +
-					"<strong>" + 'CLose: ' + d[index].Close + '</strong><br>' +
-					"<strong>" + 'High: ' + d[index].High + '</strong><br>' +
-					"<strong>" + 'Low: ' + d[index].Low + '</strong><br>' +	
-					"<strong>" + 'Volume: ' + d[index].Volume + '</strong><br>');
+					"<strong>" + 'Open:</strong> ' + d[index].Open + '<br>' +
+					"<strong>" + 'CLose:</strong> ' + d[index].Close + '<br>' +
+					"<strong>" + 'High:</strong> ' + d[index].High + '<br>' +
+					"<strong>" + 'Low:</strong> ' + d[index].Low + '<br>' +	
+					"<strong>" + 'Volume:</strong> ' + d[index].Volume + '<br>');
 			});
 			stockline.on("mousemove", function(d,i){
 				var pointer = d3.mouse(this);
@@ -196,11 +196,11 @@
 				}
 				d3.select('#lineTooltip').style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px").html(
 					"<strong>" + stock + ', ' + d[index].Date + '</strong><br>' +
-					"<strong>" + 'Open: ' + d[index].Open + '</strong><br>' +
-					"<strong>" + 'CLose: ' + d[index].Close + '</strong><br>' +
-					"<strong>" + 'High: ' + d[index].High + '</strong><br>' +
-					"<strong>" + 'Low: ' + d[index].Low + '</strong><br>' +	
-					"<strong>" + 'Volume: ' + d[index].Volume + '</strong><br>');
+					"<strong>" + 'Open:</strong> ' + d[index].Open + '<br>' +
+					"<strong>" + 'CLose:</strong> ' + d[index].Close + '<br>' +
+					"<strong>" + 'High:</strong> ' + d[index].High + '<br>' +
+					"<strong>" + 'Low:</strong> ' + d[index].Low + '<br>' +	
+					"<strong>" + 'Volume:</strong> ' + d[index].Volume + '<br>');
 			});
 			stockline.on("mouseout", function(){
 				d3.select(this).attr("class", 'line');
