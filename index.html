@@ -9,10 +9,10 @@
 <body onload="init()">
 	<div class = 'overview' style = 'text-align: center;'>
 		<h1>Growth of $10,000 as of July 17,2020</h1>
+		<p id = 'overviewMessage'></p>>
 		<svg width=1000 height=800>
 		</svg>
 	</div>
-
 	<div id='checkboxContainer'></div>
 	<div id='lineTooltip'></div>
 	<div style = 'display:none'>
@@ -28,6 +28,7 @@
 		</form>
 	</div>
 	<script>
+		document.getElementById("overviewMessage").innerHTML = "By Com";
 		var margin = {
 			top: 100,
 			bottom: 100,
@@ -57,6 +58,9 @@
 
 			stockList.forEach(function(stockId, index){
 				var ticker = stockId.Ticker;
+				if (ticker == 'GOOG') {
+					continue;
+				}
 				var company = stockId.Company;
 
 				var checkbox = document.createElement('input');
