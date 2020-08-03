@@ -262,7 +262,7 @@
 							"<strong>" + 'High:</strong> ' + d[index].High + '<br>' +
 							"<strong>" + 'Low:</strong> ' + d[index].Low + '<br>' +	
 							"<strong>" + 'Volume:</strong> ' + d[index].Volume + '<br>' +
-							"Click to view details");
+							"<strong>Click line to view details</strong>");
 
 						});
 						stockline.on("mousemove", function(d,i){
@@ -287,7 +287,7 @@
 							"<strong>" + 'High:</strong> ' + d[index].High + '<br>' +
 							"<strong>" + 'Low:</strong> ' + d[index].Low + '<br>' +	
 							"<strong>" + 'Volume:</strong> ' + d[index].Volume + '<br>' +
-							"Click to view details");
+							"<strong>Click line to view details</strong>");
 						});
 						stockline.on("mouseout", function(){
 							d3.select(this).attr("class", 'line');
