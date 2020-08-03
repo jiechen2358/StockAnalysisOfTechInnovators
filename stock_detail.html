@@ -271,10 +271,10 @@
 				d3.select('#revenueTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX + 10) + 'px')
 				.style('top', (d3.event.pageY - 10) + 'px')
-				.html('Date: ' + d.Date + '<br>' +
-					'Quarterly Revenue: ' + d.Revenue + '<br>' +
-					'PEG: ' + d.PEG + '<br>' +
-					'EPS: ' + d.EPS);
+				.html('<b>Date:</b> ' + d.Date + '<br>' +
+					'<b>Quarterly Revenue:</b> ' + d.Revenue + '<br>' +
+					'<b>PEG:</b> ' + d.PEG + '<br>' +
+					'<b>EPS:</b> ' + d.EPS);
 
 			});
 			revenueBarChart.on('mousemove', function(d,i){
