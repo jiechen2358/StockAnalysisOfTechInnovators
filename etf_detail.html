@@ -175,7 +175,7 @@
 	  	 	.style('font-size','12px');
 
 			holdingsPie.on('click', function(d){
-				if(tickerArray.includes(d.data.Ticker) == true)
+				if(tickerArray.includes(d.data.Ticker) == true || d.data.Ticker =='GOOG')
 				{
 					document.getElementById('stock_name').value=d.data.Ticker;
 			    	document.getElementById('stock_detail').submit();
@@ -187,7 +187,7 @@
 				d3.select(this).attr("class", 'pie_highlight');
 				document.getElementById('holdingsText1').innerHTML = d.data.Ticker;
 				document.getElementById('holdingsText2').innerHTML = d.data.PercentOfFund + "%";
-				if(tickerArray.includes(d.data.Ticker) == true)
+				if(tickerArray.includes(d.data.Ticker) == true || d.data.Ticker == 'GOOG')
 				{
 					document.getElementById('holdingsText3').innerHTML = 'Click to view details.';
 				}
