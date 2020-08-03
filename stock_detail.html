@@ -349,10 +349,10 @@
 				d3.select('#pegTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX+10) + 'px')
 				.style('top', (d3.event.pageY-10) + 'px')
-				.html('<p>Date: ' + d.Date + '</p><br>' +
-					'<p>Quarterly Revenue: ' + d.Revenue + '</p><br>' +
-					'<p>PEG: ' + d.PEG + '</p><br>' +
-					'<p>EPS: ' + d.EPS +"</p>");
+				.html('<b>Date:</b> ' + d.Date + '<br>' +
+					'<b>Quarterly Revenue:</b> ' + d.Revenue + '<br>' +
+					'<b>PEG:</b> ' + d.PEG + '<br>' +
+					'<b>EPS:</b> ' + d.EPS);
 
 			});
 			pegBarChart.on('mousemove', function(d,i){
@@ -429,10 +429,10 @@
 				d3.select('#epsTooltip').style('opacity', 1)
 				.style('left', (d3.event.pageX+10) + 'px')
 				.style('top', (d3.event.pageY-10) + 'px')
-				.html('<p>Date: ' + d.Date + '</p><br>' +
-					'<p>Quarterly Revenue: ' + d.Revenue + '</p><br>' +
-					'<p>PEG: ' + d.PEG + '</p><br>' +
-					'<p>EPS: ' + d.EPS +"</p>");
+				.html('<b>Date:</b> ' + d.Date + '<br>' +
+					'<b>Quarterly Revenue:</b> ' + d.Revenue + '<br>' +
+					'<b>PEG:</b> ' + d.PEG + '<br>' +
+					'<b>EPS:</b> ' + d.EPS);
 			});
 			epsBarChart.on('mousemove', function(d,i){
 				d3.select('#epsTooltip').style('left', (d3.event.pageX+10) + 'px').style('top', (d3.event.pageY-10) + 'px');
@@ -520,16 +520,18 @@
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX+10) + 'px')
 					.style('top', (d3.event.pageY-10) + 'px')
-					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation by " + ratio + '%!' );
+					.html('<b>Actual EPS:</b> '+ d.EPS + '<br>'+
+						'<b>Consensus EPS:</b> '+d.ConsensusEPS +'<br>' + 
+						"<b>Beat expectation</b> by " + ratio + '%!' );
 				}
 				else
 				{
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX+10) + 'px')
 					.style('top', (d3.event.pageY-10) + 'px')
-					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Lose expectation by " + ratio + '%!' );
+					.html('<b>Actual EPS:</b> '+ d.EPS + '<br>'+
+						'<b>Consensus EPS:</b> '+d.ConsensusEPS +'<br>' + 
+						"<b>Lose expectation</b> by " + ratio + '%!' );
 				}
 			});
 			actualEPSCircle.on('mousemove', function(d,i){
@@ -543,21 +545,20 @@
 			estimateEPSCircle.on('mouseover', function(d,i){
 				d3.select(this).attr('class', 'circle_highlight');
 				var ratio = Math.abs(((d.EPS - d.ConsensusEPS)/d.ConsensusEPS * 100).toFixed(2));
-				if (d.BEAT == 1)
-				{
+				if (d.BEAT == 1) {
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX+10) + 'px')
 					.style('top', (d3.event.pageY-10) + 'px')
-					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Beat expectation by " + ratio + '%!' );
-				}
-				else
-				{
+					.html('<b>Actual EPS:</b> '+ d.EPS + '<br>'+
+						'<b>Consensus EPS:</b> '+d.ConsensusEPS +'<br>' + 
+						"<b>Beat expectation</b> by " + ratio + '%!' );
+				} else {
 					d3.select('#epsComparisonTooltip').style('opacity', 1)
 					.style('left', (d3.event.pageX+10) + 'px')
 					.style('top', (d3.event.pageY-10) + 'px')
-					.html('Actual EPS: '+ d.EPS + '<br>'+'Consensus EPS: '+d.ConsensusEPS 
-						+'<br>' + "Lose expectation by " + ratio + '%!' );
+					.html('<b>Actual EPS:</b> '+ d.EPS + '<br>'+
+						'<b>Consensus EPS:</b> '+d.ConsensusEPS +'<br>' + 
+						"<b>Lose expectation</b> by " + ratio + '%!' );
 				}
 
 			});
